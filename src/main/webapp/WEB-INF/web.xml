@@ -51,7 +51,7 @@
   <!--</welcome-file-list>-->
 
   <welcome-file-list>
-    <welcome-file>index.jsp</welcome-file>
+    <welcome-file>oskaSystem/index/upload.jsp</welcome-file>
   </welcome-file-list>
 
   <!-- 需要在普通类中使用request的时候，注入这个监听 -->

@@ -12,12 +12,11 @@ import java.io.PrintWriter;
 import java.util.Map;
 
 /**
+ *
  * Created by liuh on 2017/6/8.
  */
 public class BaseController {
     private static final Logger logger = LoggerFactory.getLogger(BaseController.class);
-    protected final static String code_ok = "1";
-    protected final static String code_fail = "0";
 
     public void render(String code, String message,
                        Map<String, Object> dataMap, HttpServletResponse resp) {
