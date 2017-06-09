@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="oska:war">
+    <output-path>$PROJECT_DIR$/target</output-path>
+    <root id="archive" name="oska-0.0.1.war">
+      <element id="artifact" artifact-name="oska:war exploded" />
+    </root>
+  </artifact>
+</component>

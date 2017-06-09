@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlrewrite>
+
+  <rule>
+    <from>/*.jsp</from>
+    <to>/*.html</to>
+  </rule>
+
+</urlrewrite>
