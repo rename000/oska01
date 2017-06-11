@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.File;
@@ -23,28 +24,27 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * Created by liuh on 2017/6/8.
+ * Created by liuhan on 2017/6/10.
  */
 
 @Controller
-@RequestMapping("/product")
-public class ProductController extends BaseController {
+@RequestMapping("/upload")
+public class UploadController extends BaseController {
 
-   private static final Logger logger = LoggerFactory.getLogger(ProductController.class);
+    private static final Logger logger = LoggerFactory.getLogger(ProductController.class);
 
-   @Resource
-   ProductDao productDao;
-
+    @Resource
+    ProductDao productDao;
 
     /**
-     * 获取产品列表
+     * 上传产品图片
      * @return
      * @throws Exception
      */
     @ResponseBody
-    @RequestMapping(value = "/getProductList", method = { RequestMethod.POST })
-    public String getProductList(
-            @RequestParam String jsonObject,
+    @RequestMapping(value = "/uploadImg", method = { RequestMethod.POST })
+    public String uploadImg(
+            @RequestParam(value = "file", required = false) MultipartFile file,
             HttpServletRequest request, HttpServletResponse response)
             throws Exception {
 
@@ -53,14 +53,20 @@ public class ProductController extends BaseController {
         MsgResponse msgResponse = new MsgResponse(code_ok);
         try{
 
-            Product product = JSONObject.parseObject(jsonObject, Product.class);
+            System.out.println("开始");
+            String path = request.getSession().getServletContext().getRealPath("upload/product");
+            String fileName = file.getOriginalFilename();
+//        String fileName = new Date().getTime()+".jpg";
+            System.out.println(path);
+            File targetFile = new File(path, fileName);
+            if(!targetFile.exists()){
+                targetFile.mkdirs();
+            }
 
-            List<Product> list = productDao.findProductListByProId(product);
+            //保存
+            file.transferTo(targetFile);
 
-            String count = "11";
-
-            dataMap.put("count", count);
-            dataMap.put("dataList", list);
+            dataMap.put("fileUrl", request.getContextPath()+"/upload/product/"+fileName);
             //设置返回成功信息
             msgResponse.setCode(code_ok);
             msgResponse.setMsg("查询成功");
@@ -68,7 +74,7 @@ public class ProductController extends BaseController {
 
         }catch (Exception e){
             e.printStackTrace();
-            logger.error("Error ProductController getProductList() run error ErrorMsg is ====================" + e.getMessage());
+            logger.error("Error UploadController uploadImg() run error ErrorMsg is ====================" + e.getMessage());
             //throw e;
             //设置返回失败信息
             dataMap.put("dataList", null);
@@ -84,4 +90,3 @@ public class ProductController extends BaseController {
 
 
 }
-

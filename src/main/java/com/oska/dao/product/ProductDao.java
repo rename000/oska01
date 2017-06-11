@@ -16,4 +16,5 @@ public interface ProductDao {
      */
     List<Product> findProductListByProId(Product product);
 
+
 }

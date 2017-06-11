@@ -5,26 +5,27 @@
 
   <display-name>oska</display-name>
 
+  <filter>
+    <description>字符集过滤器</description>
+    <filter-name>encodingFilter</filter-name>
+    <filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
+    <init-param>
+      <description>字符集编码</description>
+      <param-name>encoding</param-name>
+      <param-value>UTF-8</param-value>
+    </init-param>
+  </filter>
+  <filter-mapping>
+    <filter-name>encodingFilter</filter-name>
+    <url-pattern>/*</url-pattern>
+  </filter-mapping>
+
   <!-- 指定Spring Bean的配置文件所在目录。默认配置在WEB-INF目录下 -->
   <context-param>
     <param-name>contextConfigLocation</param-name>
     <param-value>classpath*:springmvc-servlet.xml</param-value>
   </context-param>
 
-  <!--<filter>-->
-    <!--<description>字符集过滤器</description>-->
-    <!--<filter-name>encodingFilter</filter-name>-->
-    <!--<filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>-->
-    <!--<init-param>-->
-      <!--<description>字符集编码</description>-->
-      <!--<param-name>encoding</param-name>-->
-      <!--<param-value>UTF-8</param-value>-->
-    <!--</init-param>-->
-  <!--</filter>-->
-  <!--<filter-mapping>-->
-    <!--<filter-name>encodingFilter</filter-name>-->
-    <!--<url-pattern>/*</url-pattern>-->
-  <!--</filter-mapping>-->
 
   <!-- spring mvc servlet -->
   <servlet>
@@ -51,14 +52,16 @@
   <!--</welcome-file-list>-->
 
   <welcome-file-list>
-    <welcome-file>index.jsp</welcome-file>
+    <welcome-file>oskaSystems/index/index.jsp</welcome-file>
   </welcome-file-list>
 
   <!-- 需要在普通类中使用request的时候，注入这个监听 -->
-  <!--<listener>
-    <listener-class>org.springframework.web.context.request.RequestContextListener</listener-class>
-  </listener>-->
   <listener>
-    <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+    <listener-class>org.springframework.web.context.request.RequestContextListener</listener-class>
   </listener>
+  <!--<listener>
+    <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+  </listener>-->
+
+
 </web-app>

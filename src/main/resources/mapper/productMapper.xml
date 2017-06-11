@@ -13,10 +13,14 @@
     product_id, product_name,product_info,create_time,product_img
     from product
     where 1 = 1
+    <if test="productName != null and productName != ''">
+      and product_name like CONCAT('%','${productName}','%')
+    </if>
     <if test="productId != null and productId != ''">
       and product_id = #{productId}
     </if>
       order by create_time desc
+      limit #{nub}, #{size}
   </select>
 
 
