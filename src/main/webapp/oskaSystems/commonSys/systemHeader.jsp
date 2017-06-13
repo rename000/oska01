@@ -1,0 +1,87 @@
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+
+<%@include file="../../common/commom.jsp" %>
+
+
+<%
+    String menuType = (String)request.getSession().getAttribute("menu_Type");
+    if("".equals(menuType)){menuType = "open";}
+    String menuActive = "";
+    if("open".equals(menuType)){
+        menuType = "";
+        menuActive = "";
+    }else if("close".equals(menuType)){
+        menuActive = "active";
+        menuType = "nav-xs";
+    }else{
+        menuActive = "";
+        menuType = "";
+    }
+%>
+
+<!DOCTYPE html>
+<html lang="en" class="app">
+<head>
+    <meta charset="utf-8" />
+    <title>后台管理系统</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <link href="<%= basePath%>static/img/favicon.png" rel="shortcut icon" type="image/x-icon"/>
+    <link rel="stylesheet" href="<%=basePath%>static/css/QB.v2.css" type="text/css" />
+    <link rel="stylesheet" href="<%=basePath%>static/css/oska.css" type="text/css" />
+    <%--<link rel="stylesheet" href="css/font.css" type="text/css" cache="false" />--%>
+    <script src="<%=basePath%>static/js/QB.v2.js"></script>
+    <script src="<%=basePath%>static/js/fileupload/js/fileinput.js"></script>
+    <script src="<%=basePath%>static/js/fileupload/js/fileinput_locale_zh.js"></script>
+    <script src="<%=basePath%>static/js/oska.js"></script>
+</head>
+
+<body>
+<section class="vbox">
+    <header class="bg-dark dk header navbar navbar-fixed-top-xs">
+        <div class="navbar-header"><a class="btn btn-link visible-xs" data-toggle="class:nav-off-screen"
+                                      data-target="#nav"> <i class="fa fa-bars"></i> </a>
+            <a href="#" class="navbar-brand" data-toggle="fullscreen">
+                欧饰家 | 后台管理系统
+            </a>
+            <a class="btn btn-link visible-xs" data-toggle="dropdown" data-target=".nav-user"> <i class="fa fa-cog"></i>
+            </a>
+        </div>
+        <ul class="nav navbar-nav navbar-right hidden-xs nav-user">
+            <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown"> <span class="thumb-sm avatar pull-left">
+                    <img src="<%= basePath%>static/img/console_head.png"> </span> 你好，管理员 <b class="caret"></b>
+                </a>
+                <ul class="dropdown-menu animated fadeInRight">
+                    <span class="arrow top"></span>
+                    <li> <a href="#">帮助</a> </li>
+                    <li class="divider"></li>
+                    <li> <a href="<%=basePath%>oskaSystems/login.jsp" data-toggle="ajaxModal" >退出</a> </li>
+                </ul>
+            </li>
+        </ul>
+    </header>
+    <section>
+        <section class="hbox stretch"> <!-- .aside -->
+            <aside class="bg-dark lter <%=menuType%> aside-md hidden-print" id="nav">
+                <section class="vbox">
+                    <section class="w-f scrollable">
+                        <div class="slim-scroll" data-height="auto" data-disable-fade-out="true" data-distance="0" data-size="5px" data-color="#333333">
+                            <!-- nav -->
+                            <nav class="nav-primary hidden-xs">
+                                <ul class="nav">
+                                    <li > <a href="<%=basePath%>oskaSystems/index/index.jsp" > <i class="fa fa-home icon"> <b class="bg-danger"></b> </i> <span>主页</span> </a> </li>
+                                    <li > <a href="<%=basePath%>oskaSystems/products/products.jsp" > <i class="fa fa-columns icon"> <b class="bg-success"></b> </i> <span>产品管理</span> </a> </li>
+                                </ul>
+                            </nav>
+                            <!-- / nav -->
+                        </div>
+                    </section>
+                    <footer class="footer lt hidden-xs b-t b-dark">
+                        <a href="#nav" data-toggle="class:nav-xs" class="pull-right btn btn-sm btn-dark btn-icon <%=menuActive%>"> <i class="fa fa-angle-left text"></i> <i class="fa fa-angle-right text-active"></i> </a>
+                    </footer>
+                </section>
+            </aside>
+            <!-- /.aside -->
+            <section id="content">
+                <section id="vbox" class="vbox">
+                    <section class="scrollable padder">

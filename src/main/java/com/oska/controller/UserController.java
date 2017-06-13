@@ -21,7 +21,6 @@ import java.util.Map;
  * Created by liuh on 2017/6/8.
  */
 
-@Scope("prototype")
 @RestController
 @RequestMapping("/user")
 public class UserController extends BaseController {
@@ -36,26 +35,36 @@ public class UserController extends BaseController {
             @RequestParam String jsonObject,
             HttpServletRequest request, HttpServletResponse response)
             throws Exception {
+
         String jsonStr = URLDecoder.decode(jsonObject, "utf-8");
         JSONObject jsonObj = JSONObject.parseObject(jsonStr);
 
         String userName = jsonObj.getString("userName");
         String passWord = jsonObj.getString("passWord");
 
+
         //逻辑处理
         MsgResponse msgResponse = new MsgResponse("1");
         try{
-            
-            
+            if("admin".equals(userName)&&"123456".equals(passWord)){
+                render(oskaCommon.code_ok, "oskaSystems/products/products.jsp", (Map<String, Object>)msgResponse.getObject(), response);
+                return null;
+            }else{
+                render(oskaCommon.code_fail, "用户名或密码错误", (Map<String, Object>)msgResponse.getObject(), response);
+                return null;
+            }
+
+
             
         }catch (Exception e){
             e.printStackTrace();
             logger.error("Error UserController userlogin() run error ErrorMsg is ====================" + e.getMessage());
             //throw e;
+            render(oskaCommon.code_fail, "登录失败", (Map<String, Object>)msgResponse.getObject(), response);
+            return null;
         }
 
-        render(oskaCommon.code_ok, "登录成功", (Map<String, Object>)msgResponse.getObject(), response);
-        return null;
+
     }
 
 }

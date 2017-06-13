@@ -22,10 +22,25 @@
 	<!-- 设置使用注解的类所在的jar包 -->
 	<context:component-scan base-package="com.oska"/>
 
+
+	<!-- 需要文件上传功能时，启用以下配置 -->
+
+	<bean id="multipartResolver"
+		  class="org.springframework.web.multipart.commons.CommonsMultipartResolver"
+		  p:defaultEncoding="utf-8">
+		<property name="maxUploadSize" value="104857600" />
+		<property name="maxInMemorySize" value="4096" />
+	</bean>
+
+	<!--<bean id="product" class="com.oska.controller.ProductController" />-->
+
+	<mvc:default-servlet-handler />
+
 	<mvc:annotation-driven />
 
 	<!-- 设置不过滤的文件或文件夹 -->
 	<mvc:resources mapping="*" location="/static"/>
+
 
 	<!--加载数据库参数-->
 	<context:property-placeholder
@@ -82,4 +97,5 @@
 
 	<!--<property name="mapperLocations" value="classpath*:/mapper/oska/*.xml" />-->
 
-</beans>  
+
+</beans>

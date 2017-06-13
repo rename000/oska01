@@ -1,0 +1,32 @@
+/*signin*/
+html{
+	font-size: 16px;
+}
+.btn-twitter {
+    color: #fff !important;
+    background-color: #0098ed;
+    border-color: #0098ed;
+}
+.me-header {
+	text-align: center;
+}
+.me-header  img{
+	width: 160px;
+	margin-top: -80px;
+}
+
+.h1-size{
+	color: #fff;
+}
+.bg-body{
+	background: url(../img/signin_bg.png) 60% 40% no-repeat;
+	/*background: url(../img/signin_bg.png) 100% 100% no-repeat;*/
+}
+.me-no-line {
+	white-space: nowrap;
+}
+.btn-block{
+	height: 45px;
+	line-height: 31px;
+	vertical-align: middle;
+}

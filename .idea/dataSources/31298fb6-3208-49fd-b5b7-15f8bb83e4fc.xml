@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataSource name="MySQL - oska@localhost">
+  <database-model serializer="dbm" rdbms="MYSQL" format-version="4.0">
+    <root id="1"/>
+    <schema id="2" parent="1" name="oska">
+      <Visible>1</Visible>
+    </schema>
+    <table id="3" parent="2" name="product">
+      <Comment>产品表</Comment>
+    </table>
+    <column id="4" parent="3" name="product_id">
+      <Comment>产品ID</Comment>
+      <DataType>int(11)|0</DataType>
+    </column>
+    <column id="5" parent="3" name="product_name">
+      <Comment>产品名字</Comment>
+      <DataType>varchar(200)|0</DataType>
+    </column>
+    <column id="6" parent="3" name="create_time">
+      <Comment>创建时间</Comment>
+      <DataType>date|0</DataType>
+    </column>
+    <column id="7" parent="3" name="product_img">
+      <Comment>产品图路径</Comment>
+      <DataType>varchar(200)|0</DataType>
+    </column>
+    <column id="8" parent="3" name="product_info">
+      <Comment>产品描述</Comment>
+      <DataType>mediumtext|0</DataType>
+    </column>
+  </database-model>
+</dataSource>

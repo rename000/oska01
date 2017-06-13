@@ -1,8 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%
-    String path = request.getContextPath();
-    String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path + "/";
-%>
+
+
+<%@include file="commom.jsp" %>
 
 <!DOCTYPE html>
 <html>
@@ -43,10 +42,10 @@
                     <em class="arrow"></em>
                     <i class="g-line"></i>
                     <div class="subset">
-                        <a href="#">橡木仿古</a>
-                        <a href="#">橡木人字拼</a>
-                        <a href="#">原木手工拼花</a>
-                        <a href="#">强化地板</a>
+                        <a href="<%=basePath%>oskaHtml/products/products.jsp">橡木仿古</a>
+                        <a href="<%=basePath%>oskaHtml/products/products.jsp">橡木人字拼</a>
+                        <a href="<%=basePath%>oskaHtml/products/products.jsp">原木手工拼花</a>
+                        <a href="<%=basePath%>oskaHtml/products/products.jsp">强化地板</a>
                     </div>
                     <div class="linex"></div>
                 </li>
@@ -58,8 +57,8 @@
                     <a href="<%=basePath%>oskaHtml/news/news.jsp">新闻资讯</a>
                     <em class="arrow"></em><i class="g-line"></i>
                     <div class="subset">
-                        <a href="#">企业新闻 </a>
-                        <a href="#">行业新闻</a>
+                        <a href="<%=basePath%>oskaHtml/news/news.jsp">企业新闻 </a>
+                        <a href="<%=basePath%>oskaHtml/news/news.jsp">行业新闻</a>
                     </div>
                     <div class="linex"></div>
                 </li>
@@ -68,9 +67,9 @@
                     <em class="arrow" style="right: 29px;"></em>
                     <i class="g-line"></i>
                     <div class="subset">
-                        <a href="">关于欧饰家 </a>
-                        <a href="#">品牌故事</a>
-                        <a href="#">工程案例</a>
+                        <a href="<%=basePath%>oskaHtml/impression/about.jsp">关于欧饰家 </a>
+                        <a href="<%=basePath%>oskaHtml/impression/about.jsp">品牌故事</a>
+                        <a href="<%=basePath%>oskaHtml/impression/case.jsp">工程案例</a>
                     </div>
                     <div class="linex"></div>
                 </li>
