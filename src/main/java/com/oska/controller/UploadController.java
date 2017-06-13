@@ -54,7 +54,7 @@ public class UploadController extends BaseController {
         try{
 
             System.out.println("开始");
-            String path = request.getSession().getServletContext().getRealPath("upload/product");
+            String path = request.getSession().getServletContext().getRealPath("static/upload/product");
             String fileName = file.getOriginalFilename();
 //        String fileName = new Date().getTime()+".jpg";
             System.out.println(path);
@@ -66,7 +66,7 @@ public class UploadController extends BaseController {
             //保存
             file.transferTo(targetFile);
 
-            dataMap.put("fileUrl", request.getContextPath()+"/upload/product/"+fileName);
+            dataMap.put("fileUrl", request.getContextPath()+"/static/upload/product/"+fileName);
             //设置返回成功信息
             msgResponse.setCode(code_ok);
             msgResponse.setMsg("查询成功");

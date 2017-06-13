@@ -26,4 +26,30 @@ public class ProductDaoImpl implements ProductDao {
         return oskaDao.selectList("getProductList",product);
     }
 
+    /**
+     * 新增产品
+     * @param product
+     */
+    @Override
+    public void addProduct(Product product) {
+        oskaDao.insert("addProduct",product);
+    }
+
+    /**
+     * 修改产品信息
+     * @param product
+     */
+    @Override
+    public void updateProductById(Product product) {
+        oskaDao.update("updateProductById",product);
+    }
+
+    /**
+     * 删除产品
+     * @param product
+     */
+    @Override
+    public void deleteProductById(Product product) {
+        oskaDao.delete("deleteProductById",product);
+    }
 }

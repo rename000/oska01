@@ -47,13 +47,13 @@
     <session-timeout>600</session-timeout>
   </session-config>
 
-  <!--<welcome-file-list>-->
-    <!--<welcome-file>oskaHtml/index/index.jsp</welcome-file>-->
-  <!--</welcome-file-list>-->
-
   <welcome-file-list>
-    <welcome-file>oskaSystems/index/index.jsp</welcome-file>
+    <welcome-file>oskaHtml/index/index.jsp</welcome-file>
   </welcome-file-list>
+
+  <!--<welcome-file-list>-->
+    <!--<welcome-file>oskaSystems/login.jsp</welcome-file>-->
+  <!--</welcome-file-list>-->
 
   <!-- 需要在普通类中使用request的时候，注入这个监听 -->
   <listener>

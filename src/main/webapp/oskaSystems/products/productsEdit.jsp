@@ -2,10 +2,16 @@
 
 <%@include file="../commonSys/systemHeader.jsp" %>
 
+<%
+
+    String  productId = request.getParameter("productId");
+
+%>
+
 <ul class="breadcrumb no-border no-radius b-b b-light pull-in">
     <li><a href="<%=basePath%>oskaSystems/index/index.jsp"><i class="fa fa-home"></i> 主页</a></li>
     <li><a href="<%=basePath%>oskaSystems/products/products.jsp"><i class="fa fa-columns"></i> 产品管理</a></li>
-    <li class="active"><a href="#">新增产品</a></li>
+    <li class="active"><a href="#">编辑产品</a></li>
 </ul>
 
 <section class="panel panel-default add-b-t" style="min-width: 1000px;overflow: auto;">
@@ -54,41 +60,12 @@
 
 <script type="text/javascript">
 
-    uploadFileFun('file01','input01','<%=basePath%>upload/uploadImg',function(data){
-        //成功后的回调函数
-        successFun('imgURLHead',data,'input01','img01');
-    });
 
-    //保存
-    $("#saveBtn").click(function(){
-        var productNameVal = $("#productName").val();
-        var productInfoVal = $("#productInfo").val();
-        var productImg = $("#input01").val();
-
-        //校验
-        if(productNameVal == ''){
-            alert("请填写产品名称")
-            return;
-        }
-        if(productInfoVal == ''){
-            alert("请填写产品简介")
-            return;
-        }
-        if(productImg == ''){
-            alert("请上传产品图片")
-            return;
-        }
-
-        var jsonObj = {
-                productName:productNameVal,
-                productInfo:productInfoVal,
-                productImg:productImg
-        };
-
-
+    //编辑
+    function editFun(jsonObj) {
         console.log("jsonObj================"+ JSON.stringify(jsonObj));
         var option = {
-            url:'<%=basePath%>product/addProduct',
+            url:'<%=basePath%>product/updateProduct',
             type:'post',
             data:{jsonObject:JSON.stringify(jsonObj)},
             success:function(data){
@@ -108,6 +85,89 @@
 
         };
         $.ajax(option);
+    }
+
+    //获取产品信息
+    function getProductList(jsonObj){
+        var jsonObject = jsonObj;
+        var option = {
+            url:'<%=basePath%>' + 'product/getProductList',
+            type:'post',
+            data:{jsonObject:JSON.stringify(jsonObject)},
+            success:function(data){
+//            console.log(data);
+                data = JSON.parse(data);
+                if(data.code=='1'){
+                    var dataList = data.data.dataList;
+                    //赋值
+                    $("#productName").val(""+dataList[0]['productName']);
+                    $("#productInfo").val(""+dataList[0]['productInfo']);
+                    $("#input01").val(""+dataList[0]['productImg']);
+                    $("#img01").val(""+dataList[0]['productImg']);
+                }else{
+                    console.log("code为0； 查询失败")
+                }
+            },
+            error:function(msg){
+                console.log(msg);
+            }
+        };
+        $.ajax(option);
+    }
+
+    //初始化
+    function init(){
+        var productIdVal = "<%=productId%>";
+
+        if(productIdVal=="" || productIdVal==undefined){
+            window.location.href = '<%=basePath%>oskaSystems/products/products.jsp';
+        }else {
+            var jsonObj = {productId:productIdVal};
+            getProductList(jsonObj);
+        }
+
+    }
+    init();
+
+    uploadFileFun('file01','input01','<%=basePath%>upload/uploadImg',function(data){
+        //成功后的回调函数
+        successFun('imgURLHead',data,'input01','img01');
     });
+
+    //保存
+    $("#saveBtn").click(function(){
+        var productIdVal = "<%=productId%>";
+        var productNameVal = $("#productName").val();
+        var productInfoVal = $("#productInfo").val();
+        var productImg = $("#input01").val();
+
+        //校验
+        if(productIdVal == ''){
+            alert("产品Id不能为空！")
+            return;
+        }
+        if(productNameVal == ''){
+            alert("请填写产品名称")
+            return;
+        }
+        if(productInfoVal == ''){
+            alert("请填写产品简介")
+            return;
+        }
+        if(productImg == ''){
+            alert("请上传产品图片")
+            return;
+        }
+
+        var jsonObj = {
+                productId:productIdVal,
+                productName:productNameVal,
+                productInfo:productInfoVal,
+                productImg:productImg
+        };
+
+        editFun(jsonObj);
+    });
+
 
 </script>

@@ -85,7 +85,6 @@
 
 <script type="text/javascript">
 
-    var jsonObj = {};
     //获得产品列表
     function getProductList(jsonObj){
         var jsonObject = jsonObj;
@@ -102,13 +101,13 @@
                     var htmlStr = "";
                     for(var i=0;i<dataList.length;i++){
                         htmlStr +=  "<tr><td>"+ dataList[i]['productId'] +"</td>"+
-                                "<td>"+ dataList[i]['productName'] +"</td>"+
-                                "<td>"+ dataList[i]['productInfo'] +"</td>"+
-                                "<td> <img src='"+ dataList[i]['productImg'] +"' style='width: 30px;height: 30px;' /> </td>"+
-                                "<td>"+
-                                "<a class='a-c-blue m-r'>编辑</a>"+
-                                "<a class='c-red y-pointer m-r'>删除</a>"+
-                                "</td></tr>";
+                            "<td>"+ dataList[i]['productName'] +"</td>"+
+                            "<td>"+ dataList[i]['productInfo'] +"</td>"+
+                            "<td> <img src='"+ dataList[i]['productImg'] +"' style='width: 30px;height: 30px;' /> </td>"+
+                            "<td>"+
+                            "<a class='a-c-blue m-r editBtn' id='edit_" + dataList[i]['productId'] + "' >编辑</a>"+
+                            "<a class='c-red y-pointer m-r delBtn' id='del_" + dataList[i]['productId'] + "'>删除</a>"+
+                            "</td></tr>";
                     }
 
                     $("#productList").html(htmlStr);
@@ -124,15 +123,70 @@
         $.ajax(option);
     }
 
-    getProductList(jsonObj);
+    //删除产品
+    function delBtnFun(jsonObj){
+        var jsonObject = jsonObj;
+        var option = {
+            url:'<%=basePath%>' + 'product/deleteProduct',
+            type:'post',
+            data:{jsonObject:JSON.stringify(jsonObject)},
+            success:function(data){
+//            console.log(data);
+                data = JSON.parse(data);
+                if(data.code=='1'){
+                    alert(data.msg);
+                    var jsonObj = {};
+                    getProductList(jsonObj);
+                }else{
+                    alert(data.msg);
+                }
+            },
+            error:function(msg){
+                console.log(msg);
+            }
+        };
+        $.ajax(option);
+    }
+
+    //初始化
+    function init(){
+        var jsonObj = {};
+        getProductList(jsonObj);
+    }
+    init();
+
 
     //searchBtn
     $("#searchBtn").click(function(){
+        var jsonObj = {};
         var formObj = $("#formObj").serializeObject();
         jsonObj = $.extend(jsonObj,formObj);
         console.log("jsonObj===============" + JSON.stringify(jsonObj));
         getProductList(jsonObj);
 
-    })
+    });
+
+    //editBtn
+    $("body").on("click",".editBtn",function(){
+        var productIdVal = $(this).attr("id").split("_")[1];
+        if(productIdVal=="" || productIdVal==undefined){
+            alert("获取Id异常！");
+        }else {
+            window.location.href = "<%=basePath%>" + "oskaSystems/products/productsEdit.jsp?productId=" + productIdVal;
+        }
+
+    });
+
+    //delBtn
+    $("body").on("click",".delBtn",function(){
+        if(confirm("确定要删除吗？")){
+            var productIdVal = $(this).attr("id").split("_")[1];
+            var jsonObj = {productId:productIdVal};
+            console.log("jsonObj===========" + JSON.stringify(jsonObj));
+            delBtnFun(jsonObj);
+        }
+    });
+
+
 
 </script>

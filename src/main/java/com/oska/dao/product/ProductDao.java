@@ -16,5 +16,22 @@ public interface ProductDao {
      */
     List<Product> findProductListByProId(Product product);
 
+    /**
+     * 新增产品
+     * @param product
+     */
+     void addProduct(Product product);
+
+    /**
+     * 修改产品信息
+     * @param product
+     */
+     void updateProductById(Product product);
+
+    /**
+     * 删除产品
+     * @param product
+     */
+     void deleteProductById(Product product);
 
 }

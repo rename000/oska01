@@ -21,7 +21,7 @@
 <!--企业新闻头条-->
 <div class="news-head">
     <div class="w">
-        <div class="mbx">您当前位置：<a href="javascript:;">首页</a> - <a href="javascript:;">新闻资讯</a> - 企业新闻</div>
+        <div class="mbx">您当前位置：<a href="<%=basePath%>oskaHtml/index/index.jsp">首页</a> - <a href="<%=basePath%>oskaHtml/news/news.jsp">新闻资讯</a> - 企业新闻</div>
         <div class="box">
             <div class="list">
                 <h3 class="font18 bold ellipsis"><i class="font30">◇</i> <a href="javascript:;">买木门关键看“门道”花样再多也...</a></h3>
@@ -159,3 +159,7 @@
 </div>
 
 <%@include file="../../common/htmlFooter.jsp" %>
+
+<script type="text/javascript">
+
+</script>
