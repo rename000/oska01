@@ -21,6 +21,18 @@
         </row>
 
         <row class="dis-table padder m-b m-l-40">
+            <label class="t-cell in-name in-v-m">产品类型：</label>
+            <div class="t-cell in-input in-w-200">
+                <select id="productType" class="form-control" >
+                    <option value="1">橡木仿古</option>
+                    <option value="2">橡木人字拼</option>
+                    <option value="3">原木手工拼花</option>
+                    <option value="4">强化地板</option>
+                </select>
+            </div>
+        </row>
+
+        <row class="dis-table padder m-b m-l-40">
             <label class="t-cell in-name in-v-t">产品简介：</label>
             <div class="t-cell in-input in-w-500">
                 <textarea id="productInfo" class="form-control" rows="5"></textarea>

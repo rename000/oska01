@@ -2,6 +2,15 @@
 
 <%@include file="../../common/htmlHeader.jsp" %>
 
+<%
+
+    String  productType = request.getParameter("productType");
+    if("".equals(productType) || "null".equals(productType) || productType == null){
+        productType = "1";
+    }
+
+%>
+
 <!--banner轮播图-->
 <div class="product-banner">
     <div class="w">
@@ -12,7 +21,11 @@
 <!--页面标题-->
 <div class="navBig">
     <div class="w">
-        橡木仿古
+        <%--橡木仿古--%>
+        <%=("1".equals(productType)?"橡木仿古":"")%>
+        <%=("2".equals(productType)?"橡木人字拼":"")%>
+        <%=("3".equals(productType)?"原木手工拼花":"")%>
+        <%=("4".equals(productType)?"强化地板":"")%>
         <em class="en"><img src="<%=basePath%>static/images/product-nav-bg.png"/></em>
     </div>
 
@@ -21,7 +34,12 @@
 <!--内容-->
 <div class="content">
     <div class="w">
-        <div class="mbx">您当前位置：<a href="javascript:;">首页</a> - <a href="javascript:;">产品世界</a> - 橡木仿古</div>
+        <div class="mbx">您当前位置：<a href="javascript:;">首页</a> - <a href="javascript:;">产品世界</a> -
+            <%=("1".equals(productType)?"橡木仿古":"")%>
+            <%=("2".equals(productType)?"橡木人字拼":"")%>
+            <%=("3".equals(productType)?"原木手工拼花":"")%>
+            <%=("4".equals(productType)?"强化地板":"")%>
+        </div>
         <div class="product">
             <ul class="list" id="productList">
 
@@ -110,10 +128,10 @@
                 <dd class="font18" id="product_info">0000</dd>
             </dl>
             <div class="page">
-                <a onclick="leftOrRight(1)" id="product_left" class="arrow-left" href="javascript:;">-</a>
-                <a onclick="leftOrRight(2)" id="product_right" class="arrow-right" href="javascript:;">-</a>
-                <%--<a onclick="leftOrRight(1)" id="product_left" class="arrow-left" href="javascript:;">森林乐章</a>--%>
-                <%--<a onclick="leftOrRight(2)" id="product_right" class="arrow-right" href="javascript:;">红橡女神</a>--%>
+                <%--<a onclick="leftOrRight(1)" id="product_left" class="arrow-left" href="javascript:;">-</a>--%>
+                <%--<a onclick="leftOrRight(2)" id="product_right" class="arrow-right" href="javascript:;">-</a>--%>
+                <a onclick="leftOrRight(1)" id="product_left" class="arrow-left" href="javascript:;">森林乐章</a>
+                <a onclick="leftOrRight(2)" id="product_right" class="arrow-right" href="javascript:;">红橡女神</a>
             </div>
         </div>
     </div>
@@ -148,10 +166,10 @@
         $.ajax(option);
     }
 
-    var productListData = [];
     //获得产品列表
+    var productListData = [];
     function getProductList(){
-        var jsonObj = {};
+        var jsonObj = {productType:"<%=productType%>"};
         var urlVal = '<%=basePath%>' + 'product/getProductList';
 
         getData(jsonObj,urlVal,function (data) {
@@ -160,7 +178,7 @@
 //            console.log('dataList===='+JSON.stringify(dataList));
             var htmlStr = "";
             for(var i=0;i<dataList.length;i++){
-                htmlStr +=  '<li  id="product_'+ dataList[i]['productId']  +'"><div class="pro-box">'+
+                htmlStr +=  '<li  id="product_'+ dataList[i]['productId'] +'"><div class="pro-box">'+
                     '<em class="show"><a href="javascript:;"><img alt="产品名称" src="'+ dataList[i]['productImg'] +'"/></a></em>'+
                     '<dl class="info"> <dt>产品名称：</dt> <dd>'+ dataList[i]['productName'] +'</dd> </dl>'+
                     '</div></li>';
@@ -179,34 +197,32 @@
 
 <script type="text/javascript">
 
-    productListData = [
-        {"count":"","createTime":1497237694000,"nub":0,"productId":2022,"productImg":"http://www.oskafloor.com/userfile/20121213161251631.jpg","productInfo":"产品简介01","productName":"产品名称02","size":10},
-        {"count":"","createTime":1497237637000,"nub":0,"productId":2021,"productImg":"http://www.oskafloor.com/userfile/201211510848789.jpg","productInfo":"产品简介01","productName":"产品名字01","size":10},
-        {"count":"","createTime":"","nub":0,"productId":2030,"productImg":"/oska/static/upload/product/Hydrangeas.jpg","productInfo":"test测试10","productName":"test","size":10}
-    ];
+//    productListData = [
+//        {"count":"","createTime":1497237694000,"nub":0,"productId":2022,"productImg":"http://www.oskafloor.com/userfile/20121213161251631.jpg","productInfo":"产品简介01","productName":"产品名称02","size":10},
+//        {"count":"","createTime":1497237637000,"nub":0,"productId":2021,"productImg":"http://www.oskafloor.com/userfile/201211510848789.jpg","productInfo":"产品简介01","productName":"产品名字01","size":10},
+//        {"count":"","createTime":"","nub":0,"productId":2030,"productImg":"/oska/static/upload/product/Hydrangeas.jpg","productInfo":"test测试10","productName":"test","size":10}
+//    ];
 
     //获得产品详情
     function getProductDetail(productIdVal){
 
+        console.log("productList=========" + JSON.stringify(productListData));
         for(var i=0;i<productListData.length;i++){
 
-            if(parseInt(productListData[i].productId) == productIdVal){
+            if(parseInt(productListData[i]['productId']) == parseInt(productIdVal)){
                 $("#product_img").attr("src",productListData[i]['productImg']);
                 $("#product_name").html(productListData[i]['productName']);
                 $("#product_info").html(productListData[i]['productInfo']);
                 $("#product_info").html(productListData[i]['productInfo']);
 
                 //左右页名
-//                if(i > 0 && i < productListData.length){
-//                    $("#product_left").html(productListData[i-1]['productName']);
-//                    $("#product_right").html(productListData[i+1]['productName']);
-//                }else if(i <=  0){
-//                    $("#product_left").html(productListData[productListData.length-1]['productName']);
-//                    $("#product_right").html(productListData[i+1]['productName']);
-//                }else{
-//                    $("#product_left").html(productListData[i-1]['productName']);
-//                    $("#product_right").html(productListData[productListData.length-1]['productName']);
-//                }
+                if(i > 0 && i < productListData.length){
+                    $("#product_left").html(productListData[i-1]['productName']);
+                    $("#product_right").html(productListData[i+1]['productName']);
+                }else if(i ==  0){
+                    $("#product_left").html(productListData[productListData.length-1]['productName']);
+                    $("#product_right").html(productListData[(i+1)>productListData.length-1?i:i+1]['productName']);
+                }
 
             }else {
                 console.log("不支持不存在的productIdVal")
@@ -215,6 +231,7 @@
         }
 
     }
+
 
     /*点击放大*/
     $('body').on("click",".list li",function(){
@@ -228,10 +245,11 @@
         $('.proBg').fadeOut();
     })
 
-    var sqlJson_Data = productListData;
+
   //左右切换
     function leftOrRight(type){
-
+        var sqlJson_Data = productListData;
+        console.log("sqlJson_Data=========" + JSON.stringify(sqlJson_Data));
         var imgId = $("#product_img").attr("data-imgId");
         var imgNum = 0;
         for (var i=0;i<sqlJson_Data.length;i++) {
@@ -245,15 +263,22 @@
             imgNum++;
         }
         //判断是否跳到第一张或最后一张
-        if(imgNum >= 0 && imgNum < sqlJson_Data.length){
-
+        if(imgNum >= 0 && imgNum <= (sqlJson_Data.length-1)){
             $("#product_img").attr("src",sqlJson_Data[imgNum]["productImg"]);
             $("#product_info").text(sqlJson_Data[imgNum].productInfo);
             $("#product_name").text(sqlJson_Data[imgNum].productName);
             $("#product_img").attr("data-imgId",sqlJson_Data[imgNum].productId);
 
-//            $("#product_left").html(sqlJson_Data[imgNum-1]['productName']);
-//            $("#product_right").html(sqlJson_Data[imgNum+1]['productName']);
+            if(imgNum > 0 && imgNum < (sqlJson_Data.length-1) ){
+                $("#product_left").html(productListData[imgNum-1]['productName']);
+                $("#product_right").html(productListData[imgNum+1]['productName']);
+            }else if(imgNum ==  0){
+                $("#product_left").html(productListData[productListData.length-1]['productName']);
+                $("#product_right").html(productListData[imgNum+1]['productName']);
+            }else{
+                $("#product_left").html(productListData[imgNum-1]['productName']);
+                $("#product_right").html(productListData[0]['productName']);
+            }
 
         }else if(imgNum <= 0) {
             imgNum = sqlJson_Data.length-1;//循环到第一张
@@ -262,8 +287,8 @@
             $("#product_name").text(sqlJson_Data[imgNum].productName);
             $("#product_img").attr("data-imgId",sqlJson_Data[imgNum].productId);
 
-//            $("#product_left").html(sqlJson_Data[0]['productName']);
-//            $("#product_right").html(sqlJson_Data[imgNum-1]['productName']);
+            $("#product_left").html(sqlJson_Data[(imgNum-1)>0?imgNum-1:imgNum]['productName']);
+            $("#product_right").html(sqlJson_Data[0]['productName']);
 
         }else{
             imgNum = 0;//循环到最后一张
@@ -272,8 +297,8 @@
             $("#product_name").text(sqlJson_Data[imgNum].productName);
             $("#product_img").attr("data-imgId",sqlJson_Data[imgNum].productId);
 
-//            $("#product_left").html(sqlJson_Data[imgNum]['productName']);
-//            $("#product_right").html(sqlJson_Data[sqlJson_Data.length-1]['productName']);
+            $("#product_left").html(sqlJson_Data[sqlJson_Data.length-1]['productName']);
+            $("#product_right").html(sqlJson_Data[(imgNum+1)>(sqlJson_Data.length-1)?sqlJson_Data.length-1:imgNum+1]['productName']);
         }
 
     };

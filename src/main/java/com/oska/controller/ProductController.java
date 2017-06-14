@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.github.pagehelper.PageInfo;
 import com.google.common.collect.Maps;
 import com.oska.dao.product.ProductDao;
+import com.oska.enums.ProductType;
 import com.oska.model.MsgResponse;
 import com.oska.model.Product;
 import org.slf4j.Logger;
@@ -19,6 +20,7 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.File;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -57,12 +59,29 @@ public class ProductController extends BaseController {
             String count = "0";
             List<Product> list = productDao.findProductListByProId(product);
 
+            //封装返回数据类型
+            List<Map> aryList = new ArrayList<>();
+            if(list.size() != 0){
+                for (int i = 0; i < list.size(); i++) {
+                    Map<String, String> dataMapS = new HashMap<>();
+                    dataMapS.put("productId", list.get(i).getProductId()+"");
+                    dataMapS.put("productName", list.get(i).getProductName());
+                    dataMapS.put("productType", list.get(i).getProductType());
+                    dataMapS.put("productTypeDesc", ProductType.valueOfByString(list.get(i).getProductType()).getMsg());
+                    dataMapS.put("productInfo", list.get(i).getProductInfo());
+                    dataMapS.put("productImg", list.get(i).getProductImg());
+
+                    aryList.add(dataMapS);
+                }
+            }
+
+
             //获取总条数
             PageInfo page = new PageInfo(list);
             count = new Long(page.getTotal()).toString();
 
             dataMap.put("count", count);
-            dataMap.put("dataList", list);
+            dataMap.put("dataList", aryList);
             //设置返回信息
             render(code_ok, "查询成功", dataMap, response);
 

@@ -13,6 +13,7 @@ public class Product {
 
     private String productInfo;
 
+    private String productType;
 
     private Integer count;
     private Integer nub = 0;
@@ -81,5 +82,13 @@ public class Product {
 
     public void setProductInfo(String productInfo) {
         this.productInfo = productInfo == null ? null : productInfo.trim();
+    }
+
+    public String getProductType() {
+        return productType;
+    }
+
+    public void setProductType(String productType) {
+        this.productType = productType;
     }
 }

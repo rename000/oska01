@@ -33,6 +33,9 @@
     <script src="<%=basePath%>static/js/fileupload/js/fileinput.js"></script>
     <script src="<%=basePath%>static/js/fileupload/js/fileinput_locale_zh.js"></script>
     <script src="<%=basePath%>static/js/oska.js"></script>
+    <%--page--%>
+    <link rel="stylesheet" type="text/css" href="<%=basePath%>static/js/page/paging.css"/>
+    <script type="text/javascript" src="<%=basePath%>static/js/page/pagePlugin.js"></script>
 </head>
 
 <body>

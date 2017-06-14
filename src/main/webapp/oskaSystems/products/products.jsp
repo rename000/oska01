@@ -10,20 +10,30 @@
 <section class="panel panel-default">
     <header class="panel-heading"> 产品管理列表 </header>
     <div class="row text-sm wrapper">
-        <div class="col-sm-9 m-b-xs">
+        <div class="col-sm-6 m-b-xs">
             <a href="<%=basePath%>oskaSystems/products/productsAdd.jsp" class="btn btn-sm btn-primary">新增产品</a>
         </div>
 
+        <form id="formObj">
         <div class="col-sm-3">
-            <form id="formObj">
+            <select id="productType" name="productType" class="form-control" placeholder="产品类型" style="height: 30px;padding: 5px 10px;">
+                <option value="">(全部)产品类型</option>
+                <option value="1">橡木仿古</option>
+                <option value="2">橡木人字拼</option>
+                <option value="3">原木手工拼花</option>
+                <option value="4">强化地板</option>
+            </select>
+        </div>
+
+        <div class="col-sm-3">
             <div class="input-group">
                 <input name="productName" type="text" class="input-sm form-control" placeholder="产品名称">
                     <span class="input-group-btn">
                     <button id="searchBtn" class="btn btn-sm btn-default" type="button">搜索</button>
                     </span>
             </div>
-           </form>
         </div>
+        </form>
     </div>
     <div class="table-responsive">
         <table class="table table-striped b-t b-light text-sm">
@@ -31,6 +41,7 @@
             <tr>
                 <th>产品ID</th>
                 <th style="width: 18%">产品名称</th>
+                <th style="width: 18%">产品类型</th>
                 <th>产品简介</th>
                 <th>产品图</th>
                 <th>操作</th>
@@ -56,17 +67,17 @@
                 <small class="text-muted inline m-t-sm m-b-sm">当前展示20-30条,总共 50 条;每页10条;</small>
             </div>
 
-            <div class="col-lg-6 col-md-4 col-sm-4 text-right text-center-xs">
-                <ul class="pagination pagination-sm m-t-none m-b-none inline-li m-b">
-                    <li><a href="#"><i class="fa fa-chevron-left"></i></a></li>
-                    <li><a href="#">1</a></li>
-                    <li class="active"><a href="#">2</a></li>
-                    <li><a href="#">3</a></li>
-                    <li><a href="#">4</a></li>
-                    <li><a href="#">5</a></li>
-                    <li><a href="#">...</a></li>
-                    <li><a href="#"><i class="fa fa-chevron-right"></i></a></li>
-                </ul>
+            <div class="col-lg-6 col-md-4 col-sm-4 text-right text-center-xs" id="paging">
+                <%--<ul class="pagination pagination-sm m-t-none m-b-none inline-li m-b">--%>
+                    <%--<li><a href="#"><i class="fa fa-chevron-left"></i></a></li>--%>
+                    <%--<li><a href="#">1</a></li>--%>
+                    <%--<li class="active"><a href="#">2</a></li>--%>
+                    <%--<li><a href="#">3</a></li>--%>
+                    <%--<li><a href="#">4</a></li>--%>
+                    <%--<li><a href="#">5</a></li>--%>
+                    <%--<li><a href="#">...</a></li>--%>
+                    <%--<li><a href="#"><i class="fa fa-chevron-right"></i></a></li>--%>
+                <%--</ul>--%>
             </div>
 
             <div class="col-lg-2 col-md-2 col-sm-2 text-right text-center-xs">
@@ -102,6 +113,7 @@
                     for(var i=0;i<dataList.length;i++){
                         htmlStr +=  "<tr><td>"+ dataList[i]['productId'] +"</td>"+
                             "<td>"+ dataList[i]['productName'] +"</td>"+
+                            "<td>"+ dataList[i]['productTypeDesc'] +"</td>"+
                             "<td>"+ dataList[i]['productInfo'] +"</td>"+
                             "<td> <img src='"+ dataList[i]['productImg'] +"' style='width: 30px;height: 30px;' /> </td>"+
                             "<td>"+
@@ -111,6 +123,10 @@
                     }
 
                     $("#productList").html(htmlStr);
+
+//                    if(dataList.length > 0){
+//                        $scope.count = 3;
+//                    }
 
                 }else{
                     console.log("code为0； 查询失败")
@@ -148,13 +164,6 @@
         $.ajax(option);
     }
 
-    //初始化
-    function init(){
-        var jsonObj = {};
-        getProductList(jsonObj);
-    }
-    init();
-
 
     //searchBtn
     $("#searchBtn").click(function(){
@@ -187,6 +196,30 @@
         }
     });
 
+    //分页 pagePlugin
+    var createPagePlugin = function(total, pageSize) {
+        $("#paging").empty();
+        paging = pagePlugin.createPaging({
+            renderTo: 'paging',
+            total: 3,
+            pageSize: 2,
+//            currentPage:1
+        });
+        paging.goPage = function(from, to) {
+            pageFun(from - 1, pageSize);
+        }
+    };
 
+    var pageFun=function(from,pageSize){
+        var jsonObj = {nub: "" + from,size: "" + pageSize};
+        getProductList(jsonObj)
+    }
 
+    //初始化
+    function init(){
+        var jsonObj = {nub:"0",size:"2"};
+        getProductList(jsonObj);
+        createPagePlugin(0,2);
+    }
+    init();
 </script>
