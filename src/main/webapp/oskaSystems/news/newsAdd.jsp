@@ -60,26 +60,26 @@
     $("#saveBtn").click(function(){
         var newsNameVal = $("#newsName").val();
         var newsInfoVal = $("#newsInfo").val();
-        var newsImgVal = $("#input01").val();
+        var newsDescVal =  $("#newsDesc").val();
         var newsTypeVal = $("#newsType").val();
         //校验
         if(newsNameVal == ''){
-            alert("请填写新闻名称")
+            alert("请填写新闻标题")
             return;
         }
         if(newsInfoVal == ''){
             alert("请填写新闻简介")
             return;
         }
-        if(newsImgVal == ''){
-            alert("请上传新闻图片")
+        if(newsDescVal == ''){
+            alert("请填写新闻内容")
             return;
         }
 
         var jsonObj = {
-            newsName:newsNameVal,
+            newsTitle:newsNameVal,
             newsInfo:newsInfoVal,
-            newsImg:newsImgVal,
+            newsDesc:newsDescVal,
             newsType:newsTypeVal
         };
 
