@@ -99,14 +99,14 @@ em {
     padding: 0;
 }
 .base-paging-area .p-skip .btn {
-    height: 26px;
+    /*height: 26px;*/
     margin-left: 10px;
     font-size: 12px;
-    line-height: 20px;
+    /*line-height: 20px;*/
     text-decoration: none;
     border-radius: 3px;
     display: inline-block;
-    margin-top: -8px;
+    /*margin-top: -8px;*/
 }
 .pagelist .btn-default {
     border: 1px solid #DDD;

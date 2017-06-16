@@ -75,8 +75,8 @@
     $("#saveBtn").click(function(){
         var productNameVal = $("#productName").val();
         var productInfoVal = $("#productInfo").val();
-        var productImg = $("#input01").val();
-
+        var productImgVal = $("#input01").val();
+        var productTypeVal = $("#productType").val();
         //校验
         if(productNameVal == ''){
             alert("请填写产品名称")
@@ -86,7 +86,7 @@
             alert("请填写产品简介")
             return;
         }
-        if(productImg == ''){
+        if(productImgVal == ''){
             alert("请上传产品图片")
             return;
         }
@@ -94,7 +94,8 @@
         var jsonObj = {
                 productName:productNameVal,
                 productInfo:productInfoVal,
-                productImg:productImg
+                productImg:productImgVal,
+                productType:productTypeVal
         };
 
 

@@ -3,10 +3,10 @@ package com.oska.controller;
 import com.alibaba.fastjson.JSONObject;
 import com.github.pagehelper.PageInfo;
 import com.google.common.collect.Maps;
-import com.oska.dao.product.ProductDao;
-import com.oska.enums.ProductType;
-import com.oska.model.MsgResponse;
-import com.oska.model.Product;
+import com.oska.dao.news.NewsDao;
+import com.oska.dao.news.NewsDaoImpl;
+import com.oska.enums.NewsType;
+import com.oska.model.News;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
@@ -14,12 +14,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -30,23 +28,23 @@ import java.util.Map;
  */
 
 @Controller
-@RequestMapping("/product")
-public class ProductController extends BaseController {
+@RequestMapping("/news")
+public class NewsController extends BaseController {
 
-   private static final Logger logger = LoggerFactory.getLogger(ProductController.class);
+   private static final Logger logger = LoggerFactory.getLogger(NewsController.class);
 
    @Resource
-   ProductDao productDao;
+    NewsDao newsDao;
 
 
     /**
-     * 获取产品列表
+     * 获取新闻列表
      * @return
      * @throws Exception
      */
     @ResponseBody
-    @RequestMapping(value = "/getProductList", method = { RequestMethod.POST })
-    public String getProductList(
+    @RequestMapping(value = "/getNewsList", method = { RequestMethod.POST })
+    public String getNewsList(
             @RequestParam String jsonObject,
             HttpServletRequest request, HttpServletResponse response)
             throws Exception {
@@ -54,22 +52,23 @@ public class ProductController extends BaseController {
         //逻辑处理
         HashMap<String, Object> dataMap = Maps.newHashMap();
         try{
-            Product product = JSONObject.parseObject(jsonObject, Product.class);
+            News News = JSONObject.parseObject(jsonObject, News.class);
 
             String count = "0";
-            List<Product> list = productDao.findProductListByProId(product);
+            List<News> list = newsDao.findNewsListByProId(News);
 
             //封装返回数据类型
             List<Map> aryList = new ArrayList<>();
             if(list.size() != 0){
                 for (int i = 0; i < list.size(); i++) {
                     Map<String, String> dataMapS = new HashMap<>();
-                    dataMapS.put("productId", list.get(i).getProductId()+"");
-                    dataMapS.put("productName", list.get(i).getProductName());
-                    dataMapS.put("productType", list.get(i).getProductType());
-                    dataMapS.put("productTypeDesc", ProductType.valueOfByString(list.get(i).getProductType()).getMsg());
-                    dataMapS.put("productInfo", list.get(i).getProductInfo());
-                    dataMapS.put("productImg", list.get(i).getProductImg());
+                    dataMapS.put("newsId", list.get(i).getNewsId()+"");
+                    dataMapS.put("newsTitle", list.get(i).getNewsTitle());
+                    dataMapS.put("newsType", list.get(i).getNewsType());
+                    dataMapS.put("newsTypeDesc", NewsType.valueOfByString(list.get(i).getNewsType()).getMsg());
+                    dataMapS.put("newsInfo", list.get(i).getNewsInfo());
+                    dataMapS.put("newsDesc", list.get(i).getNewsDesc());
+                    dataMapS.put("createTime", list.get(i).getCreateTime()+"");
 
                     aryList.add(dataMapS);
                 }
@@ -86,7 +85,7 @@ public class ProductController extends BaseController {
 
         }catch (Exception e){
             e.printStackTrace();
-            logger.error("Error ProductController getProductList() run error ErrorMsg is ====================" + e.getMessage());
+            logger.error("Error NewsController getNewsList() run error ErrorMsg is ====================" + e.getMessage());
             //throw e;
             //设置返回信息
             render(code_fail, "系统异常！", null, response);
@@ -97,28 +96,28 @@ public class ProductController extends BaseController {
 
 
     /**
-     * 新增产品
+     * 新增新闻
      * @return
      * @throws Exception
      */
     @ResponseBody
-    @RequestMapping(value = "/addProduct", method = { RequestMethod.POST })
-    public String addProduct(
+    @RequestMapping(value = "/addNews", method = { RequestMethod.POST })
+    public String addNews(
             @RequestParam String jsonObject,
             HttpServletRequest request, HttpServletResponse response)
             throws Exception {
 
         //逻辑处理
         try{
-            Product product = JSONObject.parseObject(jsonObject, Product.class);
+            News News = JSONObject.parseObject(jsonObject, News.class);
 
-            productDao.addProduct(product);
+            newsDao.addNews(News);
 
             render(code_ok, "新增成功", null, response);
 
         }catch (Exception e){
             e.printStackTrace();
-            logger.error("Error ProductController updateProduct() run error ErrorMsg is ====================" + e.getMessage());
+            logger.error("Error NewsController updateNews() run error ErrorMsg is ====================" + e.getMessage());
             //throw e;
             //设置返回信息
             render(code_fail, "系统异常！", null, response);
@@ -129,13 +128,13 @@ public class ProductController extends BaseController {
 
 
     /**
-     * 更新产品
+     * 更新新闻
      * @return
      * @throws Exception
      */
     @ResponseBody
-    @RequestMapping(value = "/updateProduct", method = { RequestMethod.POST })
-    public String updateProduct(
+    @RequestMapping(value = "/updateNews", method = { RequestMethod.POST })
+    public String updateNews(
             @RequestParam String jsonObject,
             HttpServletRequest request, HttpServletResponse response)
             throws Exception {
@@ -143,20 +142,20 @@ public class ProductController extends BaseController {
         //逻辑处理
         HashMap<String, Object> dataMap = Maps.newHashMap();
         try{
-            Product product = JSONObject.parseObject(jsonObject, Product.class);
+            News News = JSONObject.parseObject(jsonObject, News.class);
 
-            if("".equals(product.getProductId()) || "null".equals(product.getProductId())){
-                render(code_fail,"编辑失败，请传入相应的产品ID", null, response);
+            if("".equals(News.getNewsId()) || "null".equals(News.getNewsId())){
+                render(code_fail,"编辑失败，请传入相应的新闻ID", null, response);
 
             }else {
-                productDao.updateProductById(product);
+                newsDao.updateNewsById(News);
                 //设置返回成功信息
                 render(code_ok,"编辑成功", null, response);
             }
 
         }catch (Exception e){
             e.printStackTrace();
-            logger.error("Error ProductController updateProduct() run error ErrorMsg is ====================" + e.getMessage());
+            logger.error("Error NewsController updateNews() run error ErrorMsg is ====================" + e.getMessage());
             //throw e;
             //设置返回失败信息
             render(code_fail, "系统异常！", dataMap, response);
@@ -167,29 +166,29 @@ public class ProductController extends BaseController {
 
 
     /**
-     * 删除产品
+     * 删除新闻
      * @return
      * @throws Exception
      */
     @ResponseBody
-    @RequestMapping(value = "/deleteProduct", method = { RequestMethod.POST })
-    public String deleteProduct(
+    @RequestMapping(value = "/deleteNews", method = { RequestMethod.POST })
+    public String deleteNews(
             @RequestParam String jsonObject,
             HttpServletRequest request, HttpServletResponse response)
             throws Exception {
 
         //逻辑处理
         try{
-            Product product = JSONObject.parseObject(jsonObject, Product.class);
+            News News = JSONObject.parseObject(jsonObject, News.class);
 
-            productDao.deleteProductById(product);
+            newsDao.deleteNewsById(News);
 
             //设置返回成功信息
             render(code_ok, "删除成功",null, response);
 
         }catch (Exception e){
             e.printStackTrace();
-            logger.error("Error ProductController deleteProduct() run error ErrorMsg is ====================" + e.getMessage());
+            logger.error("Error NewsController deleteNews() run error ErrorMsg is ====================" + e.getMessage());
             //throw e;
             //设置返回信息
             render(code_fail, "系统异常！",null, response);

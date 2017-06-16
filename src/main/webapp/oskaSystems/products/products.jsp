@@ -63,11 +63,12 @@
     </div>
     <footer class="panel-footer">
         <div class="row">
-            <div class="col-lg-3 col-md-4 col-sm-4 text-left text-center-xs">
-                <small class="text-muted inline m-t-sm m-b-sm">当前展示20-30条,总共 50 条;每页10条;</small>
+            <div class="col-lg-3 col-md-3 col-sm-3 text-left text-center-xs">
+                <%--<small class="text-muted inline m-t-sm m-b-sm">当前展示20-30条,总共 50 条;每页10条;</small>--%>
+                <small class="text-muted inline m-t-sm m-b-sm">总共 <span id="total">--</span> 条</small>
             </div>
 
-            <div class="col-lg-6 col-md-4 col-sm-4 text-right text-center-xs" id="paging">
+            <div class="col-lg-9 col-md-9 col-sm-9 text-right text-center-xs" id="paging">
                 <%--<ul class="pagination pagination-sm m-t-none m-b-none inline-li m-b">--%>
                     <%--<li><a href="#"><i class="fa fa-chevron-left"></i></a></li>--%>
                     <%--<li><a href="#">1</a></li>--%>
@@ -80,14 +81,14 @@
                 <%--</ul>--%>
             </div>
 
-            <div class="col-lg-2 col-md-2 col-sm-2 text-right text-center-xs">
-                <div class="input-group m-auto dis-table">
-                    <span class="t-cell"><button class="btn btn-sm btn-default" type="button">首页</button></span>
-                    <span class="t-cell"><button class="btn btn-sm btn-default" type="button">尾页</button></span>
-                    <span class="t-cell in-v-m"><input type="tel" class="input-sm form-control m-l" value="" placeholder="填页数" style="width: 60px;"></span>
-                    <span class="t-cell"><button class="btn btn-sm btn-default" type="button">跳转</button></span>
-                </div>
-            </div>
+            <%--<div class="col-lg-2 col-md-2 col-sm-2 text-right text-center-xs">--%>
+                <%--<div class="input-group m-auto dis-table">--%>
+                    <%--<span class="t-cell"><button class="btn btn-sm btn-default" type="button">首页</button></span>--%>
+                    <%--<span class="t-cell"><button class="btn btn-sm btn-default" type="button">尾页</button></span>--%>
+                    <%--<span class="t-cell in-v-m"><input type="tel" class="input-sm form-control m-l" value="" placeholder="填页数" style="width: 60px;"></span>--%>
+                    <%--<span class="t-cell"><button class="btn btn-sm btn-default" type="button">跳转</button></span>--%>
+                <%--</div>--%>
+            <%--</div>--%>
         </div>
     </footer>
 </section>
@@ -123,11 +124,7 @@
                     }
 
                     $("#productList").html(htmlStr);
-
-//                    if(dataList.length > 0){
-//                        $scope.count = 3;
-//                    }
-
+                    $("#total").html(dataList.length);
                 }else{
                     console.log("code为0； 查询失败")
                 }
@@ -151,8 +148,8 @@
                 data = JSON.parse(data);
                 if(data.code=='1'){
                     alert(data.msg);
-                    var jsonObj = {};
-                    getProductList(jsonObj);
+                    var jsonObjS = {nub:"",size:""};
+                    getProductList(jsonObjS);
                 }else{
                     alert(data.msg);
                 }
@@ -164,7 +161,6 @@
         $.ajax(option);
     }
 
-
     //searchBtn
     $("#searchBtn").click(function(){
         var jsonObj = {};
@@ -172,7 +168,6 @@
         jsonObj = $.extend(jsonObj,formObj);
         console.log("jsonObj===============" + JSON.stringify(jsonObj));
         getProductList(jsonObj);
-
     });
 
     //editBtn
@@ -183,7 +178,6 @@
         }else {
             window.location.href = "<%=basePath%>" + "oskaSystems/products/productsEdit.jsp?productId=" + productIdVal;
         }
-
     });
 
     //delBtn
@@ -197,29 +191,29 @@
     });
 
     //分页 pagePlugin
-    var createPagePlugin = function(total, pageSize) {
+    var createPagePlugin = function(total, size) {
         $("#paging").empty();
         paging = pagePlugin.createPaging({
             renderTo: 'paging',
-            total: 3,
-            pageSize: 2,
-//            currentPage:1
+            total: total,
+            pageSize: size,
+            currentPage:1
         });
         paging.goPage = function(from, to) {
-            pageFun(from - 1, pageSize);
+            pageFun(from - 1, size);
         }
     };
-
-    var pageFun=function(from,pageSize){
+    //翻页
+    var pageFun = function(from,pageSize){
         var jsonObj = {nub: "" + from,size: "" + pageSize};
-        getProductList(jsonObj)
+        getProductList(jsonObj);
     }
 
     //初始化
     function init(){
-        var jsonObj = {nub:"0",size:"2"};
+        var jsonObj = {nub:0,size:2};
         getProductList(jsonObj);
-        createPagePlugin(0,2);
+        createPagePlugin(3,jsonObj.size);
     }
     init();
 </script>

@@ -12,7 +12,7 @@
     <div class="swiper-wrapper">
         <div class="swiper-slide index-banner-a"><img src="<%=basePath%>static/images/index/index-banner-a.jpg"/></div>
         <div class="swiper-slide index-banner-b"><img src="<%=basePath%>static/images/index/index-banner-b.jpg"/></div>
-        <div class="swiper-slide index-banner-c"><img src="<%=basePath%>static/images/index/index-banner-c.jpg"/></div>
+        <div class="swiper-slide index-banner-c"><img src="<%=basePath%>static/images/index/index-banner-c.png"/></div>
     </div>
     <!-- Add Pagination -->
     <div class="swiper-pagination"></div>
