@@ -8,8 +8,8 @@
 		</commentGenerator>
 		<!-- 数据库链接URL、用户名、密码 -->
 		<jdbcConnection driverClass="com.mysql.jdbc.Driver"
-			connectionURL="jdbc:mysql://127.0.0.1:3306/oska"
-			userId="root" password="mysql">
+			connectionURL="jdbc:mysql://120.76.126.100:3306/oska"
+			userId="root" password="123456">
 		</jdbcConnection>
 		<javaTypeResolver>
 			<property name="forceBigDecimals" value="false" />
@@ -26,12 +26,12 @@
 			<property name="enableSubPackages" value="true" />
 		</sqlMapGenerator>
 		<!-- 生成DAO的包名和位置 -->
-		 <javaClientGenerator type="XMLMAPPER" targetPackage="com.oska.dao"
-			targetProject="src\main\java">
-			 <property name="enableSubPackages" value="true" />
-		 </javaClientGenerator>
+		 <!--<javaClientGenerator type="XMLMAPPER" targetPackage="com.oska.dao"-->
+			<!--targetProject="src\main\java">-->
+			 <!--<property name="enableSubPackages" value="true" />-->
+		 <!--</javaClientGenerator>-->
 		<!-- 要生成那些表(更改tableName和domainObjectName就可以) -->
-		<table tableName="user" domainObjectName="User"
+		<table tableName="news" domainObjectName="News"
 			enableCountByExample="false" enableUpdateByExample="false"
 			enableDeleteByExample="false" enableSelectByExample="false"
 			selectByExampleQueryId="false" />

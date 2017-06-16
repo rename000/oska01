@@ -2,6 +2,15 @@
 
 <%@include file="../../common/htmlHeader.jsp" %>
 
+<%
+
+    String  newsType = request.getParameter("newsType");
+    if("".equals(newsType) || "null".equals(newsType) || newsType == null){
+        newsType = "1";
+    }
+
+%>
+
 <!--banner轮播图-->
 <div class="material-banner">
     <div class="w">
@@ -12,7 +21,8 @@
 <!--页面标题-->
 <div class="navBig">
     <div class="w">
-        企业新闻
+        <%=("1".equals(newsType)?"企业新闻":"")%>
+        <%=("2".equals(newsType)?"行业新闻":"")%>
         <em class="en"><img src="<%=basePath%>static/images/news-nav-bg.png"/></em>
     </div>
 
@@ -21,7 +31,10 @@
 <!--企业新闻头条-->
 <div class="news-head">
     <div class="w">
-        <div class="mbx">您当前位置：<a href="<%=basePath%>oskaHtml/index/index.jsp">首页</a> - <a href="<%=basePath%>oskaHtml/news/news.jsp">新闻资讯</a> - 企业新闻</div>
+        <div class="mbx">您当前位置：<a href="<%=basePath%>oskaHtml/index/index.jsp">首页</a> - <a href="<%=basePath%>oskaHtml/news/news.jsp">新闻资讯</a> -
+            <%=("1".equals(newsType)?"企业新闻":"")%>
+            <%=("2".equals(newsType)?"行业新闻":"")%>
+        </div>
         <div class="box">
             <div class="list">
                 <h3 class="font18 bold ellipsis"><i class="font30">◇</i> <a href="javascript:;">买木门关键看“门道”花样再多也...</a></h3>
@@ -53,7 +66,7 @@
 <div class="content">
     <div class="w">
         <div class="news">
-            <ul class="list">
+            <ul class="list" id="newsList">
                 <li>
                     <a href="<%=basePath%>oskaHtml/news/newsDetail.jsp">
                         <dl class="ml">
@@ -66,92 +79,17 @@
                         <p><img src="<%=basePath%>static/images/arrow-r-con.png"/></p>
                     </em>
                 </li>
-                <li>
-                    <a href="javascript:;">
-                        <dl class="ml">
-                            <dt class="font18">◇ 绿色环保木地板的优越性</dt>
-                            <dd>环保地板不会产生室内空气二次污染，许多消费者在购买了某些木制品包括木地板、家具等后...会闻到一股强烈的刺激性气味，感到辣眼睛、流泪</dd>
-                        </dl>
-                    </a>
-                    <em class="time">
-                        <p>2015.12.08</p>
-                        <p><img src="<%=basePath%>static/images/arrow-r-con.png"/></p>
-                    </em>
-                </li>
-                <li>
-                    <a href="javascript:;">
-                        <dl class="ml">
-                            <dt class="font18">◇ 绿色环保木地板的优越性</dt>
-                            <dd>环保地板不会产生室内空气二次污染，许多消费者在购买了某些木制品包括木地板、家具等后...会闻到一股强烈的刺激性气味，感到辣眼睛、流泪</dd>
-                        </dl>
-                    </a>
-                    <em class="time">
-                        <p>2015.12.08</p>
-                        <p><img src="<%=basePath%>static/images/arrow-r-con.png"/></p>
-                    </em>
-                </li>
-                <li>
-                    <a href="javascript:;">
-                        <dl class="ml">
-                            <dt class="font18">◇ 绿色环保木地板的优越性</dt>
-                            <dd>环保地板不会产生室内空气二次污染，许多消费者在购买了某些木制品包括木地板、家具等后...会闻到一股强烈的刺激性气味，感到辣眼睛、流泪</dd>
-                        </dl>
-                    </a>
-                    <em class="time">
-                        <p>2015.12.08</p>
-                        <p><img src="<%=basePath%>static/images/arrow-r-con.png"/></p>
-                    </em>
-                </li>
-
-                <li>
-                    <a href="javascript:;">
-                        <dl class="ml">
-                            <dt class="font18">◇ 绿色环保木地板的优越性</dt>
-                            <dd>环保地板不会产生室内空气二次污染，许多消费者在购买了某些木制品包括木地板、家具等后...会闻到一股强烈的刺激性气味，感到辣眼睛、流泪</dd>
-                        </dl>
-                    </a>
-                    <em class="time">
-                        <p>2015.12.08</p>
-                        <p><img src="<%=basePath%>static/images/arrow-r-con.png"/></p>
-                    </em>
-                </li>
-
-                <li>
-                    <a href="javascript:;">
-                        <dl class="ml">
-                            <dt class="font18">◇ 绿色环保木地板的优越性</dt>
-                            <dd>环保地板不会产生室内空气二次污染，许多消费者在购买了某些木制品包括木地板、家具等后...会闻到一股强烈的刺激性气味，感到辣眼睛、流泪</dd>
-                        </dl>
-                    </a>
-                    <em class="time">
-                        <p>2015.12.08</p>
-                        <p><img src="<%=basePath%>static/images/arrow-r-con.png"/></p>
-                    </em>
-                </li>
-
-                <li>
-                    <a href="javascript:;">
-                        <dl class="ml">
-                            <dt class="font18">◇ 绿色环保木地板的优越性</dt>
-                            <dd>环保地板不会产生室内空气二次污染，许多消费者在购买了某些木制品包括木地板、家具等后...会闻到一股强烈的刺激性气味，感到辣眼睛、流泪</dd>
-                        </dl>
-                    </a>
-                    <em class="time">
-                        <p>2015.12.08</p>
-                        <p><img src="<%=basePath%>static/images/arrow-r-con.png"/></p>
-                    </em>
-                </li>
             </ul>
             <!--翻页-->
             <div class="pages">
                 <a href="#"><i><</i> 上一页</a>
-                <a href="#">1</a>
-                <a href="#" class="over">2</a>
-                <a href="#">3</a>
-                <a href="#">4</a>
-                <a href="#">5</a>
-                <a href="#">...</a>
-                <a href="#">99</a>
+                <a href="#" class="over">1</a>
+                <%--<a href="#" class="over">2</a>--%>
+                <%--<a href="#">3</a>--%>
+                <%--<a href="#">4</a>--%>
+                <%--<a href="#">5</a>--%>
+                <%--<a href="#">...</a>--%>
+                <%--<a href="#">99</a>--%>
                 <a href="#">下一页 <i>></i></a>
             </div>
         </div>
@@ -161,5 +99,61 @@
 <%@include file="../../common/htmlFooter.jsp" %>
 
 <script type="text/javascript">
+    //getData base function
+    function getData(jsonObj,urlVal,callBack) {
+        var getData_jsonObject = jsonObj;
+        var option = {
+            url:urlVal,
+            type:'post',
+            data:{jsonObject:JSON.stringify(getData_jsonObject)},
+            success:function(data){
+//            console.log(data);
+                data = JSON.parse(data);
+                if(data.code=='1'){
+                    callBack(data);
+                }else{
+                    console.log("code为0； 查询失败")
+                }
+            },
+            error:function(msg){
+                console.log(msg);
+            }
+        };
+        $.ajax(option);
+    }
 
+    //获得新闻列表
+    var newsListData = [];
+    function getNewsList(){
+        var jsonObj = {newsType:"<%=newsType%>"};
+        var urlVal = '<%=basePath%>' + 'news/getNewsList';
+
+        getData(jsonObj,urlVal,function (data) {
+            var dataList = data.data.dataList;
+            newsListData = dataList;
+//            console.log('dataList===='+JSON.stringify(dataList));
+            var htmlStr = "";
+            for(var i=0;i<dataList.length;i++){
+                htmlStr +=  '<li class="li-id" id="news_'+ dataList[i]['newsId'] +'"> <a> <dl class="ml">'+
+                    '<dt class="font18"><span class="font18 bold">◇</span> '+ dataList[i]['newsName'] +'</dt>'+
+                    '<dd>'+ dataList[i]['newsInfo'] +'</dd>'+
+                    '</dl> </a> <em class="time"><p>2015.12.08</p>'+
+                    '<p><img src="<%=basePath%>static/images/arrow-r-con.png"/></p> </em> </li>';
+
+            }
+
+            $("#newsList").html(htmlStr);
+        })
+    }
+
+    function init() {
+        getNewsList();
+    }
+    init();
+
+    //go to detail
+    $('body').on("click",".li-id",function () {
+        var newsIdVal = $(this).attr("id").split("_")[1];
+        window.location.href = "<%=basePath%>"+"oskaHtml/news/newsDetail.jsp?newsId="+newsIdVal;
+    })
 </script>

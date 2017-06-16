@@ -2,7 +2,9 @@ package com.oska.controller;
 
 import com.alibaba.fastjson.JSONObject;
 import com.oska.common.OskaCommon;
+import com.oska.dao.user.UserDao;
 import com.oska.model.MsgResponse;
+import com.oska.model.User;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Scope;
@@ -30,6 +32,9 @@ public class UserController extends BaseController {
     @Resource
     OskaCommon oskaCommon;
 
+    @Resource
+    UserDao userDao;
+
     @RequestMapping(value = "/userlogin", method = { RequestMethod.POST })
     public String userlogin(
             @RequestParam String jsonObject,
@@ -43,10 +48,13 @@ public class UserController extends BaseController {
         String passWord = jsonObj.getString("passWord");
 
 
+        User user = new User();
+        user.setUserId(1194);
+        User user01 = userDao.getUserListById(user).get(0);
         //逻辑处理
         MsgResponse msgResponse = new MsgResponse("1");
         try{
-            if("admin".equals(userName)&&"123456".equals(passWord)){
+            if(user01.getUserName().equals(userName) && user01.getPassword().equals(passWord)){
                 render(oskaCommon.code_ok, "oskaSystems/products/products.jsp", (Map<String, Object>)msgResponse.getObject(), response);
                 return null;
             }else{

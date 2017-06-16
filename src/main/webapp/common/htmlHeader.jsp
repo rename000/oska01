@@ -42,10 +42,10 @@
                     <em class="arrow"></em>
                     <i class="g-line"></i>
                     <div class="subset">
-                        <a href="<%=basePath%>oskaHtml/products/products.jsp">橡木仿古</a>
-                        <a href="<%=basePath%>oskaHtml/products/products.jsp">橡木人字拼</a>
-                        <a href="<%=basePath%>oskaHtml/products/products.jsp">原木手工拼花</a>
-                        <a href="<%=basePath%>oskaHtml/products/products.jsp">强化地板</a>
+                        <a href="<%=basePath%>oskaHtml/products/products.jsp?productType=1">橡木仿古</a>
+                        <a href="<%=basePath%>oskaHtml/products/products.jsp?productType=2">橡木人字拼</a>
+                        <a href="<%=basePath%>oskaHtml/products/products.jsp?productType=3">原木手工拼花</a>
+                        <a href="<%=basePath%>oskaHtml/products/products.jsp?productType=4">强化地板</a>
                     </div>
                     <div class="linex"></div>
                 </li>
@@ -57,8 +57,8 @@
                     <a href="<%=basePath%>oskaHtml/news/news.jsp">新闻资讯</a>
                     <em class="arrow"></em><i class="g-line"></i>
                     <div class="subset">
-                        <a href="<%=basePath%>oskaHtml/news/news.jsp">企业新闻 </a>
-                        <a href="<%=basePath%>oskaHtml/news/news.jsp">行业新闻</a>
+                        <a href="<%=basePath%>oskaHtml/news/news.jsp?newsType=1">企业新闻 </a>
+                        <a href="<%=basePath%>oskaHtml/news/news.jsp?newsType=2">行业新闻</a>
                     </div>
                     <div class="linex"></div>
                 </li>

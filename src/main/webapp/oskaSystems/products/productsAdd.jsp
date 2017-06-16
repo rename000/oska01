@@ -21,6 +21,18 @@
         </row>
 
         <row class="dis-table padder m-b m-l-40">
+            <label class="t-cell in-name in-v-m">产品类型：</label>
+            <div class="t-cell in-input in-w-200">
+                <select id="productType" class="form-control" >
+                    <option value="1">橡木仿古</option>
+                    <option value="2">橡木人字拼</option>
+                    <option value="3">原木手工拼花</option>
+                    <option value="4">强化地板</option>
+                </select>
+            </div>
+        </row>
+
+        <row class="dis-table padder m-b m-l-40">
             <label class="t-cell in-name in-v-t">产品简介：</label>
             <div class="t-cell in-input in-w-500">
                 <textarea id="productInfo" class="form-control" rows="5"></textarea>
@@ -63,8 +75,8 @@
     $("#saveBtn").click(function(){
         var productNameVal = $("#productName").val();
         var productInfoVal = $("#productInfo").val();
-        var productImg = $("#input01").val();
-
+        var productImgVal = $("#input01").val();
+        var productTypeVal = $("#productType").val();
         //校验
         if(productNameVal == ''){
             alert("请填写产品名称")
@@ -74,7 +86,7 @@
             alert("请填写产品简介")
             return;
         }
-        if(productImg == ''){
+        if(productImgVal == ''){
             alert("请上传产品图片")
             return;
         }
@@ -82,7 +94,8 @@
         var jsonObj = {
                 productName:productNameVal,
                 productInfo:productInfoVal,
-                productImg:productImg
+                productImg:productImgVal,
+                productType:productTypeVal
         };
 
 

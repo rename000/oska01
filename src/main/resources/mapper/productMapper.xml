@@ -7,11 +7,12 @@
     <result column="product_info" jdbcType="VARCHAR" property="productInfo" />
     <result column="product_img" jdbcType="VARCHAR" property="productImg" />
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="product_type" jdbcType="TIMESTAMP" property="productType" />
   </resultMap>
 
   <select id="getProductList" parameterType="com.oska.model.Product" resultMap="BaseResultMap">
     select
-    product_id, product_name,product_info,create_time,product_img
+    product_id, product_name,product_info,create_time,product_img,product_type
     from product
     where 1 = 1
     <if test="productName != null and productName != ''">
@@ -19,6 +20,9 @@
     </if>
     <if test="productId != null and productId != ''">
       and product_id = #{productId}
+    </if>
+    <if test="productType != null and productType != ''">
+      and product_Type = #{productType}
     </if>
     <!--<if test="productInfo != null and productInfo != ''">-->
       <!--and product_info = like CONCAT('%','${productInfo}','%')-->
@@ -30,32 +34,38 @@
   <insert id="addProduct" parameterType="com.oska.model.Product" >
     insert into product
     <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="productId != null" >
+      <if test="productId != null and productId != ''" >
         product_id,
       </if>
-      <if test="productName != null" >
+      <if test="productName != null and productName != ''" >
         product_name,
       </if>
-      <if test="productInfo != null" >
+      <if test="productInfo != null and productInfo != ''" >
         product_info,
       </if>
-      <if test="productImg != null" >
+      <if test="productImg != null and productImg != ''" >
         product_img,
+      </if>
+      <if test="productType != null and productType != ''" >
+        product_type,
       </if>
       create_time
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="productId != null" >
+      <if test="productId != null and productId != ''" >
         #{productId},
       </if>
-      <if test="productName != null" >
+      <if test="productName != null and productName != ''" >
         #{productName},
       </if>
-      <if test="productInfo != null" >
+      <if test="productInfo != null and productInfo != ''" >
         #{productInfo},
       </if>
-      <if test="productImg != null" >
+      <if test="productImg != null and productImg != ''" >
         #{productImg},
+      </if>
+      <if test="productType != null and productType != ''" >
+        product_type,
       </if>
         NOW()
     </trim>
@@ -65,14 +75,17 @@
   <update id="updateProductById" parameterType="com.oska.model.Product" >
     update product
     <set >
-      <if test="productName != null" >
+      <if test="productName != null and productName != ''" >
         product_name = #{productName},
       </if>
-      <if test="productInfo != null" >
+      <if test="productInfo != null and productInfo != ''" >
         product_info = #{productInfo},
       </if>
-      <if test="productImg != null" >
+      <if test="productImg != null and productImg != ''" >
         product_img = #{productImg},
+      </if>
+      <if test="productType != null and productType != ''" >
+        product_type = #{productType},
       </if>
     </set>
     where product_id = #{productId}
