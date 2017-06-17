@@ -30,7 +30,7 @@
                 </em>
             </div>
         </div>
-        <div class="about-img"><i class="more"><a href="javascript:;"><img src="<%=basePath%>static/images/index/more.jpg"/></a></i><img src="<%=basePath%>static/images/index/about-img.jpg"/></div>
+        <div class="about-img"><i class="more"><a href="<%=basePath%>oskaHtml/impression/about.jsp"><img src="<%=basePath%>static/images/index/more.jpg"/></a></i><img src="<%=basePath%>static/images/index/about-img.jpg"/></div>
     </div>
 </div>
 
@@ -46,7 +46,7 @@
                     <div class="pro-hover">
                         <a href="javascript:;"><img src="<%=basePath%>static/images/index/pro-a-hover.png"/></a>
                         <em>
-                            <a href="javascript:;">
+                            <a href="<%=basePath%>oskaHtml/products/products.jsp?productType=1">
                                 <i class="u-right"><img src="<%=basePath%>static/images/arrow-r-con.png"/></i>
                                 <img src="<%=basePath%>static/images/index/more.png"/>
                             </a>
@@ -60,7 +60,7 @@
                     <div class="pro-hover">
                         <a href="javascript:;"><img src="<%=basePath%>static/images/index/pro-b-hover.png"/></a>
                         <em>
-                            <a href="javascript:;">
+                            <a href="<%=basePath%>oskaHtml/products/products.jsp?productType=2">
                                 <i class="u-right"><img src="<%=basePath%>static/images/arrow-r-con.png"/></i>
                                 <img src="<%=basePath%>static/images/index/more.png"/>
                             </a>
@@ -74,7 +74,7 @@
                     <div class="pro-hover">
                         <a href="javascript:;"><img src="<%=basePath%>static/images/index/pro-c-hover.png"/></a>
                         <em>
-                            <a href="javascript:;">
+                            <a href="<%=basePath%>oskaHtml/products/products.jsp?productType=3">
                                 <i class="u-right"><img src="<%=basePath%>static/images/arrow-r-con.png"/></i>
                                 <img src="<%=basePath%>static/images/index/more.png"/>
                             </a>
@@ -88,7 +88,7 @@
                     <div class="pro-hover">
                         <a href="javascript:;"><img src="<%=basePath%>static/images/index/pro-d-hover.png"/></a>
                         <em>
-                            <a href="javascript:;">
+                            <a href="<%=basePath%>oskaHtml/products/products.jsp?productType=4">
                                 <i class="u-right"><img src="<%=basePath%>static/images/arrow-r-con.png"/></i>
                                 <img src="<%=basePath%>static/images/index/more.png"/>
                             </a>

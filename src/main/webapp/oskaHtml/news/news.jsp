@@ -135,9 +135,9 @@
             var htmlStr = "";
             for(var i=0;i<dataList.length;i++){
                 htmlStr +=  '<li class="li-id" id="news_'+ dataList[i]['newsId'] +'"> <a> <dl class="ml">'+
-                    '<dt class="font18"><span class="font18 bold">◇</span> '+ dataList[i]['newsName'] +'</dt>'+
+                    '<dt class="font18"><span class="font18 bold">◇</span> '+ dataList[i]['newsTitle'] +'</dt>'+
                     '<dd>'+ dataList[i]['newsInfo'] +'</dd>'+
-                    '</dl> </a> <em class="time"><p>2015.12.08</p>'+
+                    '</dl> </a> <em class="time"><p>'+ dataList[i]['createTime'].replace("-",".").replace("-",".") +'</p>'+
                     '<p><img src="<%=basePath%>static/images/arrow-r-con.png"/></p> </em> </li>';
 
             }
@@ -154,6 +154,6 @@
     //go to detail
     $('body').on("click",".li-id",function () {
         var newsIdVal = $(this).attr("id").split("_")[1];
-        window.location.href = "<%=basePath%>"+"oskaHtml/news/newsDetail.jsp?newsId="+newsIdVal;
+        window.location.href = "<%=basePath%>"+"oskaHtml/news/newsDetail.jsp?newsType=<%=newsType%>&newsId="+newsIdVal;
     })
 </script>

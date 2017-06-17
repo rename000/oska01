@@ -41,7 +41,7 @@
             <dl class="navlist font14">
                 <dt>欧饰家印象</dt>
                 <dd><a href="<%=basePath%>oskaHtml/impression/about.jsp">关于欧饰家</a></dd>
-                <dd><a href="<%=basePath%>oskaHtml/impression/about.jsp">品牌故事</a></dd>
+                <dd><a href="<%=basePath%>oskaHtml/impression/story.jsp">品牌故事</a></dd>
                 <dd><a href="<%=basePath%>oskaHtml/impression/case.jsp">工程案列</a></dd>
             </dl>
             <dl class="navlist font14">

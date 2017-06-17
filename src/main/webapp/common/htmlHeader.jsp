@@ -68,7 +68,7 @@
                     <i class="g-line"></i>
                     <div class="subset">
                         <a href="<%=basePath%>oskaHtml/impression/about.jsp">关于欧饰家 </a>
-                        <a href="<%=basePath%>oskaHtml/impression/about.jsp">品牌故事</a>
+                        <a href="<%=basePath%>oskaHtml/impression/story.jsp">品牌故事</a>
                         <a href="<%=basePath%>oskaHtml/impression/case.jsp">工程案例</a>
                     </div>
                     <div class="linex"></div>

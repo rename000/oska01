@@ -2,6 +2,10 @@
 
 .base-paging-area{
     float:right;
+    left: 50%;
+    position: absolute;
+    transform: translateX(-50%);
+    margin-top: -18px;
 }
 
 .base-paging-area .p-num{
@@ -21,16 +25,18 @@
 .base-paging-area .p-num .num.curr{
     border: 0 none;
     padding: 1px 15px;
-    background: #147BA5;
     filter: none;
-    color: #fff;
+    /*background: #147BA5;*/
+    /*color: #fff;*/
     cursor: default;
+    color: #f3efe8;
+    background: #473931;
 }
 
 .base-paging-area .p-num li{
     float: left;
-    height: 30px;
-    line-height: 27px;
+    height: 34px;
+    line-height: 34px;
     padding: 0 15px;
     margin-right: 5px;
     font-size: 12px;
@@ -41,8 +47,11 @@
     -moz-border-radius: 3px;
 }
 .base-paging-area .p-num li:hover{
-    background: #147BA5;
-    color: #fff;
+    /*background: #147BA5;*/
+    /*color: #fff;*/
+    color: #f3efe8;
+    background-color: #473931;
+
 }
 .base-paging-area .p-num .more{
     border: 0;

@@ -81,14 +81,6 @@
                 <%--</ul>--%>
             </div>
 
-            <%--<div class="col-lg-2 col-md-2 col-sm-2 text-right text-center-xs">--%>
-                <%--<div class="input-group m-auto dis-table">--%>
-                    <%--<span class="t-cell"><button class="btn btn-sm btn-default" type="button">首页</button></span>--%>
-                    <%--<span class="t-cell"><button class="btn btn-sm btn-default" type="button">尾页</button></span>--%>
-                    <%--<span class="t-cell in-v-m"><input type="tel" class="input-sm form-control m-l" value="" placeholder="填页数" style="width: 60px;"></span>--%>
-                    <%--<span class="t-cell"><button class="btn btn-sm btn-default" type="button">跳转</button></span>--%>
-                <%--</div>--%>
-            <%--</div>--%>
         </div>
     </footer>
 </section>

@@ -10,7 +10,8 @@
     }
 
 %>
-
+<link rel="stylesheet" type="text/css" href="<%=basePath%>static/js/pageHtml/paging.css"/>
+<script type="text/javascript" src="<%=basePath%>static/js/pageHtml/pagePlugin.js"></script>
 <!--banner轮播图-->
 <div class="product-banner">
     <div class="w">
@@ -100,17 +101,22 @@
             </ul>
 
             <!--翻页-->
-            <div class="pages">
-                <a href=""><i><</i> 上一页</a>
-                <a href="" class="over">1</a>
-                <%--<a href="#">2</a>--%>
-                <%--<a href="#">3</a>--%>
-                <%--<a href="#">4</a>--%>
-                <%--<a href="#">5</a>--%>
-                <%--<a href="#">...</a>--%>
-                <%--<a href="#">99</a>--%>
-                <a href="">下一页 <i>></i></a>
+            <%--<div class="pages" >--%>
+                <%--<a href=""><i><</i> 上一页</a>--%>
+                <%--<a href="" class="over">1</a>--%>
+                <%--&lt;%&ndash;<a href="#">2</a>&ndash;%&gt;--%>
+                <%--&lt;%&ndash;<a href="#">3</a>&ndash;%&gt;--%>
+                <%--&lt;%&ndash;<a href="#">4</a>&ndash;%&gt;--%>
+                <%--&lt;%&ndash;<a href="#">5</a>&ndash;%&gt;--%>
+                <%--&lt;%&ndash;<a href="#">...</a>&ndash;%&gt;--%>
+                <%--&lt;%&ndash;<a href="#">99</a>&ndash;%&gt;--%>
+                <%--<a href="">下一页 <i>></i></a>--%>
+            <%--</div>--%>
+
+            <div class="pages" id="paging">
+
             </div>
+
         </div>
     </div>
 </div>
@@ -168,8 +174,7 @@
 
     //获得产品列表
     var productListData = [];
-    function getProductList(){
-        var jsonObj = {productType:"<%=productType%>"};
+    function getProductList(jsonObj){
         var urlVal = '<%=basePath%>' + 'product/getProductList';
 
         getData(jsonObj,urlVal,function (data) {
@@ -188,10 +193,36 @@
         })
     }
 
+    //分页 pagePlugin
+    var createPagePlugin = function(total, size) {
+        $("#paging").empty();
+        paging = pagePlugin.createPaging({
+            renderTo: 'paging',
+            total: total,
+            pageSize: size,
+            currentPage:1,
+            isShowTotalPage:false,
+            isShowTotalRecords:false,
+            isGoPage:false
+        });
+        paging.goPage = function(from, to) {
+            pageFun(from - 1, size);
+        }
+    };
+    //翻页
+    var pageFun = function(from,pageSize){
+        var jsonObj = {nub: "" + from,size: "" + pageSize,productType:"<%=productType%>"};
+        getProductList(jsonObj);
+    }
+
     function init() {
-        getProductList();
+        var jsonObj = {nub:0,size:2,productType:"<%=productType%>"};
+        getProductList(jsonObj);
+        createPagePlugin(3,jsonObj.size);
     }
     init();
+
+
 
 </script>
 

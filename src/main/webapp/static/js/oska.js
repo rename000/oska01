@@ -68,3 +68,27 @@ $.fn.serializeObject = function() {
     });
     return o;
 }
+
+
+//getData base function
+function getData(jsonObj,urlVal,callBack) {
+    var getData_jsonObject = jsonObj;
+    var option = {
+        url:urlVal,
+        type:'post',
+        data:{jsonObject:JSON.stringify(getData_jsonObject)},
+        success:function(data){
+//            console.log(data);
+            data = JSON.parse(data);
+            if(data.code=='1'){
+                callBack(data);
+            }else{
+                console.log("code为0； 查询失败")
+            }
+        },
+        error:function(msg){
+            console.log(msg);
+        }
+    };
+    $.ajax(option);
+}
