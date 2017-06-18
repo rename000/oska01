@@ -1594,4 +1594,97 @@ User</columns>
       </column>
     </database-model>
   </data-source>
+  <data-source name="MySQL - oska@120.76.126.100" uuid="2533df04-4a14-4362-a1df-c61f9911d9af">
+    <database-info product="MySQL" version="5.6.31-0ubuntu0.14.04.2" jdbc-version="4.0" driver-name="MySQL Connector Java" driver-version="mysql-connector-java-5.1.40 ( Revision: 402933ef52cad9aa82624e80acbea46e3a701ce6 )">
+      <extra-name-characters>#@</extra-name-characters>
+      <identifier-quote-string>`</identifier-quote-string>
+    </database-info>
+    <case-sensitivity plain-identifiers="lower" quoted-identifiers="lower"/>
+    <database-model serializer="dbm" rdbms="MYSQL" format-version="2.5">
+      <schema id="1" name="oska"/>
+      <table id="2" parent="1" name="news">
+        <comment>新闻表</comment>
+      </table>
+      <table id="3" parent="1" name="product">
+        <comment>产品</comment>
+      </table>
+      <table id="4" parent="1" name="user">
+        <comment>用户</comment>
+      </table>
+      <column id="5" parent="2" name="news_id">
+        <comment>新闻ID</comment>
+        <mandatory>1</mandatory>
+        <data-type>int(32)</data-type>
+      </column>
+      <column id="6" parent="2" name="news_title">
+        <comment>新闻标题</comment>
+        <data-type>varchar(100)</data-type>
+      </column>
+      <column id="7" parent="2" name="news_info">
+        <comment>新闻简介</comment>
+        <data-type>varchar(100)</data-type>
+      </column>
+      <column id="8" parent="2" name="news_desc">
+        <comment>新闻内容</comment>
+        <data-type>text</data-type>
+      </column>
+      <column id="9" parent="2" name="create_time">
+        <data-type>datetime</data-type>
+      </column>
+      <column id="10" parent="2" name="news_type">
+        <comment>产品类型 1 企业新闻  2 行业新闻</comment>
+        <data-type>int(4)</data-type>
+        <default-expression>&apos;1&apos;</default-expression>
+      </column>
+      <key id="11" parent="2" name="PRIMARY">
+        <columns>news_id</columns>
+        <primary>1</primary>
+      </key>
+      <column id="12" parent="3" name="product_id">
+        <comment>产品ID</comment>
+        <mandatory>1</mandatory>
+        <data-type>int(32)</data-type>
+      </column>
+      <column id="13" parent="3" name="product_name">
+        <comment>产品名称</comment>
+        <data-type>varchar(100)</data-type>
+      </column>
+      <column id="14" parent="3" name="product_info">
+        <comment>产品信息</comment>
+        <data-type>text</data-type>
+      </column>
+      <column id="15" parent="3" name="create_time">
+        <data-type>datetime</data-type>
+      </column>
+      <column id="16" parent="3" name="product_img">
+        <data-type>varchar(200)</data-type>
+      </column>
+      <column id="17" parent="3" name="product_type">
+        <comment>产品类型 1 橡木仿古 2 橡木人字拼 3 原木手工拼花 4 强化地板</comment>
+        <data-type>int(4)</data-type>
+        <default-expression>&apos;1&apos;</default-expression>
+      </column>
+      <key id="18" parent="3" name="PRIMARY">
+        <columns>product_id</columns>
+        <primary>1</primary>
+      </key>
+      <column id="19" parent="4" name="user_id">
+        <comment>用户ID</comment>
+        <mandatory>1</mandatory>
+        <data-type>int(16)</data-type>
+      </column>
+      <column id="20" parent="4" name="user_name">
+        <comment>用户名</comment>
+        <data-type>varchar(20)</data-type>
+      </column>
+      <column id="21" parent="4" name="password">
+        <comment>密码</comment>
+        <data-type>varchar(1000)</data-type>
+      </column>
+      <key id="22" parent="4" name="PRIMARY">
+        <columns>user_id</columns>
+        <primary>1</primary>
+      </key>
+    </database-model>
+  </data-source>
 </component>
