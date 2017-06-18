@@ -88,5 +88,57 @@ public class UploadController extends BaseController {
         return null;
     }
 
+    /**
+     * 上传新闻图片
+     * @return
+     * @throws Exception
+     */
+    @ResponseBody
+    @RequestMapping(value = "/uploadNewsImg", method = { RequestMethod.POST })
+    public String uploadNewsImg(
+            @RequestParam(value = "file", required = false) MultipartFile file,
+            HttpServletRequest request, HttpServletResponse response)
+            throws Exception {
+
+        //逻辑处理
+        HashMap<String, Object> dataMap = Maps.newHashMap();
+        MsgResponse msgResponse = new MsgResponse(code_ok);
+        try{
+
+            System.out.println("开始");
+            String path = request.getSession().getServletContext().getRealPath("static/upload/news");
+            String fileName = file.getOriginalFilename();
+//        String fileName = new Date().getTime()+".jpg";
+            System.out.println(path);
+            File targetFile = new File(path, fileName);
+            if(!targetFile.exists()){
+                targetFile.mkdirs();
+            }
+
+            //保存
+            file.transferTo(targetFile);
+
+            dataMap.put("fileUrl", request.getContextPath()+"/static/upload/news/"+fileName);
+            //设置返回成功信息
+            msgResponse.setCode(code_ok);
+            msgResponse.setMsg("查询成功");
+            msgResponse.setObject(dataMap);
+
+        }catch (Exception e){
+            e.printStackTrace();
+            logger.error("Error UploadController uploadNewsImg() run error ErrorMsg is ====================" + e.getMessage());
+            //throw e;
+            //设置返回失败信息
+            dataMap.put("dataList", null);
+            msgResponse.setCode(code_fail);
+            msgResponse.setMsg("系统异常！");
+            msgResponse.setObject(dataMap);
+        }
+
+        render(msgResponse.getCode(), msgResponse.getMsg(), (Map<String, Object>)msgResponse.getObject(), response);
+
+        return null;
+    }
+
 
 }

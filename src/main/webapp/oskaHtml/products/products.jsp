@@ -173,6 +173,27 @@
     }
 
     //获得产品列表
+    function getList(jsonObj){
+        var urlVal = '<%=basePath%>' + 'product/getProductList';
+
+        getData(jsonObj,urlVal,function (data) {
+            var dataList = data.data.dataList;
+            productListData = dataList;
+//            console.log('dataList===='+JSON.stringify(dataList));
+            var htmlStr = "";
+            for(var i=0;i<dataList.length;i++){
+                htmlStr +=  '<li  id="product_'+ dataList[i]['productId'] +'"><div class="pro-box">'+
+                        '<em class="show"><a href="javascript:;"><img alt="产品名称" src="'+ dataList[i]['productImg'] +'"/></a></em>'+
+                        '<dl class="info"> <dt>产品名称：</dt> <dd>'+ dataList[i]['productName'] +'</dd> </dl>'+
+                        '</div></li>';
+            }
+
+            $("#productList").html(htmlStr);
+            createPagePlugin(data.data.count,jsonObj.size);
+        })
+    }
+
+    //获得产品列表
     var productListData = [];
     function getProductList(jsonObj){
         var urlVal = '<%=basePath%>' + 'product/getProductList';
@@ -217,8 +238,7 @@
 
     function init() {
         var jsonObj = {nub:0,size:2,productType:"<%=productType%>"};
-        getProductList(jsonObj);
-        createPagePlugin(3,jsonObj.size);
+        getList(jsonObj);
     }
     init();
 

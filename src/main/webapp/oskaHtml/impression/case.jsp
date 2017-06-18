@@ -18,7 +18,7 @@
                         <a class=""><img src="<%=basePath%>static/images/case-arrow-l.png"/></a>
                         <a class=""><img src="<%=basePath%>static/images/case-arrow-r.png"/></a>
                     </div>
-                    <ul class="list">
+                    <ul class="list" id="caseList">
                         <li class="over"><img src="<%=basePath%>static/images/impression/case-img.png"/></li>
                         <li><img src="<%=basePath%>static/images/impression/case-img.png"/></li>
                         <li><img src="<%=basePath%>static/images/impression/case-img.png"/></li>
@@ -34,7 +34,7 @@
             </div>
 
             <!--大图-->
-            <div class="big-show u-right"><img src="<%=basePath%>static/images/impression/case-img.jpg"/></div>
+            <div class="big-show u-right"><img id="bigShow" src="<%=basePath%>static/images/impression/case-img.jpg" style="width: 100%;height: 100%"/></div>
         </div>
     </div>
 </div>
@@ -47,3 +47,13 @@
 </div>
 </body>
 </html>
+
+<script>
+    $("body").on("click","#caseList li",function(){
+        $("#caseList li").removeClass("over");
+        $(this).addClass("over");
+        var srcVal = $(this).find("img").attr("src");
+        $("#bigShow").attr("src",srcVal);
+    })
+
+</script>

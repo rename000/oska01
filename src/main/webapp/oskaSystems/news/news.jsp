@@ -2,16 +2,84 @@
 
 <%@include file="../commonSys/systemHeader.jsp" %>
 
+<style>
+    .panel-default>.panel-heading {background: #fff;}
+</style>
 <ul class="breadcrumb no-border no-radius b-b b-light pull-in">
     <li><a href="<%=basePath%>oskaSystems/index/index.jsp"><i class="fa fa-home"></i> 主页</a></li>
     <li class="active"><a href="#"><i class="fa fa-columns"></i> 新闻管理</a></li>
 </ul>
 
 <section class="panel panel-default">
-    <header class="panel-heading"> 新闻管理列表 </header>
+    <header class="panel-heading"> 首页新闻 </header>
+
+    <div class="table-responsive">
+        <table class="table table-striped b-t b-light text-sm">
+            <thead>
+            <tr>
+                <th>新闻ID</th>
+                <th style="width: 18%">新闻标题</th>
+                <th style="width: 18%">新闻类型</th>
+                <th>新闻描述</th>
+                <th style="min-width: 100px">发行日期</th>
+                <th>点击数</th>
+                <th style="min-width: 100px">操作</th>
+            </tr>
+            </thead>
+            <tbody id="firstWeb">
+            <%--<tr>--%>
+            <%--<td>2017</td>--%>
+            <%--<td>红木地板</td>--%>
+            <%--<td>红木地板木质非常好</td>--%>
+            <%--<td>http://wwww.badu.com</td>--%>
+            <%--<td>--%>
+            <%--<a class="a-c-blue m-r">编辑</a>--%>
+            <%--<a class="c-red y-pointer m-r">删除</a>--%>
+            <%--</td>--%>
+            <%--</tr>--%>
+            </tbody>
+        </table>
+    </div>
+</section>
+
+
+<section class="panel panel-default">
+    <header class="panel-heading"> 推荐新闻 </header>
+
+    <div class="table-responsive">
+        <table class="table table-striped b-t b-light text-sm">
+            <thead>
+            <tr>
+                <th>新闻ID</th>
+                <th style="width: 18%">新闻标题</th>
+                <th style="width: 18%">新闻类型</th>
+                <th>新闻描述</th>
+                <th style="min-width: 100px">发行日期</th>
+                <th>点击数</th>
+                <th style="min-width: 100px">操作</th>
+            </tr>
+            </thead>
+            <tbody id="recommendList">
+            <%--<tr>--%>
+            <%--<td>2017</td>--%>
+            <%--<td>红木地板</td>--%>
+            <%--<td>红木地板木质非常好</td>--%>
+            <%--<td>http://wwww.badu.com</td>--%>
+            <%--<td>--%>
+            <%--<a class="a-c-blue m-r">编辑</a>--%>
+            <%--<a class="c-red y-pointer m-r">删除</a>--%>
+            <%--</td>--%>
+            <%--</tr>--%>
+            </tbody>
+        </table>
+    </div>
+</section>
+
+<section class="panel panel-default">
+    <header class="panel-heading"> 新闻管理列表 （企业新闻／行业新闻）</header>
     <div class="row text-sm wrapper">
         <div class="col-sm-6 m-b-xs">
-            <a href="<%=basePath%>oskaSystems/news/news.jsp" class="btn btn-sm btn-primary">新增新闻</a>
+            <a href="<%=basePath%>oskaSystems/news/newsAdd.jsp" class="btn btn-sm btn-primary">新增新闻</a>
         </div>
 
         <form id="formObj">
@@ -40,9 +108,10 @@
                 <th>新闻ID</th>
                 <th style="width: 18%">新闻标题</th>
                 <th style="width: 18%">新闻类型</th>
-                <th>新闻描述</th>
-                <th>发行日期</th>
-                <th>操作</th>
+                <th style="width: 30%">新闻描述</th>
+                <th style="min-width: 100px">发行日期</th>
+                <th>点击数</th>
+                <th style="min-width: 100px">操作</th>
             </tr>
             </thead>
             <tbody id="newsList">
@@ -95,6 +164,124 @@
 
 <script type="text/javascript">
 
+
+    //获得首页新闻列表
+    function getFirstWebList(){
+        var jsonObject = {type:2};
+        var option = {
+            url:'<%=basePath%>' + 'news/getNewsList',
+            type:'post',
+            data:{jsonObject:JSON.stringify(jsonObject)},
+            success:function(data){
+//            console.log(data);
+                data = JSON.parse(data);
+                if(data.code=='1'){
+                    var dataList = data.data.dataList;
+                    console.log('dataList===='+JSON.stringify(dataList));
+                    var htmlStr = "";
+                    for(var i=0;i<dataList.length;i++){
+                        htmlStr +=  "<tr><td>"+ dataList[i]['newsId'] +"</td>"+
+                                "<td>"+ dataList[i]['newsTitle'] +"</td>"+
+                                "<td>"+ dataList[i]['newsTypeDesc'] +"</td>"+
+                                "<td>"+ ( dataList[i]['newsInfo'].length>30?dataList[i]['newsInfo'].substr(0,30)+'...':dataList[i]['newsInfo'] ) +"</td>"+
+                                "<td> "+ dataList[i]['createTime'] +" </td>"+
+                                "<td> "+ dataList[i]['clickNum'] +" </td>"+
+                                "<td>"+
+                                "<a class='a-c-blue m-r editBtn' href='<%=basePath%>oskaSystems/news/newsEdit.jsp?active=3&type=2&newsId=" + dataList[i]['newsId'] + "' >编辑</a>"+
+                                "</td></tr>";
+                    }
+
+                    $("#firstWeb").html(htmlStr);
+                }else{
+                    console.log("code为0； 查询失败")
+                }
+            },
+            error:function(msg){
+                console.log(msg);
+            }
+        };
+        $.ajax(option);
+    }
+
+    //获得推荐新闻列表
+    function getRecommendList(){
+        var jsonObject = {type:3};
+        var option = {
+            url:'<%=basePath%>' + 'news/getNewsList',
+            type:'post',
+            data:{jsonObject:JSON.stringify(jsonObject)},
+            success:function(data){
+//            console.log(data);
+                data = JSON.parse(data);
+                if(data.code=='1'){
+                    var dataList = data.data.dataList;
+                    console.log('dataList===='+JSON.stringify(dataList));
+                    var htmlStr = "";
+                    for(var i=0;i<dataList.length;i++){
+                        htmlStr +=  "<tr><td>"+ dataList[i]['newsId'] +"</td>"+
+                                "<td>"+ dataList[i]['newsTitle'] +"</td>"+
+                                "<td>"+ dataList[i]['newsTypeDesc'] +"</td>"+
+                                "<td>"+ ( dataList[i]['newsInfo'].length>30?dataList[i]['newsInfo'].substr(0,30)+'...':dataList[i]['newsInfo'] ) +"</td>"+
+                                "<td> "+ dataList[i]['createTime'] +" </td>"+
+                                "<td> "+ dataList[i]['clickNum'] +" </td>"+
+                                "<td>"+
+                                "<a class='a-c-blue m-r editBtn' href='<%=basePath%>oskaSystems/news/newsEdit.jsp?active=3&type=3&newsId=" + dataList[i]['newsId'] + "'>编辑</a>"+
+                                "</td></tr>";
+                    }
+
+                    $("#recommendList").html(htmlStr);
+                }else{
+                    console.log("code为0； 查询失败")
+                }
+            },
+            error:function(msg){
+                console.log(msg);
+            }
+        };
+        $.ajax(option);
+    }
+
+    //获得新闻列表
+    function getList(jsonObj){
+        var jsonObject = jsonObj;
+        var option = {
+            url:'<%=basePath%>' + 'news/getNewsList',
+            type:'post',
+            data:{jsonObject:JSON.stringify(jsonObject)},
+            success:function(data){
+//            console.log(data);
+                data = JSON.parse(data);
+                if(data.code=='1'){
+                    var dataList = data.data.dataList;
+                    console.log('dataList===='+JSON.stringify(dataList));
+                    var htmlStr = "";
+                    for(var i=0;i<dataList.length;i++){
+                        htmlStr +=  "<tr><td>"+ dataList[i]['newsId'] +"</td>"+
+                                "<td>"+ dataList[i]['newsTitle'] +"</td>"+
+                                "<td>"+ dataList[i]['newsTypeDesc'] +"</td>"+
+                                "<td>"+ ( dataList[i]['newsInfo'].length>30?dataList[i]['newsInfo'].substr(0,30)+'...':dataList[i]['newsInfo'] ) +"</td>"+
+                                "<td> "+ dataList[i]['createTime'] +" </td>"+
+                                "<td> "+ dataList[i]['clickNum'] +" </td>"+
+                                "<td>"+
+                                "<a class='a-c-blue m-r editBtn' href='<%=basePath%>oskaSystems/news/newsEdit.jsp?active=3&type=1&newsId=" + dataList[i]['newsId'] + "' >编辑</a>"+
+                                "<a class='c-red y-pointer m-r delBtn' id='del_" + dataList[i]['newsId'] + "'>删除</a>"+
+                                "</td></tr>";
+                    }
+
+                    $("#newsList").html(htmlStr);
+                    $("#total").html(data.data.count);
+                    createPagePlugin(data.data.count,jsonObj.size);
+                }else{
+                    console.log("code为0； 查询失败")
+                }
+            },
+            error:function(msg){
+                console.log(msg);
+            }
+        };
+        $.ajax(option);
+    }
+
     //获得新闻列表
     function getnewsList(jsonObj){
         var jsonObject = jsonObj;
@@ -115,14 +302,14 @@
                             "<td>"+ dataList[i]['newsTypeDesc'] +"</td>"+
                             "<td>"+ ( dataList[i]['newsInfo'].length>30?dataList[i]['newsInfo'].substr(0,30)+'...':dataList[i]['newsInfo'] ) +"</td>"+
                             "<td> "+ dataList[i]['createTime'] +" </td>"+
+                            "<td> "+ dataList[i]['clickNum'] +" </td>"+
                             "<td>"+
-                            "<a class='a-c-blue m-r editBtn' id='edit_" + dataList[i]['newsId'] + "' >编辑</a>"+
+                            "<a class='a-c-blue m-r editBtn' href='<%=basePath%>oskaSystems/news/newsEdit.jsp?active=3&type=1&newsId=" + dataList[i]['newsId'] + "' >编辑</a>"+
                             "<a class='c-red y-pointer m-r delBtn' id='del_" + dataList[i]['newsId'] + "'>删除</a>"+
                             "</td></tr>";
                     }
 
                     $("#newsList").html(htmlStr);
-                    $("#total").html(dataList.length);
                 }else{
                     console.log("code为0； 查询失败")
                 }
@@ -161,22 +348,22 @@
 
     //searchBtn
     $("#searchBtn").click(function(){
-        var jsonObj = {};
+        var jsonObj = {nub:0,size:1,type:1};
         var formObj = $("#formObj").serializeObject();
         jsonObj = $.extend(jsonObj,formObj);
         console.log("jsonObj===============" + JSON.stringify(jsonObj));
-        getnewsList(jsonObj);
+        getList(jsonObj);
     });
 
     //editBtn
-    $("body").on("click",".editBtn",function(){
-        var newsIdVal = $(this).attr("id").split("_")[1];
-        if(newsIdVal=="" || newsIdVal==undefined){
-            alert("获取Id异常！");
-        }else {
-            window.location.href = "<%=basePath%>" + "oskaSystems/news/newsEdit.jsp?newsId=" + newsIdVal;
-        }
-    });
+    <%--$("body").on("click",".editBtn",function(){--%>
+        <%--var newsIdVal = $(this).attr("id").split("_")[1];--%>
+        <%--if(newsIdVal=="" || newsIdVal==undefined){--%>
+            <%--alert("获取Id异常！");--%>
+        <%--}else {--%>
+            <%--window.location.href = "<%=basePath%>" + "oskaSystems/news/newsEdit.jsp?newsId=" + newsIdVal;--%>
+        <%--}--%>
+    <%--});--%>
 
     //delBtn
     $("body").on("click",".delBtn",function(){
@@ -203,15 +390,18 @@
     };
     //翻页
     var pageFun = function(from,pageSize){
-        var jsonObj = {nub: "" + from,size: "" + pageSize};
+        var jsonObj = {nub: "" + from,size: "" + pageSize,type:1};
+        var formObj = $("#formObj").serializeObject();
+        jsonObj = $.extend(jsonObj,formObj);
         getnewsList(jsonObj);
     }
 
     //初始化
     function init(){
-        var jsonObj = {nub:0,size:2};
-        getnewsList(jsonObj);
-        createPagePlugin(3,jsonObj.size);
+        getFirstWebList();
+        getRecommendList();
+        var jsonObj = {nub:0,size:1,type:1};
+        getList(jsonObj);
     }
     init();
 </script>

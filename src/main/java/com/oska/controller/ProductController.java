@@ -58,7 +58,6 @@ public class ProductController extends BaseController {
 
             String count = "0";
             List<Product> list = productDao.findProductListByProId(product);
-            count = list.get(0).getCount()+"";
             //封装返回数据类型
             List<Map> aryList = new ArrayList<>();
             if(list.size() != 0){
@@ -73,6 +72,8 @@ public class ProductController extends BaseController {
 
                     aryList.add(dataMapS);
                 }
+            }else{
+                aryList = null;
             }
 
             //获取总条数

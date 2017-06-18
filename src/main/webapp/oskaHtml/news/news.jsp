@@ -11,6 +11,9 @@
 
 %>
 
+
+<link rel="stylesheet" type="text/css" href="<%=basePath%>static/js/pageHtml/paging.css"/>
+<script type="text/javascript" src="<%=basePath%>static/js/pageHtml/pagePlugin.js"></script>
 <!--banner轮播图-->
 <div class="material-banner">
     <div class="w">
@@ -81,17 +84,22 @@
                 </li>
             </ul>
             <!--翻页-->
-            <div class="pages">
-                <a href="#"><i><</i> 上一页</a>
-                <a href="#" class="over">1</a>
-                <%--<a href="#" class="over">2</a>--%>
-                <%--<a href="#">3</a>--%>
-                <%--<a href="#">4</a>--%>
-                <%--<a href="#">5</a>--%>
-                <%--<a href="#">...</a>--%>
-                <%--<a href="#">99</a>--%>
-                <a href="#">下一页 <i>></i></a>
+            <%--<div class="pages">--%>
+                <%--<a href="#"><i><</i> 上一页</a>--%>
+                <%--<a href="#" class="over">1</a>--%>
+                <%--&lt;%&ndash;<a href="#" class="over">2</a>&ndash;%&gt;--%>
+                <%--&lt;%&ndash;<a href="#">3</a>&ndash;%&gt;--%>
+                <%--&lt;%&ndash;<a href="#">4</a>&ndash;%&gt;--%>
+                <%--&lt;%&ndash;<a href="#">5</a>&ndash;%&gt;--%>
+                <%--&lt;%&ndash;<a href="#">...</a>&ndash;%&gt;--%>
+                <%--&lt;%&ndash;<a href="#">99</a>&ndash;%&gt;--%>
+                <%--<a href="#">下一页 <i>></i></a>--%>
+            <%--</div>--%>
+
+            <div class="pages" id="paging">
+
             </div>
+
         </div>
     </div>
 </div>
@@ -123,9 +131,32 @@
     }
 
     //获得新闻列表
+    function getList(jsonObj){
+        var urlVal = '<%=basePath%>' + 'news/getNewsList';
+
+        getData(jsonObj,urlVal,function (data) {
+            var dataList = data.data.dataList;
+            newsListData = dataList;
+//            console.log('dataList===='+JSON.stringify(dataList));
+            var htmlStr = "";
+            for(var i=0;i<dataList.length;i++){
+                htmlStr +=  '<li class="li-id" id="news_'+ dataList[i]['newsId'] +'"> <a> <dl class="ml">'+
+                        '<dt class="font18"><span class="font18 bold">◇</span> '+ dataList[i]['newsTitle'] +'</dt>'+
+                        '<dd>'+ dataList[i]['newsInfo'] +'</dd>'+
+                        '</dl> </a> <em class="time"><p>'+ dataList[i]['createTime'].replace("-",".").replace("-",".") +'</p>'+
+                        '<p><img src="<%=basePath%>static/images/arrow-r-con.png"/></p> </em> </li>';
+
+            }
+
+            $("#newsList").html(htmlStr);
+            createPagePlugin(data.data.count,jsonObj.size);
+
+        })
+    }
+
+    //获得新闻列表
     var newsListData = [];
-    function getNewsList(){
-        var jsonObj = {newsType:"<%=newsType%>"};
+    function getNewsList(jsonObj){
         var urlVal = '<%=basePath%>' + 'news/getNewsList';
 
         getData(jsonObj,urlVal,function (data) {
@@ -146,10 +177,37 @@
         })
     }
 
+    //分页 pagePlugin
+    var createPagePlugin = function(total, size) {
+        $("#paging").empty();
+        paging = pagePlugin.createPaging({
+            renderTo: 'paging',
+            total: total,
+            pageSize: size,
+            currentPage:1,
+            isShowTotalPage:false,
+            isShowTotalRecords:false,
+            isGoPage:false
+        });
+        paging.goPage = function(from, to) {
+            pageFun(from - 1, size);
+        }
+    };
+
+    //翻页
+    var pageFun = function(from,pageSize){
+        var jsonObj = {nub: "" + from,size: "" + pageSize,newsType:"<%=newsType%>"};
+        getNewsList(jsonObj);
+    }
+
     function init() {
-        getNewsList();
+        var jsonObj = {nub:0,size:2,newsType:"<%=newsType%>"};
+        getList(jsonObj);
     }
     init();
+
+
+
 
     //go to detail
     $('body').on("click",".li-id",function () {

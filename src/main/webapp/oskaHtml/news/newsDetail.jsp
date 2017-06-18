@@ -41,7 +41,7 @@
             <%=("2".equals(newsType)?"行业新闻":"")%>
         </div>
         <div class="news-detail">
-            <h3><span class="font24" id="newsTitle">软木地板如何选购 软木地板选购保养全攻略</span><p>发表时间：<span id="publicTime">2016.11.12</span>    点击：72</p></h3>
+            <h3><span class="font24" id="newsTitle">软木地板如何选购 软木地板选购保养全攻略</span><p>发表时间：<span id="publicTime">2016.11.12</span>    点击：<span id="clickNum">--</span></p></h3>
             <em class="box font14" id="newsDesc">
                 <%--软木地板分类：软木地板按铺装方式可分为粘贴式软木地板和锁扣式软木地板。<br /><br />--%>
                 <%--粘贴式软木地板一般分为三层结构，最上面一层是耐磨水性涂层；中间是纯手工打磨的珍稀软木面层，该层为软木地板花色；最下面是工程学软木基层。有些产品也会添加树皮贴面和静音隔层。<br /><br />--%>
@@ -106,6 +106,7 @@
 <%@include file="../../common/htmlFooter.jsp" %>
 
 <script type="text/javascript">
+
     //getData base function
     function getData(jsonObj,urlVal,callBack) {
         var getData_jsonObject = jsonObj;
@@ -132,7 +133,7 @@
     var newsListData = [];
     function getNewsList(){
         var jsonObj = {newsId:"<%=newsId%>"};
-        var urlVal = '<%=basePath%>' + 'news/getNewsList';
+        var urlVal = '<%=basePath%>' + 'news/getNewsAndtNum';
 
         getData(jsonObj,urlVal,function (data) {
             var dataList = data.data.dataList;
@@ -141,6 +142,7 @@
             $("#newsTitle").html(dataList[0].newsTitle);
             $("#newsDesc").html(dataList[0].newsDesc);
             $("#publicTime").html(dataList[0].createTime);
+            $("#clickNum").html(dataList[0].clickNum);
 
         })
     }

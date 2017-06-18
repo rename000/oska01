@@ -3,8 +3,8 @@
 <%@include file="../commonSys/systemHeader.jsp" %>
 
 <ul class="breadcrumb no-border no-radius b-b b-light pull-in">
-    <li><a href="<%=basePath%>oskaSystems/index/index.jsp"><i class="fa fa-home"></i> 主页</a></li>
-    <li><a href="<%=basePath%>oskaSystems/news/news.jsp"><i class="fa fa-columns"></i> 新闻管理</a></li>
+    <li><a href="<%=basePath%>oskaSystems/index/index.jsp?active=1"><i class="fa fa-home"></i> 主页</a></li>
+    <li><a href="<%=basePath%>oskaSystems/news/news.jsp?active=3"><i class="fa fa-columns"></i> 新闻管理</a></li>
     <li class="active"><a href="#">新增新闻</a></li>
 </ul>
 
@@ -32,7 +32,16 @@
         <row class="dis-table padder m-b m-l-40">
             <label class="t-cell in-name in-v-t">新闻简介：</label>
             <div class="t-cell in-input in-w-500">
-                <textarea id="newsInfo" class="form-control" rows="5"></textarea>
+                <textarea id="newsInfo" class="form-control" rows="3"></textarea>
+            </div>
+        </row>
+
+        <row class="dis-table padder m-b m-l-40">
+            <label class="in-name in-v-t">新闻内容：</label>
+            <div class="a-content m-v-40 text-center" style="margin-left: 10%;">
+                <div id="div1" style="height: 400px;">
+                    <p></p>
+                </div>
             </div>
         </row>
 
@@ -49,6 +58,13 @@
 
 <%@include file="../commonSys/systemFooter.jsp" %>
 
+<link rel="stylesheet" href="<%=basePath%>static/js/wangEditor/css/wangEditor.min.css" type="text/css" />
+<script type="text/javascript" src="<%=basePath%>static/js/wangEditor/wangEditor.min.js" ></script>
+<script>
+    var editor = new wangEditor('div1');
+    editor.create();
+</script>
+
 <script type="text/javascript">
 
     uploadFileFun('file01','input01','<%=basePath%>upload/uploadImg',function(data){
@@ -60,7 +76,7 @@
     $("#saveBtn").click(function(){
         var newsNameVal = $("#newsName").val();
         var newsInfoVal = $("#newsInfo").val();
-        var newsDescVal =  $("#newsDesc").val();
+        var newsDescVal =  $("#div1").html();
         var newsTypeVal = $("#newsType").val();
         //校验
         if(newsNameVal == ''){
@@ -86,7 +102,7 @@
 
         console.log("jsonObj================"+ JSON.stringify(jsonObj));
         var option = {
-            url:'<%=basePath%>news/addnews',
+            url:'<%=basePath%>news/addNews',
             type:'post',
             data:{jsonObject:JSON.stringify(jsonObj)},
             success:function(data){
@@ -95,7 +111,7 @@
                 if(data.code=='1'){
 
                     alert("保存成功");
-                    window.location.href = '<%=basePath%>oskaSystems/news/news.jsp';
+                    window.location.href = '<%=basePath%>oskaSystems/news/news.jsp?active=3';
                 }else{
                     console.log("code为0； 查询失败")
                 }

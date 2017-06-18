@@ -18,38 +18,38 @@ public class NewsDaoImpl implements NewsDao {
 
     /**
      * 获取新闻列表
-     * @param News
+     * @param news
      * @return
      */
     @Override
-    public List<News> findNewsListByProId(News News) {
-        return oskaDao.selectList("getNewsList",News);
+    public List<News> findNewsListByProId(News news) {
+        return oskaDao.selectList("getNewsList",news,news.getNub(),news.getSize());
     }
 
     /**
      * 新增新闻
-     * @param News
+     * @param news
      */
     @Override
-    public void addNews(News News) {
-        oskaDao.insert("addNews",News);
+    public void addNews(News news) {
+        oskaDao.insert("addNews",news);
     }
 
     /**
      * 修改新闻信息
-     * @param News
+     * @param news
      */
     @Override
-    public void updateNewsById(News News) {
-        oskaDao.update("updateNewsById",News);
+    public void updateNewsById(News news) {
+        oskaDao.update("updateNewsById",news);
     }
 
     /**
      * 删除新闻
-     * @param News
+     * @param news
      */
     @Override
-    public void deleteNewsById(News News) {
-        oskaDao.delete("deleteNewsById",News);
+    public void deleteNewsById(News news) {
+        oskaDao.delete("deleteNewsById",news);
     }
 }

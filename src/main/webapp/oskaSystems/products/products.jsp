@@ -3,7 +3,7 @@
 <%@include file="../commonSys/systemHeader.jsp" %>
 
 <ul class="breadcrumb no-border no-radius b-b b-light pull-in">
-    <li><a href="<%=basePath%>oskaSystems/index/index.jsp"><i class="fa fa-home"></i> 主页</a></li>
+    <li><a href="<%=basePath%>oskaSystems/index/index.jspactive=1"><i class="fa fa-home"></i> 主页</a></li>
     <li class="active"><a href="#"><i class="fa fa-columns"></i> 产品管理</a></li>
 </ul>
 
@@ -11,7 +11,7 @@
     <header class="panel-heading"> 产品管理列表 </header>
     <div class="row text-sm wrapper">
         <div class="col-sm-6 m-b-xs">
-            <a href="<%=basePath%>oskaSystems/products/productsAdd.jsp" class="btn btn-sm btn-primary">新增产品</a>
+            <a href="<%=basePath%>oskaSystems/products/productsAdd.jsp?active=2" class="btn btn-sm btn-primary">新增产品</a>
         </div>
 
         <form id="formObj">
@@ -116,7 +116,7 @@
 
                     $("#productList").html(htmlStr);
                     $("#total").html(data.data.count);
-                    createPagePlugin(data.data.count,2);
+                    createPagePlugin(data.data.count,jsonObj.size);
                 }else{
                     console.log("code为0； 查询失败")
                 }
@@ -155,7 +155,6 @@
                     }
 
                     $("#productList").html(htmlStr);
-                    $("#total").html(dataList.length);
                 }else{
                     console.log("code为0； 查询失败")
                 }
@@ -194,11 +193,11 @@
 
     //searchBtn
     $("#searchBtn").click(function(){
-        var jsonObj = {};
+        var jsonObj = {nub:0,size:2};
         var formObj = $("#formObj").serializeObject();
         jsonObj = $.extend(jsonObj,formObj);
         console.log("jsonObj===============" + JSON.stringify(jsonObj));
-        getProductList(jsonObj);
+        getList(jsonObj);
     });
 
     //editBtn
@@ -207,7 +206,7 @@
         if(productIdVal=="" || productIdVal==undefined){
             alert("获取Id异常！");
         }else {
-            window.location.href = "<%=basePath%>" + "oskaSystems/products/productsEdit.jsp?productId=" + productIdVal;
+            window.location.href = "<%=basePath%>" + "oskaSystems/products/productsEdit.jsp?active=2&productId=" + productIdVal;
         }
     });
 
@@ -230,13 +229,15 @@
             pageSize: size,
             currentPage:1
         });
-        paging.goPage = function(from, to) {
+        paging.goPage = function(from, to ,) {
             pageFun(from - 1, size);
         }
     };
     //翻页
     var pageFun = function(from,pageSize){
         var jsonObj = {nub: "" + from,size: "" + pageSize};
+        var formObj = $("#formObj").serializeObject();
+        jsonObj = $.extend(jsonObj,formObj);
         getProductList(jsonObj);
     }
 

@@ -4,7 +4,7 @@
 
 <ul class="breadcrumb no-border no-radius b-b b-light pull-in">
     <li><a href="<%=basePath%>oskaSystems/index/index.jsp"><i class="fa fa-home"></i> 主页</a></li>
-    <li><a href="<%=basePath%>oskaSystems/products/products.jsp"><i class="fa fa-columns"></i> 产品管理</a></li>
+    <li><a href="<%=basePath%>oskaSystems/products/products.jsp?active=2"><i class="fa fa-columns"></i> 产品管理</a></li>
     <li class="active"><a href="#">新增产品</a></li>
 </ul>
 
@@ -110,7 +110,7 @@
                 if(data.code=='1'){
 
                     alert("保存成功");
-                    window.location.href = '<%=basePath%>oskaSystems/products/products.jsp';
+                    window.location.href = '<%=basePath%>oskaSystems/products/products.jsp?active=2';
                 }else{
                     console.log("code为0； 查询失败")
                 }

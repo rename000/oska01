@@ -15,6 +15,67 @@ public class News {
 
     private String newsInfo;
 
+    private String newsImg;
+
+    private String clickNum; //点击率
+
+    private String type; //新闻类型
+
+
+
+    private Integer count;
+    private Integer nub = 0;
+    private Integer size = 10;
+
+
+    public String getNewsImg() {
+        return newsImg;
+    }
+
+    public void setNewsImg(String newsImg) {
+        this.newsImg = newsImg;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public String getClickNum() {
+        return clickNum;
+    }
+
+    public void setClickNum(String clickNum) {
+        this.clickNum = clickNum;
+    }
+
+    public Integer getCount() {
+        return count;
+    }
+
+    public void setCount(Integer count) {
+        this.count = count;
+    }
+
+    public Integer getNub() {
+        return nub;
+    }
+
+    public void setNub(Integer nub) {
+        this.nub = nub;
+    }
+
+    public Integer getSize() {
+        return size;
+    }
+
+    public void setSize(Integer size) {
+        this.size = size;
+    }
+
     public String getNewsType() {
         return newsType;
     }

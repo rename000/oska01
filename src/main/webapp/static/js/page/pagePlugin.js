@@ -153,7 +153,7 @@ pagePlugin.createPaging = function(param){
                 html.push('<li><em>共<b>'+me.pages+'</b>页&nbsp;&nbsp;到第</em></li>');
             }
             if(me.isGoPage){
-                html.push('<li><input class="input-txt" type="text" style="margin-top:4px;" value="'+me.currentPage+'" onkeydown="javascript:if(event.keyCode==13){return false;}"></li>');
+                html.push('<li><input class="input-txt" type="text" value="'+me.currentPage+'" onkeydown="javascript:if(event.keyCode==13){return false;}"></li>');
                 html.push('<li><em>页</em></li>');
                 html.push('<li><a class="btn btn-default" onclick="" href="javascript:;">确定</a></li>');
             }

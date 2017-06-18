@@ -8,11 +8,15 @@
     <result column="create_time" property="createTime" jdbcType="VARCHAR" />
     <result column="news_type" property="newsType" jdbcType="INTEGER" />
     <result column="news_info" property="newsInfo" jdbcType="LONGVARCHAR" />
+    <result column="click_num" property="clickNum" jdbcType="VARCHAR" />
+    <result column="type" property="type" jdbcType="VARCHAR" />
+    <result column="newsImg" property="newsImg" jdbcType="VARCHAR" />
   </resultMap>
 
   <select id="getNewsList" resultMap="BaseResultMap" parameterType="com.oska.model.News" >
     select 
-    news_id, news_title, news_desc, DATE_FORMAT(create_time, '%Y-%m-%d') create_time, news_type,news_info
+    news_id, news_title, news_desc, DATE_FORMAT(create_time, '%Y-%m-%d') create_time, news_type,news_info,
+    click_num,type,news_img
     from news
     where 1 = 1
     <if test="newsTitle != null and newsTitle != ''">
@@ -23,6 +27,9 @@
     </if>
     <if test="newsType != null and newsType != ''">
       and news_type = #{newsType}
+    </if>
+    <if test="type != null and type != ''">
+      and type = #{type}
     </if>
     order by create_time DESC
   </select>
@@ -44,15 +51,13 @@
       <if test="newsDesc != null and newsDesc != ''" >
         news_desc,
       </if>
-      <if test="createTime != null  and createTime != ''" >
-        create_time,
-      </if>
       <if test="newsType != null  and newsType != ''" >
         news_type,
       </if>
       <if test="newsInfo != null and newsInfo != ''" >
         news_info,
       </if>
+        create_time
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="newsId != null and newsId != ''" >
@@ -64,15 +69,13 @@
       <if test="newsDesc != null and newsDesc != ''" >
         #{newsDesc,jdbcType=VARCHAR},
       </if>
-      <if test="createTime != null  and createTime != ''" >
-        #{createTime,jdbcType=TIMESTAMP},
-      </if>
       <if test="newsType != null  and newsType != ''" >
         #{newsType,jdbcType=INTEGER},
       </if>
       <if test="newsInfo != null  and newsInfo != ''" >
         #{newsInfo,jdbcType=LONGVARCHAR},
       </if>
+        NOW()
     </trim>
   </insert>
 
@@ -93,6 +96,12 @@
       </if>
       <if test="newsInfo != null and newsInfo != ''" >
         news_info = #{newsInfo,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="clickNum != null and clickNum != ''" >
+        click_num = #{clickNum,jdbcType=VARCHAR},
+      </if>
+      <if test="newsImg != null and newsImg != ''" >
+        news_img = #{newsImg,jdbcType=VARCHAR},
       </if>
     </set>
     where news_id = #{newsId,jdbcType=INTEGER}
