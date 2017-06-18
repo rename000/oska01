@@ -90,6 +90,46 @@
 <script type="text/javascript">
 
     //获得产品列表
+    function getList(jsonObj){
+        var jsonObject = jsonObj;
+        var option = {
+            url:'<%=basePath%>' + 'product/getProductList',
+            type:'post',
+            data:{jsonObject:JSON.stringify(jsonObject)},
+            success:function(data){
+                console.log('data===='+JSON.stringify(data));
+                data = JSON.parse(data);
+                if(data.code=='1'){
+                    var dataList = data.data.dataList;
+                    var htmlStr = "";
+                    for(var i=0;i<dataList.length;i++){
+                        htmlStr +=  "<tr><td>"+ dataList[i]['productId'] +"</td>"+
+                            "<td>"+ dataList[i]['productName'] +"</td>"+
+                            "<td>"+ dataList[i]['productTypeDesc'] +"</td>"+
+                            "<td>"+ dataList[i]['productInfo'] +"</td>"+
+                            "<td> <img src='"+ dataList[i]['productImg'] +"' style='width: 30px;height: 30px;' /> </td>"+
+                            "<td>"+
+                            "<a class='a-c-blue m-r editBtn' id='edit_" + dataList[i]['productId'] + "' >编辑</a>"+
+                            "<a class='c-red y-pointer m-r delBtn' id='del_" + dataList[i]['productId'] + "'>删除</a>"+
+                            "</td></tr>";
+                    }
+
+                    $("#productList").html(htmlStr);
+                    $("#total").html(data.data.count);
+                    createPagePlugin(data.data.count,2);
+                }else{
+                    console.log("code为0； 查询失败")
+                }
+            },
+            error:function(msg){
+                console.log(msg);
+            }
+        };
+        $.ajax(option);
+    }
+
+
+    //获得产品列表
     function getProductList(jsonObj){
         var jsonObject = jsonObj;
         var option = {
@@ -97,11 +137,10 @@
             type:'post',
             data:{jsonObject:JSON.stringify(jsonObject)},
             success:function(data){
-//            console.log(data);
+                console.log('data===='+JSON.stringify(data));
                 data = JSON.parse(data);
                 if(data.code=='1'){
                     var dataList = data.data.dataList;
-                    console.log('dataList===='+JSON.stringify(dataList));
                     var htmlStr = "";
                     for(var i=0;i<dataList.length;i++){
                         htmlStr +=  "<tr><td>"+ dataList[i]['productId'] +"</td>"+
@@ -204,8 +243,7 @@
     //初始化
     function init(){
         var jsonObj = {nub:0,size:2};
-        getProductList(jsonObj);
-        createPagePlugin(3,jsonObj.size);
+        getList(jsonObj);
     }
     init();
 </script>

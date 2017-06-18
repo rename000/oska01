@@ -25,7 +25,7 @@
         <div class="about-warp">
             <div class="title"></div>
             <div class="box">
-                <em class="font14">
+                <em class="font14" id="div1">
                     欧饰家品牌地板自投放市场以来，<br />
                     <span class="font18 bold">始终秉承“行家、专家、管家”的品牌经营理念和服务宗旨，<br />
 						不断开发和推行“欧洲品质、皇家时尚、健康华贵”的地板精品，<br />
@@ -39,3 +39,36 @@
 </div>
 
 <%@include file="../../common/htmlFooter.jsp" %>
+<script type="text/javascript">
+    function getList(jsonObj){
+        var jsonObject = jsonObj;
+        var option = {
+            url:'<%=basePath%>' + 'impression/getImpressionList',
+            type:'post',
+            data:{jsonObject:JSON.stringify(jsonObject)},
+            success:function(data){
+                console.log('data===='+JSON.stringify(data));
+                data = JSON.parse(data);
+                if(data.code=='1'){
+                    var dataList = data.data.dataList;
+
+                    $("#div1").html(dataList[0].impressionDesc);
+                }else{
+                    console.log("code为0； 查询失败")
+                }
+            },
+            error:function(msg){
+                console.log(msg);
+            }
+        };
+        $.ajax(option);
+    }
+
+    function init() {
+        var jsonObj = {
+            impressionId:1,
+        }
+        getList(jsonObj);
+    }
+    init();
+</script>

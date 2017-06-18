@@ -24,11 +24,7 @@
     <if test="productType != null and productType != ''">
       and product_Type = #{productType}
     </if>
-    <!--<if test="productInfo != null and productInfo != ''">-->
-      <!--and product_info = like CONCAT('%','${productInfo}','%')-->
-    <!--</if>-->
       order by create_time DESC
-      limit #{nub}, #{size}
   </select>
 
   <insert id="addProduct" parameterType="com.oska.model.Product" >

@@ -23,7 +23,8 @@ public class ProductDaoImpl implements ProductDao {
      */
     @Override
     public List<Product> findProductListByProId(Product product) {
-        return oskaDao.selectList("getProductList",product);
+        //return oskaDao.selectList("getProductList");
+        return oskaDao.selectList("getProductList",product,product.getNub(),product.getSize());
     }
 
     /**

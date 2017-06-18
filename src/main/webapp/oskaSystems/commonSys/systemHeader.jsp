@@ -77,9 +77,9 @@
                                     <li > <a href="<%=basePath%>oskaSystems/news/news.jsp" > <i class="fa fa-columns icon"> <b class="bg-success"></b> </i> <span>新闻管理</span> </a> </li>
                                     <li > <a href="#uikit" > <i class="fa fa-flask icon"> <b class="bg-success"></b> </i> <span class="pull-right"> <i class="fa fa-angle-down text"></i> <i class="fa fa-angle-up text-active"></i> </span> <span>欧饰家印象</span> </a>
                                         <ul class="nav lt">
-                                            <li > <a href="<%=basePath%>oskaSystems/news/news.jsp" > <i class="fa fa-angle-right"></i> <span>关于欧饰家 </span> </a> </li>
-                                            <li > <a href="<%=basePath%>oskaSystems/news/news.jsp" > <i class="fa fa-angle-right"></i> <span>品牌故事 </span> </a> </li>
-                                            <li > <a href="<%=basePath%>oskaSystems/news/news.jsp" > <i class="fa fa-angle-right"></i> <span>工程案例 </span> </a> </li>
+                                            <li > <a href="<%=basePath%>oskaSystems/impression/about.jsp" > <i class="fa fa-angle-right"></i> <span>关于欧饰家 </span> </a> </li>
+                                            <li > <a href="<%=basePath%>oskaSystems/impression/story.jsp" > <i class="fa fa-angle-right"></i> <span>品牌故事 </span> </a> </li>
+                                            <li > <a href="<%=basePath%>oskaSystems/impression/case.jsp" > <i class="fa fa-angle-right"></i> <span>工程案例 </span> </a> </li>
                                             <!--<li > <a href="icons.html" > <b class="badge bg-info pull-right">369</b> <i class="fa fa-angle-right"></i> <span>Icons</span> </a> </li>-->
                                         </ul>
                                     </li>

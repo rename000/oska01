@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.oska.model.Impression" >
+  <resultMap id="BaseResultMap" type="com.oska.model.Impression" >
+    <id column="impression_id" property="impressionId" jdbcType="INTEGER" />
+    <result column="impression_desc" property="impressionDesc" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="VARCHAR" />
+  </resultMap>
+
+  <select id="getImpressionList" resultMap="BaseResultMap" parameterType="com.oska.model.Impression" >
+    select
+    impression_id,impression_desc
+    from impression
+    where 1 = 1
+    <if test="impressionId != null and impressionId != ''">
+      and impression_id = #{impressionId}
+    </if>
+    <if test="impressionDesc != null and impressionDesc != ''">
+      and impression_Desc = #{impressionDesc}
+    </if>
+  </select>
+
+  <update id="updateImpressionById" parameterType="com.oska.model.Impression" >
+    update impression
+    <set >
+      <if test="impressionDesc != null and impressionDesc != ''" >
+        impression_desc = #{impressionDesc},
+      </if>
+    </set>
+    where impression_id = #{impressionId}
+  </update>
+
+</mapper>
