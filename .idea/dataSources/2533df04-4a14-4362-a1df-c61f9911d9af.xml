@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataSource name="MySQL - oska@120.76.126.100">
+  <database-model serializer="dbm" rdbms="MYSQL" format-version="4.0">
+    <root id="1"/>
+    <schema id="2" parent="1" name="oska">
+      <Visible>1</Visible>
+    </schema>
+    <table id="3" parent="2" name="news">
+      <Comment>新闻表</Comment>
+    </table>
+    <table id="4" parent="2" name="product">
+      <Comment>产品</Comment>
+    </table>
+    <table id="5" parent="2" name="user">
+      <Comment>用户</Comment>
+    </table>
+    <column id="6" parent="3" name="news_id">
+      <Comment>新闻ID</Comment>
+      <DataType>int(32)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="7" parent="3" name="news_title">
+      <Comment>新闻标题</Comment>
+      <DataType>varchar(100)|0</DataType>
+    </column>
+    <column id="8" parent="3" name="news_info">
+      <Comment>新闻简介</Comment>
+      <DataType>varchar(100)|0</DataType>
+    </column>
+    <column id="9" parent="3" name="news_desc">
+      <Comment>新闻内容</Comment>
+      <DataType>text|0</DataType>
+    </column>
+    <column id="10" parent="3" name="create_time">
+      <DataType>datetime|0</DataType>
+    </column>
+    <column id="11" parent="3" name="news_type">
+      <Comment>产品类型 1 企业新闻  2 行业新闻</Comment>
+      <DataType>int(4)|0</DataType>
+      <DefaultExpression>&apos;1&apos;</DefaultExpression>
+    </column>
+    <key id="12" parent="3" name="PRIMARY">
+      <ColNames>news_id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <column id="13" parent="4" name="product_id">
+      <Comment>产品ID</Comment>
+      <DataType>int(32)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="14" parent="4" name="product_name">
+      <Comment>产品名称</Comment>
+      <DataType>varchar(100)|0</DataType>
+    </column>
+    <column id="15" parent="4" name="product_info">
+      <Comment>产品信息</Comment>
+      <DataType>text|0</DataType>
+    </column>
+    <column id="16" parent="4" name="create_time">
+      <DataType>datetime|0</DataType>
+    </column>
+    <column id="17" parent="4" name="product_img">
+      <DataType>varchar(200)|0</DataType>
+    </column>
+    <column id="18" parent="4" name="product_type">
+      <Comment>产品类型 1 橡木仿古 2 橡木人字拼 3 原木手工拼花 4 强化地板</Comment>
+      <DataType>int(4)|0</DataType>
+      <DefaultExpression>&apos;1&apos;</DefaultExpression>
+    </column>
+    <key id="19" parent="4" name="PRIMARY">
+      <ColNames>product_id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <column id="20" parent="5" name="user_id">
+      <Comment>用户ID</Comment>
+      <DataType>int(16)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="21" parent="5" name="user_name">
+      <Comment>用户名</Comment>
+      <DataType>varchar(20)|0</DataType>
+    </column>
+    <column id="22" parent="5" name="password">
+      <Comment>密码</Comment>
+      <DataType>varchar(1000)|0</DataType>
+    </column>
+    <key id="23" parent="5" name="PRIMARY">
+      <ColNames>user_id</ColNames>
+      <Primary>1</Primary>
+    </key>
+  </database-model>
+</dataSource>
