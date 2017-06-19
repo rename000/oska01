@@ -141,4 +141,108 @@ public class UploadController extends BaseController {
     }
 
 
+    /**
+     * 上传首页图片
+     * @return
+     * @throws Exception
+     */
+    @ResponseBody
+    @RequestMapping(value = "/uploadIndexImg", method = { RequestMethod.POST })
+    public String uploadIndexImg(
+            @RequestParam(value = "file", required = false) MultipartFile file,
+            HttpServletRequest request, HttpServletResponse response)
+            throws Exception {
+
+        //逻辑处理
+        HashMap<String, Object> dataMap = Maps.newHashMap();
+        MsgResponse msgResponse = new MsgResponse(code_ok);
+        try{
+
+            System.out.println("开始");
+            String path = request.getSession().getServletContext().getRealPath("static/upload/index");
+            String fileName = file.getOriginalFilename();
+//        String fileName = new Date().getTime()+".jpg";
+            System.out.println(path);
+            File targetFile = new File(path, fileName);
+            if(!targetFile.exists()){
+                targetFile.mkdirs();
+            }
+
+            //保存
+            file.transferTo(targetFile);
+
+            dataMap.put("fileUrl", request.getContextPath()+"/static/upload/index/"+fileName);
+            //设置返回成功信息
+            msgResponse.setCode(code_ok);
+            msgResponse.setMsg("查询成功");
+            msgResponse.setObject(dataMap);
+
+        }catch (Exception e){
+            e.printStackTrace();
+            logger.error("Error UploadController uploadIndexImg() run error ErrorMsg is ====================" + e.getMessage());
+            //throw e;
+            //设置返回失败信息
+            dataMap.put("dataList", null);
+            msgResponse.setCode(code_fail);
+            msgResponse.setMsg("系统异常！");
+            msgResponse.setObject(dataMap);
+        }
+
+        render(msgResponse.getCode(), msgResponse.getMsg(), (Map<String, Object>)msgResponse.getObject(), response);
+
+        return null;
+    }
+
+    /**
+     * 上传工程案例图片
+     * @return
+     * @throws Exception
+     */
+    @ResponseBody
+    @RequestMapping(value = "/uploadCaseImg", method = { RequestMethod.POST })
+    public String uploadCaseImg(
+            @RequestParam(value = "file", required = false) MultipartFile file,
+            HttpServletRequest request, HttpServletResponse response)
+            throws Exception {
+
+        //逻辑处理
+        HashMap<String, Object> dataMap = Maps.newHashMap();
+        MsgResponse msgResponse = new MsgResponse(code_ok);
+        try{
+
+            System.out.println("开始");
+            String path = request.getSession().getServletContext().getRealPath("static/upload/case");
+            String fileName = file.getOriginalFilename();
+//        String fileName = new Date().getTime()+".jpg";
+            System.out.println(path);
+            File targetFile = new File(path, fileName);
+            if(!targetFile.exists()){
+                targetFile.mkdirs();
+            }
+
+            //保存
+            file.transferTo(targetFile);
+
+            dataMap.put("fileUrl", request.getContextPath()+"/static/upload/case/"+fileName);
+            //设置返回成功信息
+            msgResponse.setCode(code_ok);
+            msgResponse.setMsg("查询成功");
+            msgResponse.setObject(dataMap);
+
+        }catch (Exception e){
+            e.printStackTrace();
+            logger.error("Error UploadController uploadCaseImg() run error ErrorMsg is ====================" + e.getMessage());
+            //throw e;
+            //设置返回失败信息
+            dataMap.put("dataList", null);
+            msgResponse.setCode(code_fail);
+            msgResponse.setMsg("系统异常！");
+            msgResponse.setObject(dataMap);
+        }
+
+        render(msgResponse.getCode(), msgResponse.getMsg(), (Map<String, Object>)msgResponse.getObject(), response);
+
+        return null;
+    }
+
 }

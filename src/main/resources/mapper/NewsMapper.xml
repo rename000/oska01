@@ -10,7 +10,7 @@
     <result column="news_info" property="newsInfo" jdbcType="LONGVARCHAR" />
     <result column="click_num" property="clickNum" jdbcType="VARCHAR" />
     <result column="type" property="type" jdbcType="VARCHAR" />
-    <result column="newsImg" property="newsImg" jdbcType="VARCHAR" />
+    <result column="news_img" property="newsImg" jdbcType="VARCHAR" />
   </resultMap>
 
   <select id="getNewsList" resultMap="BaseResultMap" parameterType="com.oska.model.News" >
