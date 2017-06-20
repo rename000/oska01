@@ -207,8 +207,6 @@
     init();
 
 
-
-
     //go to detail
     $('body').on("click",".li-id",function () {
         var newsIdVal = $(this).attr("id").split("_")[1];

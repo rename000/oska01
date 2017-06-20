@@ -63,7 +63,7 @@
                     <span class="arrow top"></span>
                     <li> <a href="#">帮助</a> </li>
                     <li class="divider"></li>
-                    <li> <a href="<%=basePath%>oskaSystems/login.jsp" data-toggle="ajaxModal" >退出</a> </li>
+                    <li> <a href="<%=basePath%>oskaSystems/login.jsp">退出</a> </li>
                 </ul>
             </li>
         </ul>

@@ -2,6 +2,14 @@
 
 <%@include file="../../common/htmlHeader.jsp" %>
 
+<%
+
+    String img01 = (String) request.getSession().getAttribute("img01");
+    String img02 = (String) request.getSession().getAttribute("img02");
+    String img03 = (String) request.getSession().getAttribute("img03");
+
+%>
+
 <!--banner轮播图-->
 <!--<div class="">
     <div class="index-banner"><img src="images/index/index-banner.jpg"/></div>
@@ -10,9 +18,12 @@
 
 <div class="swiper-container">
     <div class="swiper-wrapper">
-        <div class="swiper-slide index-banner-a"><img src="<%=basePath%>static/images/index/index-banner-a.jpg"/></div>
-        <div class="swiper-slide index-banner-b"><img src="<%=basePath%>static/images/index/index-banner-b.jpg"/></div>
-        <div class="swiper-slide index-banner-c"><img src="<%=basePath%>static/images/index/index-banner-c.png"/></div>
+        <%--<div class="swiper-slide index-banner-a"><img id="img01" src="<%=basePath%>static/images/index/index-banner-a.jpg"/></div>--%>
+        <%--<div class="swiper-slide index-banner-b"><img id="img02" src="<%=basePath%>static/images/index/index-banner-b.jpg"/></div>--%>
+        <%--<div class="swiper-slide index-banner-c"><img id="img03" src="<%=basePath%>static/images/index/index-banner-c.png"/></div>--%>
+        <div class="swiper-slide index-banner-a"><img id="img01" src="<%=img01%>"/></div>
+        <div class="swiper-slide index-banner-b"><img id="img02" src="<%=img02%>"/></div>
+        <div class="swiper-slide index-banner-c"><img id="img03" src="<%=img03%>"/></div>
     </div>
     <!-- Add Pagination -->
     <div class="swiper-pagination"></div>
@@ -96,7 +107,6 @@
                     </div>
                 </li>
             </ul>
-
 
             <div class="clearfloat"></div>
         </div>

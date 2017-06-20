@@ -3,7 +3,7 @@
 <%@include file="../commonSys/systemHeader.jsp" %>
 
 <div class="a-content m-v-40 text-center">
-    <h3 class="h3">关于欧饰家 </h3>
+    <h3 class="h3">品牌故事 </h3>
     <div id="div1" style="height: 300px;">
         <p>请输入内容...</p>
     </div>
