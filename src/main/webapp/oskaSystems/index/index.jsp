@@ -39,7 +39,7 @@
                 <img id="img02" src="<%=basePath%>static/img/bmz.jpg" class="in-pro-img">
                 <div class="btn btn-primary in-v-t y-pointer">上传图片
                     <%--<input id="file01" type="file" class="fileBtn">--%>
-                    <input id="file01" type="file" class="fileBtn" name="file"/>
+                    <input id="file02" type="file" class="fileBtn" name="file"/>
                 </div>
                 <input id="input02" type="text" value="" class="y-hide" data-value="上传图片的值">
             </div>
@@ -51,7 +51,7 @@
                 <img id="img03" src="<%=basePath%>static/img/bmz.jpg" class="in-pro-img">
                 <div class="btn btn-primary in-v-t y-pointer">上传图片
                     <%--<input id="file01" type="file" class="fileBtn">--%>
-                    <input id="file01" type="file" class="fileBtn" name="file"/>
+                    <input id="file03" type="file" class="fileBtn" name="file"/>
                 </div>
                 <input id="input03" type="text" value="" class="y-hide" data-value="上传图片的值">
             </div>
@@ -59,7 +59,12 @@
 
     </div>
 
-    <button class="btn btn-success">保存</button>
+    <row class="dis-table padder m-b m-l-40 m-t-lg">
+        <label class="t-cell in-name in-v-t">&nbsp;</label>
+        <div class="t-cell in-input">
+            <a id="saveBtn" class="btn btn-primary in-w-120 m-b-lg">保存</a>
+        </div>
+    </row>
 
 </section>
 
@@ -118,4 +123,68 @@
        getList(jsonObj);
    }
    init();
+
+
+    //编辑
+    function editFun(jsonObj) {
+        console.log("jsonObj================"+ JSON.stringify(jsonObj));
+        var option = {
+            url:'<%=basePath%>banner/updateBanner',
+            type:'post',
+            data:{jsonObject:JSON.stringify(jsonObj)},
+            success:function(data){
+                //            console.log(data);
+                data = JSON.parse(data);
+                if(data.code=='1'){
+
+                    alert("保存成功");
+                    window.location.href = '<%=basePath%>oskaSystems/index/index.jsp?active=1';
+                }else{
+                    console.log("code为0； 查询失败")
+                }
+            },
+            error:function(msg){
+                console.log(msg);
+            }
+
+        };
+        $.ajax(option);
+    }
+
+    //保存
+    $("#saveBtn").click(function(){
+
+        var img01Val = $("#input01").val();
+        var img02Val = $("#input02").val();
+        var img03Val = $("#input03").val();
+
+        var jsonObj = {
+            img01:img01Val,
+            img02:img02Val,
+            img03:img03Val
+        };
+
+        console.log("jsonObj================"+ JSON.stringify(jsonObj));
+        var option = {
+            url:'<%=basePath%>banner/updateBanner',
+            type:'post',
+            data:{jsonObject:JSON.stringify(jsonObj)},
+            success:function(data){
+                //            console.log(data);
+                data = JSON.parse(data);
+                if(data.code=='1'){
+
+                    alert("保存成功");
+                }else{
+                    console.log("code为0； 查询失败")
+                }
+            },
+            error:function(msg){
+                console.log(msg);
+            }
+
+        };
+        $.ajax(option);
+    });
+
 </script>

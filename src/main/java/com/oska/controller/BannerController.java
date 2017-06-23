@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.net.URLDecoder;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -39,7 +40,7 @@ public class BannerController extends BaseController {
 
 
     /**
-     * 获取产品列表
+     * 获取Banner图列表
      * @return
      * @throws Exception
      */
@@ -74,7 +75,7 @@ public class BannerController extends BaseController {
 
         }catch (Exception e){
             e.printStackTrace();
-            logger.error("Error ProductController getBannerList() run error ErrorMsg is ====================" + e.getMessage());
+            logger.error("Error BannerController getBannerList() run error ErrorMsg is ====================" + e.getMessage());
             //throw e;
             //设置返回信息
             render(code_fail, "系统异常！", null, response);
@@ -84,34 +85,41 @@ public class BannerController extends BaseController {
     }
 
     /**
-     * 更新产品
+     * 更新三张Banner图
      * @return
      * @throws Exception
      */
     @ResponseBody
-    @RequestMapping(value = "/updateProduct", method = { RequestMethod.POST })
-    public String updateProduct(
+    @RequestMapping(value = "/updateBanner", method = { RequestMethod.POST })
+    public String updateBanner(
             @RequestParam String jsonObject,
             HttpServletRequest request, HttpServletResponse response)
             throws Exception {
 
+        jsonObject = URLDecoder.decode(jsonObject, "utf-8");
+        JSONObject jsonObj = JSONObject.parseObject(jsonObject);
+
         //逻辑处理
         HashMap<String, Object> dataMap = Maps.newHashMap();
         try{
-            Banner banner = JSONObject.parseObject(jsonObject, Banner.class);
-
-            if("".equals(banner.getBannerId()) || "null".equals(banner.getBannerId())){
-                render(code_fail,"编辑失败，请传入相应的图片ID", null, response);
-
-            }else {
-                bannerDao.updateBannerById(banner);
+                Banner banner1 = new Banner();
+                banner1.setBannerId(1);
+                banner1.setBannerImg(jsonObj.getString("img01"));
+                bannerDao.updateBannerById(banner1);
+                Banner banner2 = new Banner();
+                banner2.setBannerId(2);
+                banner2.setBannerImg(jsonObj.getString("img02"));
+                bannerDao.updateBannerById(banner2);
+                Banner banner3 = new Banner();
+                banner3.setBannerId(3);
+                banner3.setBannerImg(jsonObj.getString("img03"));
+                bannerDao.updateBannerById(banner3);
                 //设置返回成功信息
                 render(code_ok,"编辑成功", null, response);
-            }
 
         }catch (Exception e){
             e.printStackTrace();
-            logger.error("Error ProductController updateProduct() run error ErrorMsg is ====================" + e.getMessage());
+            logger.error("Error BannerController updateBanner() run error ErrorMsg is ====================" + e.getMessage());
             //throw e;
             //设置返回失败信息
             render(code_fail, "系统异常！", dataMap, response);

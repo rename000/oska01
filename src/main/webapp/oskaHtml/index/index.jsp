@@ -21,9 +21,9 @@
         <%--<div class="swiper-slide index-banner-a"><img id="img01" src="<%=basePath%>static/images/index/index-banner-a.jpg"/></div>--%>
         <%--<div class="swiper-slide index-banner-b"><img id="img02" src="<%=basePath%>static/images/index/index-banner-b.jpg"/></div>--%>
         <%--<div class="swiper-slide index-banner-c"><img id="img03" src="<%=basePath%>static/images/index/index-banner-c.png"/></div>--%>
-        <div class="swiper-slide index-banner-a"><img id="img01" src="<%=img01%>"/></div>
-        <div class="swiper-slide index-banner-b"><img id="img02" src="<%=img02%>"/></div>
-        <div class="swiper-slide index-banner-c"><img id="img03" src="<%=img03%>"/></div>
+        <div class="swiper-slide index-banner-a"><img id="img01" src="<%=img01%>" style="width: 100%"/></div>
+        <div class="swiper-slide index-banner-b"><img id="img02" src="<%=img02%>" style="width: 100%"/></div>
+        <div class="swiper-slide index-banner-c"><img id="img03" src="<%=img03%>" style="width: 100%"/></div>
     </div>
     <!-- Add Pagination -->
     <div class="swiper-pagination"></div>
@@ -142,3 +142,6 @@
 </div>
 
 <%@include file="../../common/htmlFooter.jsp" %>
+<script>
+
+</script>
