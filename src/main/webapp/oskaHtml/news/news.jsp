@@ -38,28 +38,29 @@
             <%=("1".equals(newsType)?"企业新闻":"")%>
             <%=("2".equals(newsType)?"行业新闻":"")%>
         </div>
-        <div class="box">
-            <div class="list">
-                <h3 class="font18 bold ellipsis"><i class="font30">◇</i> <a href="javascript:;">买木门关键看“门道”花样再多也...</a></h3>
-                <div class="ms">
-                    <dl class="info">
-                        <dt class="font14">环保地板不会产生室内空气二次污染，许多消费者在购买了某些木制品包括木地板、家具等之后。会闻到一股强烈的刺激性气味感到辣眼睛...</dt>
-                        <dd><i class="u-right"><a href="javascript:;"><img src="<%=basePath%>static/images/arrow-r-con.png"/></a></i>2015.12.08</dd>
-                    </dl>
-                    <em class="show"><a href="javascript:;"><img src="<%=basePath%>static/images/news/news-img.jpg"/></a></em>
-                </div>
+        <div class="box" id="newsListImg">
+            <%--<div class="list">--%>
+                <%--<h3 class="font18 bold ellipsis"><i class="font30">◇</i> <a href="javascript:;">买木门关键看“门道”花样再多也...</a></h3>--%>
+                <%--<div class="ms">--%>
+                    <%--<dl class="info">--%>
+                        <%--<dt class="font14">环保地板不会产生室内空气二次污染，许多消费者在购买了某些木制品包括木地板、家具等之后。会闻到一股强烈的刺激性气味感到辣眼睛...</dt>--%>
+                        <%--<dd><i class="u-right"><a href="javascript:;"><img src="<%=basePath%>static/images/arrow-r-con.png"/></a></i>2015.12.08</dd>--%>
+                    <%--</dl>--%>
+                    <%--<em class="show"><a href="javascript:;"><img src="<%=basePath%>static/images/news/news-img.jpg"/></a></em>--%>
+                <%--</div>--%>
+            <%--</div>--%>
+            <%----%>
+            <%--<div class="list">--%>
+                <%--<h3 class="font18 bold ellipsis"><i class="font30">◇</i> <a href="javascript:;">买木门关键看“门道”花样再多也...</a></h3>--%>
+                <%--<div class="ms">--%>
+                    <%--<dl class="info">--%>
+                        <%--<dt class="font14">环保地板不会产生室内空气二次污染，许多消费者在购买了某些木制品包括木地板、家具等之后。会闻到一股强烈的刺激性气味感到辣眼睛...</dt>--%>
+                        <%--<dd><i class="u-right"><a href="javascript:;"><img src="<%=basePath%>static/images/arrow-r-con.png"/></a></i>2015.12.08</dd>--%>
+                    <%--</dl>--%>
+                    <%--<em class="show"><a href="javascript:;"><img src="<%=basePath%>static/images/news/news-img.jpg"/></a></em>--%>
+                <%--</div>--%>
+            <%--</div>--%>
 
-            </div>
-            <div class="list">
-                <h3 class="font18 bold ellipsis"><i class="font30">◇</i> <a href="javascript:;">买木门关键看“门道”花样再多也...</a></h3>
-                <div class="ms">
-                    <dl class="info">
-                        <dt class="font14">环保地板不会产生室内空气二次污染，许多消费者在购买了某些木制品包括木地板、家具等之后。会闻到一股强烈的刺激性气味感到辣眼睛...</dt>
-                        <dd><i class="u-right"><a href="javascript:;"><img src="<%=basePath%>static/images/arrow-r-con.png"/></a></i>2015.12.08</dd>
-                    </dl>
-                    <em class="show"><a href="javascript:;"><img src="<%=basePath%>static/images/news/news-img.jpg"/></a></em>
-                </div>
-            </div>
         </div>
 
     </div>
@@ -200,16 +201,39 @@
         getNewsList(jsonObj);
     }
 
-    function init() {
-        var jsonObj = {nub:0,size:2,newsType:"<%=newsType%>"};
-        getList(jsonObj);
-    }
-    init();
-
-
     //go to detail
     $('body').on("click",".li-id",function () {
         var newsIdVal = $(this).attr("id").split("_")[1];
         window.location.href = "<%=basePath%>"+"oskaHtml/news/newsDetail.jsp?newsType=<%=newsType%>&newsId="+newsIdVal;
     })
+
+    //img news
+    function getNewsListImg(jsonObj){
+        var urlVal = '<%=basePath%>' + 'news/getNewsList';
+        getData(jsonObj,urlVal,function (data) {
+            var dataList = data.data.dataList;
+            var htmlStr = "";
+            for(var i=0;i<dataList.length;i++){
+                htmlStr +=  '<div class="list">'+
+                '<h3 class="font18 bold ellipsis"><i class="font30">◇</i> ' +
+                '<a href="<%=basePath%>'+'oskaHtml/news/newsDetail.jsp?newsType=3&newsId='+dataList[i]['newsId']+'">'+ dataList[i]['newsTitle'] +'</a></h3>'+
+                '<div class="ms"> <dl class="info">'+
+                '   <dt class="font14">'+ dataList[i]['newsInfo'] +'</dt>'+
+                '<dd><i class="u-right"><a href="<%=basePath%>'+'oskaHtml/news/newsDetail.jsp?newsType=3&newsId='+dataList[i]['newsId']+'">' +
+                '<img src="<%=basePath%>static/images/arrow-r-con.png"/></a></i>'+ dataList[i]['createTime'].replace("-",".").replace("-",".") +'</dd>'+
+                '</dl> <em class="show"><a href="javascript:;"><img src="'+ dataList[i]['newsImg'] +'"/></a></em>'+
+                '</div> </div>';
+            }
+
+            $("#newsListImg").html(htmlStr);
+        })
+    }
+
+    function init() {
+        var jsonObj01 = {newsType:"3",type:"3"};
+        getNewsListImg(jsonObj01);
+        var jsonObj = {nub:0,size:2,newsType:"<%=newsType%>"};
+        getList(jsonObj);
+    }
+    init();
 </script>

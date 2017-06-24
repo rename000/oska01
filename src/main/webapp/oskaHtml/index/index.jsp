@@ -112,30 +112,30 @@
         </div>
 
         <!--新闻-->
-        <div class="news">
+        <div class="news" id="newsList">
             <div class=""><img class="u-left" src="<%=basePath%>static/images/index/news-title.jpg"/> <img class="u-right" src="<%=basePath%>static/images/index/news-banner.jpg"/></div>
             <!--列表                  ********************************-->
-            <div class="news-list">
-                <div class="newBox">
-                    <h3 class="title font18 bold"><span class="font30">◇</span><a href="javascript:;">买木门关键看“门道” 花样再多也...</a></h3>
-                    <p class="ellipsis-3">环保地板不会产生室内空气二次污染，许多消费者在购买了某些木制品包括木地板、家具等之后。会闻到一股强烈的刺激性气味感到辣眼睛...</p>
-                    <em class="date"><i class="u-right"></i><a href="javascript:;"><img src="<%=basePath%>static/images/arrow-r-con.png"/>2015.12.08</a></em>
-                </div>
-            </div>
-            <div class="news-list">
-                <div class="newBox">
-                    <h3 class="title font18 bold"><span class="font30">◇</span><a href="javascript:;">买木门关键看“门道” 花样再多也...</a></h3>
-                    <p class="ellipsis-3">环保地板不会产生室内空气二次污染，许多消费者在购买了某些木制品包括木地板、家具等之后。会闻到一股强烈的刺激性气味感到辣眼睛...</p>
-                    <em class="date"><i class="u-right"></i><a href="javascript:;"><img src="<%=basePath%>static/images/arrow-r-con.png"/>2015.12.08</a></em>
-                </div>
-            </div>
-            <div class="news-list">
-                <div class="newBox">
-                    <h3 class="title font18 bold"><span class="font30">◇</span><a href="javascript:;">买木门关键看“门道” 花样再多也...</a></h3>
-                    <p class="ellipsis-3">环保地板不会产生室内空气二次污染，许多消费者在购买了某些木制品包括木地板、家具等之后。会闻到一股强烈的刺激性气味感到辣眼睛...</p>
-                    <em class="date"><i class="u-right"><a href="javascript:;"><img src="<%=basePath%>static/images/arrow-r-con.png"/></a></i>2015.12.08</em>
-                </div>
-            </div>
+            <%--<div class="news-list">--%>
+                <%--<div class="newBox">--%>
+                    <%--<h3 class="title font18 bold"><span class="font30">◇</span><a href="javascript:;">买木门关键看“门道” 花样再多也...</a></h3>--%>
+                    <%--<p class="ellipsis-3">环保地板不会产生室内空气二次污染，许多消费者在购买了某些木制品包括木地板、家具等之后。会闻到一股强烈的刺激性气味感到辣眼睛...</p>--%>
+                    <%--<em class="date"><i class="u-right"></i><a href="javascript:;"><img src="<%=basePath%>static/images/arrow-r-con.png"/>2015.12.08</a></em>--%>
+                <%--</div>--%>
+            <%--</div>--%>
+            <%--<div class="news-list">--%>
+                <%--<div class="newBox">--%>
+                    <%--<h3 class="title font18 bold"><span class="font30">◇</span><a href="javascript:;">买木门关键看“门道” 花样再多也...</a></h3>--%>
+                    <%--<p class="ellipsis-3">环保地板不会产生室内空气二次污染，许多消费者在购买了某些木制品包括木地板、家具等之后。会闻到一股强烈的刺激性气味感到辣眼睛...</p>--%>
+                    <%--<em class="date"><i class="u-right"></i><a href="javascript:;"><img src="<%=basePath%>static/images/arrow-r-con.png"/>2015.12.08</a></em>--%>
+                <%--</div>--%>
+            <%--</div>--%>
+            <%--<div class="news-list">--%>
+                <%--<div class="newBox">--%>
+                    <%--<h3 class="title font18 bold"><span class="font30">◇</span><a href="javascript:;">买木门关键看“门道” 花样再多也...</a></h3>--%>
+                    <%--<p class="ellipsis-3">环保地板不会产生室内空气二次污染，许多消费者在购买了某些木制品包括木地板、家具等之后。会闻到一股强烈的刺激性气味感到辣眼睛...</p>--%>
+                    <%--<em class="date"><i class="u-right"><a href="javascript:;"><img src="<%=basePath%>static/images/arrow-r-con.png"/></a></i>2015.12.08</em>--%>
+                <%--</div>--%>
+            <%--</div>--%>
             <div class="clearfloat"></div>
         </div>
     </div>
@@ -143,5 +143,51 @@
 
 <%@include file="../../common/htmlFooter.jsp" %>
 <script>
+    //getData base function
+    function getData(jsonObj,urlVal,callBack) {
+        var getData_jsonObject = jsonObj;
+        var option = {
+            url:urlVal,
+            type:'post',
+            data:{jsonObject:JSON.stringify(getData_jsonObject)},
+            success:function(data){
+//            console.log(data);
+                data = JSON.parse(data);
+                if(data.code=='1'){
+                    callBack(data);
+                }else{
+                    console.log("code为0； 查询失败")
+                }
+            },
+            error:function(msg){
+                console.log(msg);
+            }
+        };
+        $.ajax(option);
+    }
+    //获得新闻列表
+    function getList(jsonObj){
+        var urlVal = '<%=basePath%>' + 'news/getNewsList';
 
+        getData(jsonObj,urlVal,function (data) {
+            var dataList = data.data.dataList;
+            newsListData = dataList;
+//            console.log('dataList===='+JSON.stringify(dataList));
+            var htmlStr = "";
+            for(var i=0;i<dataList.length;i++){
+                htmlStr +=  '<div class="news-list"> <div class="newBox">'+
+                '<h3 class="title font18 bold"><span class="font30">◇</span><a href="javascript:;">'+ dataList[i]['newsTitle'] +'</a></h3>'+
+                '<p class="ellipsis-3">'+ dataList[i]['newsInfo'] +'</p>'+
+                '<em class="date"><i class="u-right"></i><a href="<%=basePath%>'+'oskaHtml/news/newsDetail.jsp?newsType=4&newsId='+dataList[i]['newsId']+'">' +
+                '<img src="<%=basePath%>static/images/arrow-r-con.png"/>'+ dataList[i]['createTime'].replace("-",".").replace("-",".") +'</a></em>'+
+                '</div> </div>';
+            }
+            $("#newsList").append(htmlStr);
+        })
+    }
+    function init() {
+        var jsonObj = {type:"2"};
+        getList(jsonObj);
+    }
+    init();
 </script>
