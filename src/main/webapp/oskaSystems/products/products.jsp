@@ -3,7 +3,7 @@
 <%@include file="../commonSys/systemHeader.jsp" %>
 
 <ul class="breadcrumb no-border no-radius b-b b-light pull-in">
-    <li><a href="<%=basePath%>oskaSystems/index/index.jspactive=1"><i class="fa fa-home"></i> 主页</a></li>
+    <li><a href="<%=basePath%>oskaSystems/index/index.jsp?active=1"><i class="fa fa-home"></i> 主页</a></li>
     <li class="active"><a href="#"><i class="fa fa-columns"></i> 产品管理</a></li>
 </ul>
 
@@ -229,7 +229,7 @@
             pageSize: size,
             currentPage:1
         });
-        paging.goPage = function(from, to ,) {
+        paging.goPage = function(from, to) {
             pageFun(from - 1, size);
         }
     };

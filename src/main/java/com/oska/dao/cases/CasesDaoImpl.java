@@ -18,7 +18,7 @@ public class CasesDaoImpl implements CasesDao {
 
     @Override
     public List<Cases> getCasesList(Cases cases) {
-        return oskaDao.selectList("getCasesList",cases);
+        return oskaDao.selectList("getCasesList",cases,cases.getNub(),cases.getSize());
     }
 
     @Override

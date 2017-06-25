@@ -11,6 +11,34 @@ public class Cases {
 
     private String caseImg;
 
+    private Integer count;
+    private Integer nub = 0;
+    private Integer size = 10;
+
+    public Integer getCount() {
+        return count;
+    }
+
+    public void setCount(Integer count) {
+        this.count = count;
+    }
+
+    public Integer getNub() {
+        return nub;
+    }
+
+    public void setNub(Integer nub) {
+        this.nub = nub;
+    }
+
+    public Integer getSize() {
+        return size;
+    }
+
+    public void setSize(Integer size) {
+        this.size = size;
+    }
+
     public Integer getCaseId() {
         return caseId;
     }

@@ -13,7 +13,7 @@
     case_id, case_name,
     DATE_FORMAT(create_time, '%Y-%m-%d') create_time,
     case_img
-    from case
+    from `case`
     where 1=1
     <if test="caseName != null and caseName != ''">
       and case_name like CONCAT('%','${caseName}','%')
@@ -21,15 +21,16 @@
     <if test="caseId != null and caseId != ''">
       and case_id = #{caseId}
     </if>
+    order by create_time DESC
   </select>
 
-  <delete id="deleteCase" parameterType="com.oska.model.Cases" >
-    delete from case
+  <delete id="deleteCases" parameterType="com.oska.model.Cases" >
+    delete from `case`
     where case_id = #{caseId,jdbcType=INTEGER}
   </delete>
 
-  <insert id="addCase" parameterType="com.oska.model.Cases" >
-    insert into case
+  <insert id="addCases" parameterType="com.oska.model.Cases" >
+    insert into `case`
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="caseId != null and caseId != ''" >
         case_id,
@@ -56,8 +57,8 @@
     </trim>
   </insert>
 
-  <update id="updateCase" parameterType="com.oska.model.Cases" >
-    update case
+  <update id="updateCases" parameterType="com.oska.model.Cases" >
+    update `case`
     <set >
       <if test="caseName != null" >
         case_name = #{caseName,jdbcType=VARCHAR},

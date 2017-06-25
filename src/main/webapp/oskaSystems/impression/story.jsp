@@ -2,7 +2,12 @@
 
 <%@include file="../commonSys/systemHeader.jsp" %>
 
-<div class="a-content m-v-40 text-center">
+<ul class="breadcrumb no-border no-radius b-b b-light pull-in">
+    <li><a href="<%=basePath%>oskaSystems/index/index.jsp?active=1"><i class="fa fa-home"></i> 主页</a></li>
+    <li class="active"><a href="#"><i class="fa fa-columns"></i> 品牌故事  </a></li>
+</ul>
+
+<div class="a-content m-v-40 text-center m-t-lg">
     <h3 class="h3">品牌故事 </h3>
     <div id="div1" style="height: 300px;">
         <p>请输入内容...</p>

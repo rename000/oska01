@@ -36,7 +36,7 @@ public class CasesController extends BaseController {
 
 
     /**
-     * 获取产品列表
+     * 获取案例列表
      * @return
      * @throws Exception
      */
@@ -91,7 +91,7 @@ public class CasesController extends BaseController {
 
 
     /**
-     * 新增产品
+     * 新增案例
      * @return
      * @throws Exception
      */
@@ -122,7 +122,7 @@ public class CasesController extends BaseController {
 
 
     /**
-     * 更新产品
+     * 更新案例
      * @return
      * @throws Exception
      */
@@ -139,7 +139,7 @@ public class CasesController extends BaseController {
             Cases cases = JSONObject.parseObject(jsonObject, Cases.class);
 
             if("".equals(cases.getCaseId()) || "null".equals(cases.getCaseId())){
-                render(code_fail,"编辑失败，请传入相应的产品ID", null, response);
+                render(code_fail,"编辑失败，请传入相应的案例ID", null, response);
 
             }else {
                 casesDao.updateCases(cases);
@@ -160,7 +160,7 @@ public class CasesController extends BaseController {
 
 
     /**
-     * 删除产品
+     * 删除案例
      * @return
      * @throws Exception
      */

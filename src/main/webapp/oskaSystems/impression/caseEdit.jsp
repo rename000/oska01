@@ -4,14 +4,14 @@
 
 <%
 
-    String  productId = request.getParameter("productId");
+    String  caseId = request.getParameter("caseId");
 
 %>
 
 <ul class="breadcrumb no-border no-radius b-b b-light pull-in">
     <li><a href="<%=basePath%>oskaSystems/index/index.jsp?active=1"><i class="fa fa-home"></i> 主页</a></li>
-    <li><a href="<%=basePath%>oskaSystems/products/products.jsp?active=2"><i class="fa fa-columns"></i> 产品管理</a></li>
-    <li class="active"><a href="#">编辑产品</a></li>
+    <li><a href="<%=basePath%>oskaSystems/impression/case.jsp?active=4&c_active=3"><i class="fa fa-columns"></i> 工程案例</a></li>
+    <li class="active"><a href="#">编辑案例</a></li>
 </ul>
 
 <section class="panel panel-default add-b-t" style="min-width: 1000px;overflow: auto;">
@@ -19,34 +19,15 @@
     <div class="a-content">
 
         <!-- 项目基本资料 -->
-        <header class="h4 text-left padder padder-v m-b"><strong>编辑产品</strong></header>
+        <header class="h4 text-left padder padder-v m-b"><strong>编辑案例</strong></header>
 
         <row class="dis-table padder m-b m-l-40">
-            <label class="t-cell in-name in-v-m">产品名称：</label>
-            <div class="t-cell in-input in-w-200"><input type="text" data-name="projectName" id="productName" class="form-control" placeholder="请填写产品名称" value=""></div>
+            <label class="t-cell in-name in-v-m">案例名称：</label>
+            <div class="t-cell in-input in-w-200"><input type="text" data-name="projectName" id="caseName" class="form-control" placeholder="请填写案例名称" value=""></div>
         </row>
 
         <row class="dis-table padder m-b m-l-40">
-            <label class="t-cell in-name in-v-m">产品类型：</label>
-            <div class="t-cell in-input in-w-200">
-                <select id="productType" class="form-control" >
-                    <option value="1">橡木仿古</option>
-                    <option value="2">橡木人字拼</option>
-                    <option value="3">原木手工拼花</option>
-                    <option value="4">强化地板</option>
-                </select>
-            </div>
-        </row>
-
-        <row class="dis-table padder m-b m-l-40">
-            <label class="t-cell in-name in-v-t">产品简介：</label>
-            <div class="t-cell in-input in-w-500">
-                <textarea id="productInfo" class="form-control" rows="5"></textarea>
-            </div>
-        </row>
-
-        <row class="dis-table padder m-b m-l-40">
-            <label class="t-cell in-name in-v-t">产品图：</label>
+            <label class="t-cell in-name in-v-t">案例图：</label>
             <div class="t-cell in-input">
                 <img id="img01" src="<%=basePath%>static/img/bmz.jpg" class="in-pro-img" style="width: 322px;height: 260px">
                 <div class="btn btn-primary in-v-t y-pointer">上传图片
@@ -77,7 +58,7 @@
     function editFun(jsonObj) {
         console.log("jsonObj================"+ JSON.stringify(jsonObj));
         var option = {
-            url:'<%=basePath%>product/updateProduct',
+            url:'<%=basePath%>cases/updateCases',
             type:'post',
             data:{jsonObject:JSON.stringify(jsonObj)},
             success:function(data){
@@ -86,7 +67,7 @@
                 if(data.code=='1'){
 
                     alert("保存成功");
-                    window.location.href = '<%=basePath%>oskaSystems/products/products.jsp?active=2';
+                    window.location.href = '<%=basePath%>oskaSystems/impression/case.jsp?active=4&c_active=3';
                 }else{
                     console.log("code为0； 查询失败")
                 }
@@ -99,11 +80,11 @@
         $.ajax(option);
     }
 
-    //获取产品信息
-    function getProductList(jsonObj){
+    //获取案例信息
+    function getcaseList(jsonObj){
         var jsonObject = jsonObj;
         var option = {
-            url:'<%=basePath%>' + 'product/getProductList',
+            url:'<%=basePath%>' + 'cases/getCasesList',
             type:'post',
             data:{jsonObject:JSON.stringify(jsonObject)},
             success:function(data){
@@ -112,11 +93,9 @@
                 if(data.code=='1'){
                     var dataList = data.data.dataList;
                     //赋值
-                    $("#productName").val(""+dataList[0]['productName']);
-                    $("#productInfo").val(""+dataList[0]['productInfo']);
-                    $("#input01").val(""+dataList[0]['productImg']);
-                    $("#img01").attr("src",""+dataList[0]['productImg']);
-                    $("#productType").val(""+dataList[0]['productType']);
+                    $("#caseName").val(""+dataList[0]['caseName']);
+                    $("#input01").val(""+dataList[0]['caseImg']);
+                    $("#img01").attr("src",""+dataList[0]['caseImg']);
                 }else{
                     console.log("code为0； 查询失败")
                 }
@@ -130,53 +109,47 @@
 
     //初始化
     function init(){
-        var productIdVal = "<%=productId%>";
+        var caseIdVal = "<%=caseId%>";
 
-        if(productIdVal=="" || productIdVal==undefined){
-            window.location.href = '<%=basePath%>oskaSystems/products/products.jsp?active=2';
+        if(caseIdVal=="" || caseIdVal==undefined){
+            window.location.href = '<%=basePath%>oskaSystems/impression/case.jsp?active=4&c_active=3';
         }else {
-            var jsonObj = {productId:productIdVal};
-            getProductList(jsonObj);
+            var jsonObj = {caseId:caseIdVal};
+            getcaseList(jsonObj);
         }
 
     }
     init();
 
-    uploadFileFun('file01','input01','<%=basePath%>upload/uploadImg',function(data){
+    uploadFileFun('file01','input01','<%=basePath%>upload/uploadCaseImg',function(data){
         //成功后的回调函数
         successFun('imgURLHead',data,'input01','img01');
     });
 
     //保存
     $("#saveBtn").click(function(){
-        var productIdVal = "<%=productId%>";
-        var productNameVal = $("#productName").val();
-        var productInfoVal = $("#productInfo").val();
-        var productImg = $("#input01").val();
+        var caseIdVal = "<%=caseId%>";
+        var caseNameVal = $("#caseName").val();
+        var caseImg = $("#input01").val();
 
         //校验
-        if(productIdVal == ''){
-            alert("产品Id不能为空！")
+        if(caseIdVal == ''){
+            alert("案例Id不能为空！")
             return;
         }
-        if(productNameVal == ''){
-            alert("请填写产品名称")
+        if(caseNameVal == ''){
+            alert("请填写案例名称")
             return;
         }
-        if(productInfoVal == ''){
-            alert("请填写产品简介")
-            return;
-        }
-        if(productImg == ''){
-            alert("请上传产品图片")
+        if(caseImg == ''){
+            alert("请上传案例图片")
             return;
         }
 
         var jsonObj = {
-                productId:productIdVal,
-                productName:productNameVal,
-                productInfo:productInfoVal,
-                productImg:productImg
+                caseId:caseIdVal,
+                caseName:caseNameVal,
+                caseImg:caseImg
         };
 
         editFun(jsonObj);
