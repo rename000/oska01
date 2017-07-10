@@ -8,7 +8,7 @@
 </ul>
 
 <section class="panel panel-default">
-    <header class="panel-heading"> 产品管理列表 </header>
+    <header class="panel-heading"> 产品列表 </header>
     <div class="row text-sm wrapper">
         <div class="col-sm-6 m-b-xs">
             <a href="<%=basePath%>oskaSystems/products/productsAdd.jsp?active=2" class="btn btn-sm btn-primary">新增产品</a>

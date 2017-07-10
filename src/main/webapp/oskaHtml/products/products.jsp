@@ -136,8 +136,12 @@
             <div class="page">
                 <%--<a onclick="leftOrRight(1)" id="product_left" class="arrow-left" href="javascript:;">-</a>--%>
                 <%--<a onclick="leftOrRight(2)" id="product_right" class="arrow-right" href="javascript:;">-</a>--%>
-                <a onclick="leftOrRight(1)" id="product_left" class="arrow-left" href="javascript:;">森林乐章</a>
-                <a onclick="leftOrRight(2)" id="product_right" class="arrow-right" href="javascript:;">红橡女神</a>
+                <a onclick="leftOrRight(1)" id="product_left" class="arrow-left" href="javascript:;">
+                    &nbsp;<%--森林乐章--%>
+                </a>
+                <a onclick="leftOrRight(2)" id="product_right" class="arrow-right" href="javascript:;">
+                    &nbsp;<%--红橡女神--%>
+                </a>
             </div>
         </div>
     </div>
@@ -148,7 +152,6 @@
 <%@include file="../../common/htmlFooter.jsp" %>
 
 <script type="text/javascript">
-
     //getData base function
     function getData(jsonObj,urlVal,callBack) {
         var getData_jsonObject = jsonObj;
@@ -205,9 +208,9 @@
             var htmlStr = "";
             for(var i=0;i<dataList.length;i++){
                 htmlStr +=  '<li  id="product_'+ dataList[i]['productId'] +'"><div class="pro-box">'+
-                    '<em class="show"><a href="javascript:;"><img alt="产品名称" src="'+ dataList[i]['productImg'] +'"/></a></em>'+
-                    '<dl class="info"> <dt>产品名称：</dt> <dd>'+ dataList[i]['productName'] +'</dd> </dl>'+
-                    '</div></li>';
+                        '<em class="show"><a href="javascript:;"><img alt="产品名称" src="'+ dataList[i]['productImg'] +'"/></a></em>'+
+                        '<dl class="info"> <dt>产品名称：</dt> <dd>'+ dataList[i]['productName'] +'</dd> </dl>'+
+                        '</div></li>';
             }
 
             $("#productList").html(htmlStr);
@@ -232,12 +235,12 @@
     };
     //翻页
     var pageFun = function(from,pageSize){
-        var jsonObj = {nub: "" + from,size: "" + pageSize,productType:"<%=productType%>"};
+        var jsonObj = {nub: "" + from,size: "" + pageSize,productType:"1"};
         getProductList(jsonObj);
     }
 
     function init() {
-        var jsonObj = {nub:0,size:2,productType:"<%=productType%>"};
+        var jsonObj = {nub:0,size:2,productType:"1"};
         getList(jsonObj);
     }
     init();
@@ -248,17 +251,17 @@
 
 <script type="text/javascript">
 
-//    productListData = [
-//        {"count":"","createTime":1497237694000,"nub":0,"productId":2022,"productImg":"http://www.oskafloor.com/userfile/20121213161251631.jpg","productInfo":"产品简介01","productName":"产品名称02","size":10},
-//        {"count":"","createTime":1497237637000,"nub":0,"productId":2021,"productImg":"http://www.oskafloor.com/userfile/201211510848789.jpg","productInfo":"产品简介01","productName":"产品名字01","size":10},
-//        {"count":"","createTime":"","nub":0,"productId":2030,"productImg":"/oska/static/upload/product/Hydrangeas.jpg","productInfo":"test测试10","productName":"test","size":10}
-//    ];
+    //    productListData = [
+    //        {"count":"","createTime":1497237694000,"nub":0,"productId":2022,"productImg":"http://www.oskafloor.com/userfile/20121213161251631.jpg","productInfo":"产品简介01","productName":"产品名称02","size":10},
+    //        {"count":"","createTime":1497237637000,"nub":0,"productId":2021,"productImg":"http://www.oskafloor.com/userfile/201211510848789.jpg","productInfo":"产品简介01","productName":"产品名字01","size":10},
+    //        {"count":"","createTime":"","nub":0,"productId":2030,"productImg":"/oska/static/upload/product/Hydrangeas.jpg","productInfo":"test测试10","productName":"test","size":10}
+    //    ];
 
     //获得产品详情
     function getProductDetail(productIdVal){
 
         console.log("productList=========" + JSON.stringify(productListData));
-        for(var i=0;i<productListData.length;i++){
+        for(var i=0;i<productListData.length-1;i++){
 
             if(parseInt(productListData[i]['productId']) == parseInt(productIdVal)){
                 $("#product_img").attr("src",productListData[i]['productImg']);
@@ -267,13 +270,13 @@
                 $("#product_info").html(productListData[i]['productInfo']);
 
                 //左右页名
-                if(i > 0 && i < productListData.length){
-                    $("#product_left").html(productListData[i-1]['productName']);
-                    $("#product_right").html(productListData[i+1]['productName']);
-                }else if(i ==  0){
-                    $("#product_left").html(productListData[productListData.length-1]['productName']);
-                    $("#product_right").html(productListData[(i+1)>productListData.length-1?i:i+1]['productName']);
-                }
+//                if(i > 0 && i < productListData.length){
+//                    $("#product_left").html(productListData[i-1]['productName']);
+//                    $("#product_right").html(productListData[i+1]['productName']);
+//                }else if(i ==  0){
+//                    $("#product_left").html(productListData[productListData.length-1]['productName']);
+//                    $("#product_right").html(productListData[(i+1)>productListData.length-1?i:i+1]['productName']);
+//                }
 
             }else {
                 console.log("不支持不存在的productIdVal")
@@ -297,7 +300,7 @@
     })
 
 
-  //左右切换
+    //左右切换
     function leftOrRight(type){
         var sqlJson_Data = productListData;
         console.log("sqlJson_Data=========" + JSON.stringify(sqlJson_Data));
@@ -317,19 +320,19 @@
         if(imgNum >= 0 && imgNum <= (sqlJson_Data.length-1)){
             $("#product_img").attr("src",sqlJson_Data[imgNum]["productImg"]);
             $("#product_info").text(sqlJson_Data[imgNum].productInfo);
-            $("#product_name").text(sqlJson_Data[imgNum].productName);
+//            $("#product_name").text(sqlJson_Data[imgNum].productName);
             $("#product_img").attr("data-imgId",sqlJson_Data[imgNum].productId);
 
-            if(imgNum > 0 && imgNum < (sqlJson_Data.length-1) ){
-                $("#product_left").html(productListData[imgNum-1]['productName']);
-                $("#product_right").html(productListData[imgNum+1]['productName']);
-            }else if(imgNum ==  0){
-                $("#product_left").html(productListData[productListData.length-1]['productName']);
-                $("#product_right").html(productListData[imgNum+1]['productName']);
-            }else{
-                $("#product_left").html(productListData[imgNum-1]['productName']);
-                $("#product_right").html(productListData[0]['productName']);
-            }
+//            if(imgNum > 0 && imgNum < (sqlJson_Data.length-1) ){
+//                $("#product_left").html(productListData[imgNum-1]['productName']);
+//                $("#product_right").html(productListData[imgNum+1]['productName']);
+//            }else if(imgNum ==  0){
+//                $("#product_left").html(productListData[productListData.length-1]['productName']);
+//                $("#product_right").html(productListData[imgNum+1]['productName']);
+//            }else{
+//                $("#product_left").html(productListData[imgNum-1]['productName']);
+//                $("#product_right").html(productListData[0]['productName']);
+//            }
 
         }else if(imgNum <= 0) {
             imgNum = sqlJson_Data.length-1;//循环到第一张
@@ -338,8 +341,8 @@
             $("#product_name").text(sqlJson_Data[imgNum].productName);
             $("#product_img").attr("data-imgId",sqlJson_Data[imgNum].productId);
 
-            $("#product_left").html(sqlJson_Data[(imgNum-1)>0?imgNum-1:imgNum]['productName']);
-            $("#product_right").html(sqlJson_Data[0]['productName']);
+//            $("#product_left").html(sqlJson_Data[(imgNum-1)>0?imgNum-1:imgNum]['productName']);
+//            $("#product_right").html(sqlJson_Data[0]['productName']);
 
         }else{
             imgNum = 0;//循环到最后一张
@@ -348,8 +351,8 @@
             $("#product_name").text(sqlJson_Data[imgNum].productName);
             $("#product_img").attr("data-imgId",sqlJson_Data[imgNum].productId);
 
-            $("#product_left").html(sqlJson_Data[sqlJson_Data.length-1]['productName']);
-            $("#product_right").html(sqlJson_Data[(imgNum+1)>(sqlJson_Data.length-1)?sqlJson_Data.length-1:imgNum+1]['productName']);
+//            $("#product_left").html(sqlJson_Data[sqlJson_Data.length-1]['productName']);
+//            $("#product_right").html(sqlJson_Data[(imgNum+1)>(sqlJson_Data.length-1)?sqlJson_Data.length-1:imgNum+1]['productName']);
         }
 
     };

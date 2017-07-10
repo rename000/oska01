@@ -78,7 +78,14 @@
                             <nav class="nav-primary hidden-xs">
                                 <ul class="nav">
                                     <li class="<%=("1".equals(active)?"active":"")%>"> <a href="<%=basePath%>oskaSystems/index/index.jsp?active=1" class="<%=("1".equals(active)?"active":"")%>"> <i class="fa fa-home icon"> <b class="bg-danger"></b> </i> <span>主页</span> </a> </li>
-                                    <li class="<%="2".equals(active)?"active":""%>"> <a href="<%=basePath%>oskaSystems/products/products.jsp?active=2" class="<%="2".equals(active)?"active":""%>"> <i class="fa fa-columns icon"> <b class="bg-success"></b> </i> <span>产品管理</span> </a> </li>
+                                    <%--<li class="<%="2".equals(active)?"active":""%>"> <a href="<%=basePath%>oskaSystems/products/products.jsp?active=2" class="<%="2".equals(active)?"active":""%>"> <i class="fa fa-columns icon"> <b class="bg-success"></b> </i> <span>产品管理</span> </a>--%>
+                                    <li class="<%="2".equals(active)?"active":""%>"> <a href="" class="<%="2".equals(active)?"active":""%>"> <i class="fa fa-columns icon"> <b class="bg-success"></b> </i> <span>产品管理</span> </a>
+                                        <ul class="nav lt">
+                                            <li class="<%="1".equals(c_active)?"active":""%>"> <a href="<%=basePath%>oskaSystems/products/products.jsp?active=2&c_active=1" class="<%="1".equals(c_active)?"active":""%>"> <i class="fa fa-angle-right"></i> <span>产品列表 </span> </a> </li>
+                                            <li class="<%="2".equals(c_active)?"active":""%>"> <a href="<%=basePath%>oskaSystems/products/productsType.jsp?active=2&c_active=2" class="<%="2".equals(c_active)?"active":""%>"> <i class="fa fa-angle-right"></i> <span>产品类型 </span> </a> </li>
+                                            <!--<li > <a href="icons.html" > <b class="badge bg-info pull-right">369</b> <i class="fa fa-angle-right"></i> <span>Icons</span> </a> </li>-->
+                                        </ul>
+                                    </li>
                                     <li class="<%="3".equals(active)?"active":""%>"> <a href="<%=basePath%>oskaSystems/news/news.jsp?active=3" class="<%="3".equals(active)?"active":""%>"> <i class="fa fa-book icon"> <b class="bg-info"></b> </i> <span>新闻管理</span> </a> </li>
                                     <li class="<%="4".equals(active)?"active":""%>"> <a href="#uikit" class="<%="4".equals(active)?"active":""%>"> <i class="fa fa-edit icon"> <b class="bg-warning"></b> </i> <span class="pull-right"> <i class="fa fa-angle-down text"></i> <i class="fa fa-angle-up text-active"></i> </span> <span>欧饰家印象</span> </a>
                                         <ul class="nav lt">

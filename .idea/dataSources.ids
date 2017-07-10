@@ -1617,126 +1617,172 @@ User</columns>
       <table id="6" parent="1" name="impression">
         <comment>欧饰家印象</comment>
       </table>
-      <column id="7" parent="2" name="news_id">
+      <table id="7" parent="1" name="banner">
+        <comment>首页轮播图</comment>
+      </table>
+      <table id="8" parent="1" name="product_type">
+        <comment>产品类型</comment>
+      </table>
+      <column id="9" parent="2" name="news_id">
         <comment>新闻ID</comment>
         <mandatory>1</mandatory>
         <data-type>int(32)</data-type>
       </column>
-      <column id="8" parent="2" name="news_title">
+      <column id="10" parent="2" name="news_title">
         <comment>新闻标题</comment>
         <data-type>varchar(100)</data-type>
       </column>
-      <column id="9" parent="2" name="news_info">
+      <column id="11" parent="2" name="news_info">
         <comment>新闻简介</comment>
         <data-type>varchar(100)</data-type>
       </column>
-      <column id="10" parent="2" name="news_desc">
+      <column id="12" parent="2" name="news_desc">
         <comment>新闻内容</comment>
         <data-type>text</data-type>
       </column>
-      <column id="11" parent="2" name="create_time">
+      <column id="13" parent="2" name="create_time">
         <data-type>datetime</data-type>
       </column>
-      <column id="12" parent="2" name="news_type">
+      <column id="14" parent="2" name="news_type">
         <comment>产品类型 1 企业新闻  2 行业新闻 3 首页新闻 4 推荐新闻</comment>
         <data-type>int(4)</data-type>
         <default-expression>&apos;1&apos;</default-expression>
       </column>
-      <column id="13" parent="2" name="news_img">
+      <column id="15" parent="2" name="news_img">
         <comment>新闻图片Url</comment>
         <data-type>varchar(100)</data-type>
       </column>
-      <column id="14" parent="2" name="click_num">
+      <column id="16" parent="2" name="click_num">
         <data-type>varchar(200)</data-type>
         <default-expression>&apos;0&apos;</default-expression>
       </column>
-      <column id="15" parent="2" name="type">
+      <column id="17" parent="2" name="type">
         <data-type>int(4)</data-type>
         <default-expression>&apos;1&apos;</default-expression>
       </column>
-      <key id="16" parent="2" name="PRIMARY">
+      <key id="18" parent="2" name="PRIMARY">
         <columns>news_id</columns>
         <primary>1</primary>
       </key>
-      <column id="17" parent="3" name="product_id">
+      <column id="19" parent="3" name="product_id">
         <comment>产品ID</comment>
         <mandatory>1</mandatory>
         <data-type>int(32)</data-type>
       </column>
-      <column id="18" parent="3" name="product_name">
+      <column id="20" parent="3" name="product_name">
         <comment>产品名称</comment>
         <data-type>varchar(100)</data-type>
       </column>
-      <column id="19" parent="3" name="product_info">
+      <column id="21" parent="3" name="product_info">
         <comment>产品信息</comment>
         <data-type>text</data-type>
       </column>
-      <column id="20" parent="3" name="create_time">
+      <column id="22" parent="3" name="create_time">
         <data-type>datetime</data-type>
       </column>
-      <column id="21" parent="3" name="product_img">
+      <column id="23" parent="3" name="product_img">
         <data-type>varchar(200)</data-type>
       </column>
-      <column id="22" parent="3" name="product_type">
+      <column id="24" parent="3" name="product_type">
         <comment>产品类型 1 橡木仿古 2 橡木人字拼 3 原木手工拼花 4 强化地板</comment>
         <data-type>int(4)</data-type>
         <default-expression>&apos;1&apos;</default-expression>
       </column>
-      <key id="23" parent="3" name="PRIMARY">
+      <key id="25" parent="3" name="PRIMARY">
         <columns>product_id</columns>
         <primary>1</primary>
       </key>
-      <column id="24" parent="4" name="user_id">
+      <column id="26" parent="4" name="user_id">
         <comment>用户ID</comment>
         <mandatory>1</mandatory>
         <data-type>int(16)</data-type>
       </column>
-      <column id="25" parent="4" name="user_name">
+      <column id="27" parent="4" name="user_name">
         <comment>用户名</comment>
         <data-type>varchar(20)</data-type>
       </column>
-      <column id="26" parent="4" name="password">
+      <column id="28" parent="4" name="password">
         <comment>密码</comment>
         <data-type>varchar(1000)</data-type>
       </column>
-      <key id="27" parent="4" name="PRIMARY">
+      <key id="29" parent="4" name="PRIMARY">
         <columns>user_id</columns>
         <primary>1</primary>
       </key>
-      <column id="28" parent="5" name="case_id">
+      <column id="30" parent="5" name="case_id">
         <comment>案例ID</comment>
         <mandatory>1</mandatory>
         <data-type>int(32)</data-type>
       </column>
-      <column id="29" parent="5" name="case_name">
+      <column id="31" parent="5" name="case_name">
         <comment>案例名称</comment>
         <data-type>varchar(100)</data-type>
       </column>
-      <column id="30" parent="5" name="create_time">
+      <column id="32" parent="5" name="create_time">
         <data-type>datetime</data-type>
       </column>
-      <column id="31" parent="5" name="case_img">
+      <column id="33" parent="5" name="case_img">
         <data-type>varchar(200)</data-type>
       </column>
-      <key id="32" parent="5" name="PRIMARY">
+      <key id="34" parent="5" name="PRIMARY">
         <columns>case_id</columns>
         <primary>1</primary>
       </key>
-      <column id="33" parent="6" name="impression_id">
+      <column id="35" parent="6" name="impression_id">
         <comment>印象ID 1关于欧饰家 2品牌故事</comment>
         <mandatory>1</mandatory>
         <data-type>int(32)</data-type>
       </column>
-      <column id="34" parent="6" name="impression_desc">
+      <column id="36" parent="6" name="impression_desc">
         <comment>印象内容</comment>
         <data-type>text</data-type>
       </column>
-      <column id="35" parent="6" name="create_time">
+      <column id="37" parent="6" name="create_time">
         <data-type>datetime</data-type>
       </column>
-      <key id="36" parent="6" name="PRIMARY">
+      <key id="38" parent="6" name="PRIMARY">
         <columns>impression_id</columns>
         <primary>1</primary>
+      </key>
+      <column id="39" parent="7" name="banner_id">
+        <comment>轮播图ID</comment>
+        <mandatory>1</mandatory>
+        <data-type>int(16)</data-type>
+      </column>
+      <column id="40" parent="7" name="banner_img">
+        <comment>轮播图URL</comment>
+        <data-type>varchar(200)</data-type>
+      </column>
+      <key id="41" parent="7" name="PRIMARY">
+        <columns>banner_id</columns>
+        <primary>1</primary>
+      </key>
+      <column id="42" parent="8" name="pro_type_id">
+        <comment>产品类型Id</comment>
+        <mandatory>1</mandatory>
+        <data-type>int(11)</data-type>
+      </column>
+      <column id="43" parent="8" name="pro_type_name">
+        <comment>产品类型名称</comment>
+        <data-type>varchar(200)</data-type>
+      </column>
+      <column id="44" parent="8" name="is_delete">
+        <comment>状态：0 未删除 1 已删除</comment>
+        <data-type>int(4)</data-type>
+        <default-expression>&apos;0&apos;</default-expression>
+      </column>
+      <index id="45" parent="8" name="product_type_pro_type_id_uindex">
+        <columns>pro_type_id</columns>
+        <desc-columns></desc-columns>
+        <unique>1</unique>
+      </index>
+      <key id="46" parent="8" name="PRIMARY">
+        <columns>pro_type_id</columns>
+        <primary>1</primary>
+      </key>
+      <key id="47" parent="8" name="product_type_pro_type_id_uindex">
+        <columns>pro_type_id</columns>
+        <underlying-index>product_type_pro_type_id_uindex</underlying-index>
       </key>
     </database-model>
   </data-source>

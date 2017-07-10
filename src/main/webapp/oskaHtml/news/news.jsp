@@ -167,10 +167,10 @@
             var htmlStr = "";
             for(var i=0;i<dataList.length;i++){
                 htmlStr +=  '<li class="li-id" id="news_'+ dataList[i]['newsId'] +'"> <a> <dl class="ml">'+
-                    '<dt class="font18"><span class="font18 bold">◇</span> '+ dataList[i]['newsTitle'] +'</dt>'+
-                    '<dd>'+ dataList[i]['newsInfo'] +'</dd>'+
-                    '</dl> </a> <em class="time"><p>'+ dataList[i]['createTime'].replace("-",".").replace("-",".") +'</p>'+
-                    '<p><img src="<%=basePath%>static/images/arrow-r-con.png"/></p> </em> </li>';
+                        '<dt class="font18"><span class="font18 bold">◇</span> '+ dataList[i]['newsTitle'] +'</dt>'+
+                        '<dd>'+ dataList[i]['newsInfo'] +'</dd>'+
+                        '</dl> </a> <em class="time"><p>'+ dataList[i]['createTime'].replace("-",".").replace("-",".") +'</p>'+
+                        '<p><img src="<%=basePath%>static/images/arrow-r-con.png"/></p> </em> </li>';
 
             }
 
@@ -197,14 +197,14 @@
 
     //翻页
     var pageFun = function(from,pageSize){
-        var jsonObj = {nub: "" + from,size: "" + pageSize,newsType:"<%=newsType%>"};
+        var jsonObj = {nub: "" + from,size: "" + pageSize,newsType:"1"};
         getNewsList(jsonObj);
     }
 
     //go to detail
     $('body').on("click",".li-id",function () {
         var newsIdVal = $(this).attr("id").split("_")[1];
-        window.location.href = "<%=basePath%>"+"oskaHtml/news/newsDetail.jsp?newsType=<%=newsType%>&newsId="+newsIdVal;
+        window.location.href = "<%=basePath%>"+"oskaHtml/news/newsDetail.jsp?newsType=1&newsId="+newsIdVal;
     })
 
     //img news
@@ -215,14 +215,14 @@
             var htmlStr = "";
             for(var i=0;i<dataList.length;i++){
                 htmlStr +=  '<div class="list">'+
-                '<h3 class="font18 bold ellipsis"><i class="font30">◇</i> ' +
-                '<a href="<%=basePath%>'+'oskaHtml/news/newsDetail.jsp?newsType=3&newsId='+dataList[i]['newsId']+'">'+ dataList[i]['newsTitle'] +'</a></h3>'+
-                '<div class="ms"> <dl class="info">'+
-                '   <dt class="font14">'+ dataList[i]['newsInfo'] +'</dt>'+
-                '<dd><i class="u-right"><a href="<%=basePath%>'+'oskaHtml/news/newsDetail.jsp?newsType=3&newsId='+dataList[i]['newsId']+'">' +
-                '<img src="<%=basePath%>static/images/arrow-r-con.png"/></a></i>'+ dataList[i]['createTime'].replace("-",".").replace("-",".") +'</dd>'+
-                '</dl> <em class="show"><a href="javascript:;"><img src="'+ dataList[i]['newsImg'] +'"/></a></em>'+
-                '</div> </div>';
+                        '<h3 class="font18 bold ellipsis"><i class="font30">◇</i> ' +
+                        '<a href="<%=basePath%>'+'oskaHtml/news/newsDetail.jsp?newsType=3&newsId='+dataList[i]['newsId']+'">'+ dataList[i]['newsTitle'] +'</a></h3>'+
+                        '<div class="ms"> <dl class="info">'+
+                        '   <dt class="font14"><a href="<%=basePath%>oskaHtml/news/newsDetail.jsp?newsType=1&newsId='+dataList[i]['newsId']+'">'+ dataList[i]['newsInfo'] +'</a></dt>'+
+                        '<dd><i class="u-right"><a href="<%=basePath%>'+'oskaHtml/news/newsDetail.jsp?newsType=3&newsId='+dataList[i]['newsId']+'">' +
+                        '<img src="<%=basePath%>static/images/arrow-r-con.png"/></a></i>'+ dataList[i]['createTime'].replace("-",".").replace("-",".") +'</dd>'+
+                        '</dl> <em class="show"><a href="javascript:;"><img src="'+ dataList[i]['newsImg'] +'"/></a></em>'+
+                        '</div> </div>';
             }
 
             $("#newsListImg").html(htmlStr);
@@ -232,8 +232,9 @@
     function init() {
         var jsonObj01 = {newsType:"3",type:"3"};
         getNewsListImg(jsonObj01);
-        var jsonObj = {nub:0,size:2,newsType:"<%=newsType%>"};
+        var jsonObj = {nub:0,size:2,newsType:"1"};
         getList(jsonObj);
     }
     init();
+
 </script>
