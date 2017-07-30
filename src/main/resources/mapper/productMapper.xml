@@ -7,7 +7,7 @@
     <result column="product_info" jdbcType="VARCHAR" property="productInfo" />
     <result column="product_img" jdbcType="VARCHAR" property="productImg" />
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
-    <result column="product_type" jdbcType="TIMESTAMP" property="productType" />
+    <result column="product_type" jdbcType="VARCHAR" property="productType" />
   </resultMap>
 
   <select id="getProductList" parameterType="com.oska.model.Product" resultMap="BaseResultMap">
@@ -61,7 +61,7 @@
         #{productImg},
       </if>
       <if test="productType != null and productType != ''" >
-        product_type,
+        #{productType},
       </if>
         NOW()
     </trim>
@@ -90,6 +90,11 @@
   <delete id="deleteProductById" parameterType="com.oska.model.Product" >
     delete from product
     where product_id = #{productId}
+  </delete>
+
+  <delete id="deleteProductByType" parameterType="com.oska.model.Product" >
+    delete from product
+    where product_type = #{productType}
   </delete>
 
 </mapper>

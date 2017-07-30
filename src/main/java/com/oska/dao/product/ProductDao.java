@@ -34,4 +34,10 @@ public interface ProductDao {
      */
      void deleteProductById(Product product);
 
+    /**
+     * 删除一类产品
+     * @param product
+     */
+     void deleteProductByType(Product product);
+
 }

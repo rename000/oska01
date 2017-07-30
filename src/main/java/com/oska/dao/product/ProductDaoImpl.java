@@ -53,4 +53,13 @@ public class ProductDaoImpl implements ProductDao {
     public void deleteProductById(Product product) {
         oskaDao.delete("deleteProductById",product);
     }
+
+    /**
+     * 删除一类产品
+     * @param product
+     */
+    @Override
+    public void deleteProductByType(Product product) {
+        oskaDao.delete("deleteProductByType",product);
+    }
 }

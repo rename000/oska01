@@ -48,7 +48,7 @@
     update product_type
     <set >
       <if test="proTypeName != null and proTypeName != ''" >
-        pro_type_name = #{productName},
+        pro_type_name = #{proTypeName},
       </if>
       <if test="isDelete != null and isDelete != ''" >
         id_delete = #{isDelete},
@@ -57,7 +57,7 @@
     where pro_type_id = #{proTypeId}
   </update>
 
-  <delete id="deleteProductById" parameterType="com.oska.model.ProductType" >
+  <delete id="deleteProductType" parameterType="com.oska.model.ProductType" >
     delete from product_type
     where pro_type_id = #{proTypeId}
   </delete>

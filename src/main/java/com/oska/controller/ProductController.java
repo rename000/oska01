@@ -4,9 +4,9 @@ import com.alibaba.fastjson.JSONObject;
 import com.github.pagehelper.PageInfo;
 import com.google.common.collect.Maps;
 import com.oska.dao.product.ProductDao;
-import com.oska.enums.ProductType;
-import com.oska.model.MsgResponse;
+import com.oska.dao.productType.ProductTypeDao;
 import com.oska.model.Product;
+import com.oska.model.ProductType;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
@@ -14,12 +14,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -37,6 +35,8 @@ public class ProductController extends BaseController {
 
    @Resource
    ProductDao productDao;
+   @Resource
+   ProductTypeDao productTypeDao;
 
 
     /**
@@ -66,7 +66,13 @@ public class ProductController extends BaseController {
                     dataMapS.put("productId", list.get(i).getProductId()+"");
                     dataMapS.put("productName", list.get(i).getProductName());
                     dataMapS.put("productType", list.get(i).getProductType());
-                    dataMapS.put("productTypeDesc", ProductType.valueOfByString(list.get(i).getProductType()).getMsg());
+
+                    ProductType productType = new ProductType();
+                    productType.setProTypeId(Integer.parseInt(list.get(i).getProductType()));
+                    String typeName = productTypeDao.getProductType(productType).get(0).getProTypeName();
+                    dataMapS.put("productTypeDesc", typeName);
+
+//                    dataMapS.put("productTypeDesc", ProductType.valueOfByString(list.get(i).getProductType()).getMsg());
                     dataMapS.put("productInfo", list.get(i).getProductInfo());
                     dataMapS.put("productImg", list.get(i).getProductImg());
 

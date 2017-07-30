@@ -30,10 +30,10 @@
             <label class="t-cell in-name in-v-m">产品类型：</label>
             <div class="t-cell in-input in-w-200">
                 <select id="productType" class="form-control" >
-                    <option value="1">橡木仿古</option>
-                    <option value="2">橡木人字拼</option>
-                    <option value="3">原木手工拼花</option>
-                    <option value="4">强化地板</option>
+                    <%--<option value="1">橡木仿古</option>--%>
+                    <%--<option value="2">橡木人字拼</option>--%>
+                    <%--<option value="3">原木手工拼花</option>--%>
+                    <%--<option value="4">强化地板</option>--%>
                 </select>
             </div>
         </row>
@@ -71,7 +71,34 @@
 <%@include file="../commonSys/systemFooter.jsp" %>
 
 <script type="text/javascript">
+    //获得产品类型列表
+    function getProductTypeList(jsonObj){
+        var jsonObject = jsonObj;
+        var option = {
+            url:'<%=basePath%>' + 'productType/getProductType',
+            type:'post',
+            data:{jsonObject:JSON.stringify(jsonObject)},
+            success:function(data){
+                console.log('data===='+JSON.stringify(data));
+                data = JSON.parse(data);
+                if(data.code=='1'){
+                    var dataList = data.data.dataList;
+                    var htmlStr = "";
+                    for(var i=0;i<dataList.length;i++){
+                        htmlStr += '<option value="'+ dataList[i]['proTypeId'] +'">'+ dataList[i]['proTypeName'] +'</option>';
+                    }
 
+                    $("#productType").html(htmlStr);
+                }else{
+                    console.log("code为0； 查询失败")
+                }
+            },
+            error:function(msg){
+                console.log(msg);
+            }
+        };
+        $.ajax(option);
+    }
 
     //编辑
     function editFun(jsonObj) {
@@ -128,19 +155,6 @@
         $.ajax(option);
     }
 
-    //初始化
-    function init(){
-        var productIdVal = "<%=productId%>";
-
-        if(productIdVal=="" || productIdVal==undefined){
-            window.location.href = '<%=basePath%>oskaSystems/products/products.jsp?active=2';
-        }else {
-            var jsonObj = {productId:productIdVal};
-            getProductList(jsonObj);
-        }
-
-    }
-    init();
 
     uploadFileFun('file01','input01','<%=basePath%>upload/uploadImg',function(data){
         //成功后的回调函数
@@ -182,5 +196,21 @@
         editFun(jsonObj);
     });
 
+    //初始化
+    function init(){
+        var productIdVal = "<%=productId%>";
+
+        if(productIdVal=="" || productIdVal==undefined){
+            window.location.href = '<%=basePath%>oskaSystems/products/products.jsp?active=2';
+        }else {
+            var jsonObj = {productId:productIdVal};
+            getProductList(jsonObj);
+
+            var jsonObjs = {};
+            getProductTypeList(jsonObjs);
+        }
+
+    }
+    init();
 
 </script>

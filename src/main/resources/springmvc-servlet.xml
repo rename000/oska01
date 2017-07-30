@@ -39,7 +39,7 @@
 	<mvc:annotation-driven />
 
 	<!-- 设置不过滤的文件或文件夹 -->
-	<mvc:resources mapping="*" location="/static"/>
+	<mvc:resources mapping="/**" location="/static"/>
 
 
 	<!--加载数据库参数-->

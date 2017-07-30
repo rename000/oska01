@@ -14,24 +14,24 @@
             <a id="addModel" class="btn btn-sm btn-primary">新增产品类型</a>
         </div>
 
-        <form id="formObj">
-        <div class="col-sm-3">
-            <select id="productType" name="productType" class="form-control" placeholder="产品类型" style="height: 30px;padding: 5px 10px;">
-                <option value="">(全部)状态</option>
-                <option value="0">上线</option>
-                <option value="1">下线</option>
-            </select>
-        </div>
+        <%--<form id="formObj">--%>
+        <%--<div class="col-sm-3">--%>
+            <%--<select id="productType" name="productType" class="form-control" placeholder="产品类型" style="height: 30px;padding: 5px 10px;">--%>
+                <%--<option value="">(全部)状态</option>--%>
+                <%--<option value="0">上线</option>--%>
+                <%--<option value="1">下线</option>--%>
+            <%--</select>--%>
+        <%--</div>--%>
 
-        <div class="col-sm-3">
-            <div class="input-group">
-                <input name="productName" type="text" class="input-sm form-control" placeholder="产品类型">
-                    <span class="input-group-btn">
-                    <button id="searchBtn" class="btn btn-sm btn-default" type="button">搜索</button>
-                    </span>
-            </div>
-        </div>
-        </form>
+        <%--<div class="col-sm-3">--%>
+            <%--<div class="input-group">--%>
+                <%--<input name="productName" type="text" class="input-sm form-control" placeholder="产品类型">--%>
+                    <%--<span class="input-group-btn">--%>
+                    <%--<button id="searchBtn" class="btn btn-sm btn-default" type="button">搜索</button>--%>
+                    <%--</span>--%>
+            <%--</div>--%>
+        <%--</div>--%>
+        <%--</form>--%>
     </div>
     <div class="table-responsive">
         <table class="table table-striped b-t b-light text-sm">
@@ -95,13 +95,42 @@
             <div class="modal-body">
                 <div class="dis-table text-left" style="margin: auto;width: 70%">
                     <span class="t-cell in-v-m" style="width: 101px;">产品类型名称：</span>
-                    <span class="t-cell in-input in-w-200"><input class="form-control" value="" placeholder="请填写产品类型名称" /></span>
+                    <span class="t-cell in-input in-w-200"><input id="productTypeName" class="form-control" value="" placeholder="请填写产品类型名称" /></span>
                 </div>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">关闭
                 </button>
-                <button type="button" class="btn btn-primary">
+                <button id="saveBtn" type="button" class="btn btn-primary">
+                    保存
+                </button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal -->
+</div>
+
+<!-- （Modal） -->
+<div class="modal fade" id="myModalEdit" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                    &times;
+                </button>
+                <h4 class="modal-title">
+                    编辑产品类型
+                </h4>
+            </div>
+            <div class="modal-body">
+                <div class="dis-table text-left" style="margin: auto;width: 70%">
+                    <span class="t-cell in-v-m" style="width: 101px;">产品类型名称：</span>
+                    <span class="t-cell in-input in-w-200"><input id="productTypeNameEdit" class="form-control" value="" placeholder="请填写产品类型名称" /></span>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭
+                </button>
+                <button id="editBtn" type="button" class="btn btn-primary">
                     保存
                 </button>
             </div>
@@ -130,7 +159,7 @@
                         htmlStr +=  "<tr><td>"+ dataList[i]['proTypeId'] +"</td>"+
                             "<td>"+ dataList[i]['proTypeName'] +"</td>"+
                             "<td>"+
-                            "<a class='a-c-blue m-r editBtn' id='edit_" + dataList[i]['proTypeId'] + "' >编辑</a>"+
+                            "<a class='a-c-blue m-r editBtn' data-name='"+ dataList[i]['proTypeName'] +"' id='edit_" + dataList[i]['proTypeId'] + "' >编辑</a>"+
                             "<a class='c-red y-pointer m-r delBtn' id='del_" + dataList[i]['proTypeId'] + "'>删除</a>"+
                             "</td></tr>";
                     }
@@ -167,7 +196,7 @@
                         htmlStr +=  "<tr><td>"+ dataList[i]['proTypeId'] +"</td>"+
                             "<td>"+ dataList[i]['proTypeName'] +"</td>"+
                             "<td>"+
-                            "<a class='a-c-blue m-r editBtn' id='edit_" + dataList[i]['proTypeId'] + "' >编辑</a>"+
+                            "<a class='a-c-blue m-r editBtn' data-name='"+ dataList[i]['proTypeName'] +"'  id='edit_" + dataList[i]['proTypeId'] + "' >编辑</a>"+
                             "<a class='c-red y-pointer m-r delBtn' id='del_" + dataList[i]['proTypeId'] + "'>删除</a>"+
                             "</td></tr>";
                     }
@@ -219,14 +248,107 @@
         getList(jsonObj);
     });
 
+    //saveBtn
+    $("body").on("click","#saveBtn",function(){
+        var productTypeName = $("#productTypeName").val();
+        if(productTypeName=="" || productTypeName==undefined){
+            alert("产品类型名称不能为空！");
+            return;
+        }
+        var jsonObj = {
+            proTypeName:productTypeName,
+        };
+
+        console.log("jsonObj================"+ JSON.stringify(jsonObj));
+        var option = {
+            url:'<%=basePath%>productType/addProductType',
+            type:'post',
+            data:{jsonObject:JSON.stringify(jsonObj)},
+            success:function(data){
+                //            console.log(data);
+                data = JSON.parse(data);
+                if(data.code=='1'){
+
+                    alert("保存成功");
+                    $("#myModal").modal("hide");
+                    $("#productTypeName").val("");
+
+                    var jsonObj = {nub:0,size:2};
+                    var formObj = $("#formObj").serializeObject();
+                    jsonObj = $.extend(jsonObj,formObj);
+                    console.log("jsonObj===============" + JSON.stringify(jsonObj));
+                    getList(jsonObj);
+
+                }else{
+                    console.log("code为0： 新增失败")
+                }
+            },
+            error:function(msg){
+                console.log(msg);
+            }
+
+        };
+        $.ajax(option);
+
+    });
+
     //editBtn
+    var proTypeId = "";
     $("body").on("click",".editBtn",function(){
         var productIdVal = $(this).attr("id").split("_")[1];
+        var productIdName = $(this).attr("data-name");
         if(productIdVal=="" || productIdVal==undefined){
             alert("获取Id异常！");
-        }else {
-            window.location.href = "<%=basePath%>" + "oskaSystems/products/productsEdit.jsp?active=2&productId=" + productIdVal;
+            return;
         }
+        proTypeId = productIdVal;
+//        alert(productIdName);
+        $("#productTypeNameEdit").val(productIdName);
+        $("#myModalEdit").modal("show");
+    });
+
+    $("body").on("click","#editBtn",function(){
+        var productTypeNameEdit = $("#productTypeNameEdit").val();
+        if(productTypeNameEdit=="" || productTypeNameEdit==undefined){
+            alert("产品类型名称不能为空！");
+            return;
+        }
+        var jsonObj = {
+            proTypeId:proTypeId,
+            proTypeName:productTypeNameEdit,
+        };
+
+        console.log("jsonObj================"+ JSON.stringify(jsonObj));
+        var option = {
+            url:'<%=basePath%>productType/updateProductType',
+            type:'post',
+            data:{jsonObject:JSON.stringify(jsonObj)},
+            success:function(data){
+                //            console.log(data);
+                data = JSON.parse(data);
+                if(data.code=='1'){
+
+                    alert("保存成功");
+                    $("#myModalEdit").modal("hide");
+                    $("#productTypeNameEdit").val("");
+
+                    var jsonObj = {nub:0,size:2};
+                    var formObj = $("#formObj").serializeObject();
+                    jsonObj = $.extend(jsonObj,formObj);
+                    console.log("jsonObj===============" + JSON.stringify(jsonObj));
+                    getList(jsonObj);
+
+                }else{
+                    console.log("code为0： 新增失败")
+                }
+            },
+            error:function(msg){
+                console.log(msg);
+            }
+
+        };
+        $.ajax(option);
+
     });
 
     //delBtn

@@ -3,6 +3,7 @@ package com.oska.controller;
 import com.alibaba.fastjson.JSONObject;
 import com.github.pagehelper.PageInfo;
 import com.google.common.collect.Maps;
+import com.oska.dao.product.ProductDao;
 import com.oska.dao.productType.ProductTypeDao;
 import com.oska.model.Product;
 import com.oska.model.ProductType;
@@ -34,7 +35,8 @@ public class ProductTypeController extends BaseController {
 
    @Resource
    ProductTypeDao productTypeDao;
-
+   @Resource
+   ProductDao productDao;
 
     /**
      * 获取产品类型列表
@@ -173,6 +175,11 @@ public class ProductTypeController extends BaseController {
         try{
             ProductType productType = JSONObject.parseObject(jsonObject, ProductType.class);
 
+            //先删除一类产品
+            Product product = new Product();
+            product.setProductType(productType.getProTypeId()+"");
+            productDao.deleteProductByType(product);
+            //在删除产品类型
             productTypeDao.deleteProductType(productType);
 
             //设置返回成功信息
