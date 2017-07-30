@@ -92,3 +92,8 @@ function getData(jsonObj,urlVal,callBack) {
     };
     $.ajax(option);
 }
+
+function goOutFun(){
+    localStorage.tokenKey = "";
+    window.location.href =  localStorage.basePath+"oskaSystems/login.jsp";
+}

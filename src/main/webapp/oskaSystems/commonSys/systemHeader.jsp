@@ -41,6 +41,11 @@
     <%--page--%>
     <link rel="stylesheet" type="text/css" href="<%=basePath%>static/js/page/paging.css"/>
     <script type="text/javascript" src="<%=basePath%>static/js/page/pagePlugin.js"></script>
+    <script>
+        if(!localStorage.tokenKey || localStorage.tokenKey==""){
+            window.location.href =  localStorage.basePath+"oskaSystems/login.jsp"
+        }
+    </script>
 </head>
 
 <body>
@@ -63,7 +68,7 @@
                     <span class="arrow top"></span>
                     <li> <a href="#">帮助</a> </li>
                     <li class="divider"></li>
-                    <li> <a href="<%=basePath%>oskaSystems/login.jsp">退出</a> </li>
+                    <li> <a onclick="goOutFun()">退出</a> </li>
                 </ul>
             </li>
         </ul>

@@ -17,6 +17,9 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.net.URLDecoder;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -46,7 +49,7 @@ public class UserController extends BaseController {
 
         String userName = jsonObj.getString("userName");
         String passWord = jsonObj.getString("passWord");
-
+        String tokenKey = System.currentTimeMillis() + userName;
 
         User user = new User();
         user.setUserId(1194);
@@ -55,7 +58,10 @@ public class UserController extends BaseController {
         MsgResponse msgResponse = new MsgResponse("1");
         try{
             if(user01.getUserName().equals(userName) && user01.getPassword().equals(passWord)){
-                render(oskaCommon.code_ok, "oskaSystems/products/products.jsp", (Map<String, Object>)msgResponse.getObject(), response);
+                Map<String,String> dataMap = new HashMap<>();
+                dataMap.put("tokenKey",tokenKey);
+                msgResponse.setObject(dataMap);
+                render(oskaCommon.code_ok, "oskaSystems/products/products.jsp", (Map<String, Object>) msgResponse.getObject(), response);
                 return null;
             }else{
                 render(oskaCommon.code_fail, "用户名或密码错误", (Map<String, Object>)msgResponse.getObject(), response);

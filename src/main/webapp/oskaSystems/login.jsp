@@ -60,6 +60,7 @@
         login(jsonObj);
     })
 
+    localStorage.basePath = '<%=basePath%>';
     function login(jsonObj){
         var jsonObject = jsonObj;
         var option = {
@@ -70,6 +71,8 @@
 //            console.log(data);
                 data = JSON.parse(data);
                 if(data.code=='1'){
+                    localStorage.tokenKey = data.data.tokenKey;
+//                    console.log("tokenKey==="+localStorage.tokenKey)
                     window.location.href = "<%=basePath%>" + data.msg;
                 }else{
                     alert(data.msg);
