@@ -11,7 +11,7 @@
     <header class="panel-heading"> 产品类型 </header>
     <div class="row text-sm wrapper">
         <div class="col-sm-6 m-b-xs">
-            <a class="btn btn-sm btn-primary">新增产品类型</a>
+            <a id="addModel" class="btn btn-sm btn-primary">新增产品类型</a>
         </div>
 
         <form id="formObj">
@@ -37,11 +37,8 @@
         <table class="table table-striped b-t b-light text-sm">
             <thead>
             <tr>
-                <th>产品ID</th>
-                <th style="width: 18%">产品名称</th>
-                <th style="width: 18%">产品类型</th>
-                <th>产品简介</th>
-                <th>产品图</th>
+                <th>产品类型ID</th>
+                <th>产品类名称</th>
                 <th>操作</th>
             </tr>
             </thead>
@@ -83,6 +80,35 @@
     </footer>
 </section>
 
+<!-- （Modal） -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                    &times;
+                </button>
+                <h4 class="modal-title" id="myModalLabel">
+                    新增产品类型
+                </h4>
+            </div>
+            <div class="modal-body">
+                <div class="dis-table text-left" style="margin: auto;width: 70%">
+                    <span class="t-cell in-v-m" style="width: 101px;">产品类型名称：</span>
+                    <span class="t-cell in-input in-w-200"><input class="form-control" value="" placeholder="请填写产品类型名称" /></span>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭
+                </button>
+                <button type="button" class="btn btn-primary">
+                    保存
+                </button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal -->
+</div>
+
 <%@include file="../commonSys/systemFooter.jsp" %>
 
 <script type="text/javascript">
@@ -91,7 +117,7 @@
     function getList(jsonObj){
         var jsonObject = jsonObj;
         var option = {
-            url:'<%=basePath%>' + 'product/getProductList',
+            url:'<%=basePath%>' + 'productType/getProductType',
             type:'post',
             data:{jsonObject:JSON.stringify(jsonObject)},
             success:function(data){
@@ -101,20 +127,17 @@
                     var dataList = data.data.dataList;
                     var htmlStr = "";
                     for(var i=0;i<dataList.length;i++){
-                        htmlStr +=  "<tr><td>"+ dataList[i]['productId'] +"</td>"+
-                            "<td>"+ dataList[i]['productName'] +"</td>"+
-                            "<td>"+ dataList[i]['productTypeDesc'] +"</td>"+
-                            "<td>"+ dataList[i]['productInfo'] +"</td>"+
-                            "<td> <img src='"+ dataList[i]['productImg'] +"' style='width: 30px;height: 30px;' /> </td>"+
+                        htmlStr +=  "<tr><td>"+ dataList[i]['proTypeId'] +"</td>"+
+                            "<td>"+ dataList[i]['proTypeName'] +"</td>"+
                             "<td>"+
-                            "<a class='a-c-blue m-r editBtn' id='edit_" + dataList[i]['productId'] + "' >编辑</a>"+
-                            "<a class='c-red y-pointer m-r delBtn' id='del_" + dataList[i]['productId'] + "'>删除</a>"+
+                            "<a class='a-c-blue m-r editBtn' id='edit_" + dataList[i]['proTypeId'] + "' >编辑</a>"+
+                            "<a class='c-red y-pointer m-r delBtn' id='del_" + dataList[i]['proTypeId'] + "'>删除</a>"+
                             "</td></tr>";
                     }
 
                     $("#productList").html(htmlStr);
-                    $("#total").html(data.data.count);
-                    createPagePlugin(data.data.count,jsonObj.size);
+                    $("#total").html(dataList.length);
+//                    createPagePlugin(data.data.count,jsonObj.size);
                 }else{
                     console.log("code为0； 查询失败")
                 }
@@ -131,7 +154,7 @@
     function getProductList(jsonObj){
         var jsonObject = jsonObj;
         var option = {
-            url:'<%=basePath%>' + 'product/getProductList',
+            url:'<%=basePath%>' + 'productType/getProductType',
             type:'post',
             data:{jsonObject:JSON.stringify(jsonObject)},
             success:function(data){
@@ -141,14 +164,11 @@
                     var dataList = data.data.dataList;
                     var htmlStr = "";
                     for(var i=0;i<dataList.length;i++){
-                        htmlStr +=  "<tr><td>"+ dataList[i]['productId'] +"</td>"+
-                            "<td>"+ dataList[i]['productName'] +"</td>"+
-                            "<td>"+ dataList[i]['productTypeDesc'] +"</td>"+
-                            "<td>"+ dataList[i]['productInfo'] +"</td>"+
-                            "<td> <img src='"+ dataList[i]['productImg'] +"' style='width: 30px;height: 30px;' /> </td>"+
+                        htmlStr +=  "<tr><td>"+ dataList[i]['proTypeId'] +"</td>"+
+                            "<td>"+ dataList[i]['proTypeName'] +"</td>"+
                             "<td>"+
-                            "<a class='a-c-blue m-r editBtn' id='edit_" + dataList[i]['productId'] + "' >编辑</a>"+
-                            "<a class='c-red y-pointer m-r delBtn' id='del_" + dataList[i]['productId'] + "'>删除</a>"+
+                            "<a class='a-c-blue m-r editBtn' id='edit_" + dataList[i]['proTypeId'] + "' >编辑</a>"+
+                            "<a class='c-red y-pointer m-r delBtn' id='del_" + dataList[i]['proTypeId'] + "'>删除</a>"+
                             "</td></tr>";
                     }
 
@@ -168,7 +188,7 @@
     function delBtnFun(jsonObj){
         var jsonObject = jsonObj;
         var option = {
-            url:'<%=basePath%>' + 'product/deleteProduct',
+            url:'<%=basePath%>' + 'productType/deleteProductType',
             type:'post',
             data:{jsonObject:JSON.stringify(jsonObject)},
             success:function(data){
@@ -186,7 +206,8 @@
                 console.log(msg);
             }
         };
-        $.ajax(option);
+        alert("删除")
+//        $.ajax(option);
     }
 
     //searchBtn
@@ -218,31 +239,18 @@
         }
     });
 
-    //分页 pagePlugin
-    var createPagePlugin = function(total, size) {
-        $("#paging").empty();
-        paging = pagePlugin.createPaging({
-            renderTo: 'paging',
-            total: total,
-            pageSize: size,
-            currentPage:1
-        });
-        paging.goPage = function(from, to) {
-            pageFun(from - 1, size);
-        }
-    };
-    //翻页
-    var pageFun = function(from,pageSize){
-        var jsonObj = {nub: "" + from,size: "" + pageSize};
-        var formObj = $("#formObj").serializeObject();
-        jsonObj = $.extend(jsonObj,formObj);
-        getProductList(jsonObj);
-    }
+
 
     //初始化
     function init(){
-        var jsonObj = {nub:0,size:2};
+        var jsonObj = {};
         getList(jsonObj);
     }
     init();
+
+    $("body").on("click","#addModel",function(){
+        $('#myModal').modal('show')
+    });
+
+
 </script>

@@ -41,11 +41,11 @@
                     <a href="<%=basePath%>oskaHtml/products/products.jsp">产品世界</a>
                     <em class="arrow"></em>
                     <i class="g-line"></i>
-                    <div class="subset">
-                        <a href="<%=basePath%>oskaHtml/products/products.jsp?productType=1">橡木仿古</a>
-                        <a href="<%=basePath%>oskaHtml/products/products.jsp?productType=2">橡木人字拼</a>
-                        <a href="<%=basePath%>oskaHtml/products/products.jsp?productType=3">原木手工拼花</a>
-                        <a href="<%=basePath%>oskaHtml/products/products.jsp?productType=4">强化地板</a>
+                    <div class="subset" id="productTypeList">
+                        <%--<a href="<%=basePath%>oskaHtml/products/products.jsp?productType=1">橡木仿古</a>--%>
+                        <%--<a href="<%=basePath%>oskaHtml/products/products.jsp?productType=2">橡木人字拼</a>--%>
+                        <%--<a href="<%=basePath%>oskaHtml/products/products.jsp?productType=3">原木手工拼花</a>--%>
+                        <%--<a href="<%=basePath%>oskaHtml/products/products.jsp?productType=4">强化地板</a>--%>
                     </div>
                     <div class="linex"></div>
                 </li>
@@ -80,3 +80,52 @@
     </div>
 
 </div>
+
+<script>
+    //getData base function
+    function getData(jsonObj,urlVal,callBack) {
+        var getData_jsonObject = jsonObj;
+        var option = {
+            url:urlVal,
+            type:'post',
+            data:{jsonObject:JSON.stringify(getData_jsonObject)},
+            success:function(data){
+//            console.log(data);
+                data = JSON.parse(data);
+                if(data.code=='1'){
+                    callBack(data);
+                }else{
+                    console.log("code为0； 查询失败")
+                }
+            },
+            error:function(msg){
+                console.log(msg);
+            }
+        };
+        $.ajax(option);
+    }
+
+    //获得产品列表
+    function getList(jsonObj){
+        var urlVal = '<%=basePath%>' + 'productType/getProductType';
+
+        getData(jsonObj,urlVal,function (data) {
+            var dataList = data.data.dataList;
+            productListData = dataList;
+//            console.log('dataList===='+JSON.stringify(dataList));
+            var htmlStr = "";
+            for(var i=0;i<dataList.length;i++){
+                htmlStr +=  '<a href="<%=basePath%>oskaHtml/products/products.jsp?productType='+ dataList[i]['proTypeId'] +'">'+ dataList[i]['proTypeName'] +'</a>';
+            }
+
+            $("#productTypeList").html(htmlStr);
+        })
+    }
+
+    function init() {
+        var jsonObj = {nub:0,size:2,productType:"1"};
+        getList(jsonObj);
+    }
+//    init();
+
+</script>
