@@ -112,7 +112,7 @@
         getData(jsonObj,urlVal,function (data) {
             var dataList = data.data.dataList;
             productListData = dataList;
-//            console.log('dataList===='+JSON.stringify(dataList));
+            console.log('dataList===='+JSON.stringify(dataList));
             var htmlStr = "";
             for(var i=0;i<dataList.length;i++){
                 htmlStr +=  '<a href="<%=basePath%>oskaHtml/products/products.jsp?productType='+ dataList[i]['proTypeId'] +'">'+ dataList[i]['proTypeName'] +'</a>';
@@ -122,10 +122,10 @@
         })
     }
 
-    function init() {
+    function inits() {
         var jsonObj = {nub:0,size:2,productType:"1"};
         getList(jsonObj);
     }
-//    init();
+    inits();
 
 </script>

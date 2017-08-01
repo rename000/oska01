@@ -205,8 +205,9 @@
                 data = JSON.parse(data);
                 if(data.code=='1'){
                     alert(data.msg);
-                    var jsonObjS = {nub:"",size:""};
-                    getProductList(jsonObjS);
+                    init();
+//                    var jsonObjS = {nub:"0",size:"2"};
+//                    getProductList(jsonObjS);
                 }else{
                     alert(data.msg);
                 }

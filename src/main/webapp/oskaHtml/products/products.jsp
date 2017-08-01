@@ -22,11 +22,11 @@
 <!--页面标题-->
 <div class="navBig">
     <div class="w">
-        <%--橡木仿古--%>
-        <%=("1".equals(productType)?"橡木仿古":"")%>
-        <%=("2".equals(productType)?"橡木人字拼":"")%>
-        <%=("3".equals(productType)?"原木手工拼花":"")%>
-        <%=("4".equals(productType)?"强化地板":"")%>
+        <span id="navBig01">橡木仿古</span>
+        <%--<%=("1".equals(productType)?"橡木仿古":"")%>--%>
+        <%--<%=("2".equals(productType)?"橡木人字拼":"")%>--%>
+        <%--<%=("3".equals(productType)?"原木手工拼花":"")%>--%>
+        <%--<%=("4".equals(productType)?"强化地板":"")%>--%>
         <em class="en"><img src="<%=basePath%>static/images/product-nav-bg.png"/></em>
     </div>
 
@@ -36,10 +36,11 @@
 <div class="content">
     <div class="w">
         <div class="mbx">您当前位置：<a href="javascript:;">首页</a> - <a href="javascript:;">产品世界</a> -
-            <%=("1".equals(productType)?"橡木仿古":"")%>
-            <%=("2".equals(productType)?"橡木人字拼":"")%>
-            <%=("3".equals(productType)?"原木手工拼花":"")%>
-            <%=("4".equals(productType)?"强化地板":"")%>
+            <span id="navBig01">橡木仿古</span>
+            <%--<%=("1".equals(productType)?"橡木仿古":"")%>--%>
+            <%--<%=("2".equals(productType)?"橡木人字拼":"")%>--%>
+            <%--<%=("3".equals(productType)?"原木手工拼花":"")%>--%>
+            <%--<%=("4".equals(productType)?"强化地板":"")%>--%>
         </div>
         <div class="product">
             <ul class="list" id="productList">
@@ -124,14 +125,14 @@
 <!--产品弹窗-->
 <div class="pro-blcok-up">
     <div class="case-box">
-        <em class="bigImg"><img id="product_img" data-imgId="" src="<%=basePath%>static/images/product/pro-img.jpg"/></em>
+        <em class="bigImg"><img id="product_img" data-imgId="" src=""/></em>
         <div class="info">
             <em class="close"><span class="u-right"><img src="<%=basePath%>static/images/case-close.png"/></span></em>
             <dl class="ms">
                 <dt class="font18">产品名称：</dt>
-                <dd class="font30 bold" id="product_name">森林乐章</dd>
+                <dd class="font30 bold" id="product_name"></dd>
                 <dt class="font18">产品简介：</dt>
-                <dd class="font18" id="product_info">0000</dd>
+                <dd class="font18" id="product_info"></dd>
             </dl>
             <div class="page">
                 <%--<a onclick="leftOrRight(1)" id="product_left" class="arrow-left" href="javascript:;">-</a>--%>
@@ -152,6 +153,36 @@
 <%@include file="../../common/htmlFooter.jsp" %>
 
 <script type="text/javascript">
+    //获得产品列表
+    function getProductTypeList(jsonObj){
+        var jsonObject = jsonObj;
+        var option = {
+            url:'<%=basePath%>' + 'productType/getProductType',
+            type:'post',
+            data:{jsonObject:JSON.stringify(jsonObject)},
+            success:function(data){
+                console.log('data===='+JSON.stringify(data));
+                data = JSON.parse(data);
+                if(data.code=='1'){
+                    var dataList = data.data.dataList;
+                    var htmlStr = "";
+//                    for(var i=0;i<dataList.length;i++){
+//                        htmlStr += '<option value="'+ dataList[i]['proTypeId'] +'">'+ dataList[i]['proTypeName'] +'</option>';
+//                    }
+
+                    $("#navBig01").html(dataList[0]['proTypeName']);
+                    $("#navBig02").html(dataList[0]['proTypeName']);
+                }else{
+                    console.log("code为0； 查询失败")
+                }
+            },
+            error:function(msg){
+                console.log(msg);
+            }
+        };
+        $.ajax(option);
+    }
+
     //getData base function
     function getData(jsonObj,urlVal,callBack) {
         var getData_jsonObject = jsonObj;
@@ -240,7 +271,9 @@
     }
 
     function init() {
-        var jsonObj = {nub:0,size:2,productType:"1"};
+        var jsonObjs = {nub:0,size:1,proTypeId:'<%=productType%>'};
+        getProductTypeList(jsonObjs);
+        var jsonObj = {nub:0,size:2,productType:'<%=productType%>'};
         getList(jsonObj);
     }
     init();
@@ -261,7 +294,7 @@
     function getProductDetail(productIdVal){
 
         console.log("productList=========" + JSON.stringify(productListData));
-        for(var i=0;i<productListData.length-1;i++){
+        for(var i=0;i<productListData.length;i++){
 
             if(parseInt(productListData[i]['productId']) == parseInt(productIdVal)){
                 $("#product_img").attr("src",productListData[i]['productImg']);

@@ -137,7 +137,7 @@ img {
 .header .nav .nav-line li .arrow{ position: absolute; right: 32px; top: 18px; font-size: 0; width: 19px; height:16px; background:url(../images/arrow-b-icon.png);}
 
 .header .nav .nav-line li .linex{ display: none; position: absolute; bottom: 0; left: 0; right: 0; z-index: 9999; width: 100%; height: 2px; background-color: #463723;}
-.header .nav .subset{ display: none; position: absolute; top: 54px; left: 30px; z-index: 99999; width: 500px;}
+.header .nav .subset{ display: none; position: absolute; top: 54px; left: 30px; z-index: 99999; width: 900px;}
 .header .nav .subset a{ float: left; color: #f3efe8 !important; line-height: 46px; padding: 0 25px;}
 .header .nav .subset a:hover{ color: #937a59 !important;}
 .header .nav .subsetbg{ display: none; width: 100%; position: absolute; top: 54px; left: 0; right: 0; z-index: 99; height: 46px; background-color: #463723;}

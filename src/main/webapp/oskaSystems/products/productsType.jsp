@@ -225,8 +225,7 @@
                 data = JSON.parse(data);
                 if(data.code=='1'){
                     alert(data.msg);
-                    var jsonObjS = {nub:"",size:""};
-                    getProductList(jsonObjS);
+                    init();
                 }else{
                     alert(data.msg);
                 }
@@ -235,8 +234,8 @@
                 console.log(msg);
             }
         };
-        alert("删除")
-//        $.ajax(option);
+//        alert("删除")
+        $.ajax(option);
     }
 
     //searchBtn
@@ -355,7 +354,7 @@
     $("body").on("click",".delBtn",function(){
         if(confirm("确定要删除吗？")){
             var productIdVal = $(this).attr("id").split("_")[1];
-            var jsonObj = {productId:productIdVal};
+            var jsonObj = {proTypeId:productIdVal};
             console.log("jsonObj===========" + JSON.stringify(jsonObj));
             delBtnFun(jsonObj);
         }
