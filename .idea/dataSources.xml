@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="DataSourceManagerImpl" format="xml" hash="538443746">
+  <component name="DataSourceManagerImpl" format="xml" hash="2180089220">
     <data-source source="LOCAL" name="MySQL - oska@localhost" uuid="31298fb6-3208-49fd-b5b7-15f8bb83e4fc">
       <driver-ref>mysql</driver-ref>
       <synchronize>true</synchronize>
@@ -20,20 +20,6 @@
       <synchronize>true</synchronize>
       <jdbc-driver>com.mysql.jdbc.Driver</jdbc-driver>
       <jdbc-url>jdbc:mysql://120.76.126.100:3306/oska?useUnicode=true&amp;characterEncoding=utf-8</jdbc-url>
-      <driver-properties>
-        <property name="autoReconnect" value="true" />
-        <property name="zeroDateTimeBehavior" value="convertToNull" />
-        <property name="tinyInt1isBit" value="false" />
-        <property name="characterEncoding" value="utf8" />
-        <property name="characterSetResults" value="utf8" />
-        <property name="yearIsDateType" value="false" />
-      </driver-properties>
-    </data-source>
-    <data-source source="LOCAL" name="MySQL - oska@47.52.110.185" uuid="7cdf4128-98e4-4c69-944a-2358a0094a57">
-      <driver-ref>mysql</driver-ref>
-      <synchronize>true</synchronize>
-      <jdbc-driver>com.mysql.jdbc.Driver</jdbc-driver>
-      <jdbc-url>jdbc:mysql://47.52.110.185:3306/oska?useUnicode=true&amp;characterEncoding=utf-8</jdbc-url>
       <driver-properties>
         <property name="autoReconnect" value="true" />
         <property name="zeroDateTimeBehavior" value="convertToNull" />
