@@ -66,8 +66,6 @@
                 </a>
                 <ul class="dropdown-menu animated fadeInRight">
                     <span class="arrow top"></span>
-                    <li> <a href="#">帮助</a> </li>
-                    <li class="divider"></li>
                     <li> <a onclick="goOutFun()">退出</a> </li>
                 </ul>
             </li>
@@ -84,7 +82,7 @@
                                 <ul class="nav">
                                     <li class="<%=("1".equals(active)?"active":"")%>"> <a href="<%=basePath%>oskaSystems/index/index.jsp?active=1" class="<%=("1".equals(active)?"active":"")%>"> <i class="fa fa-home icon"> <b class="bg-danger"></b> </i> <span>主页</span> </a> </li>
                                     <%--<li class="<%="2".equals(active)?"active":""%>"> <a href="<%=basePath%>oskaSystems/products/products.jsp?active=2" class="<%="2".equals(active)?"active":""%>"> <i class="fa fa-columns icon"> <b class="bg-success"></b> </i> <span>产品管理</span> </a>--%>
-                                    <li class="<%="2".equals(active)?"active":""%>"> <a href="" class="<%="2".equals(active)?"active":""%>"> <i class="fa fa-columns icon"> <b class="bg-success"></b> </i> <span>产品管理</span> </a>
+                                    <li class="<%="2".equals(active)?"active":""%>"> <a href="" class="<%="2".equals(active)?"active":""%>"> <i class="fa fa-columns icon"> <b class="bg-success"></b> </i> <span class="pull-right"> <i class="fa fa-angle-down text"></i> <i class="fa fa-angle-up text-active"></i> </span> <span>产品管理</span> </a>
                                         <ul class="nav lt">
                                             <li class="<%="1".equals(c_active)?"active":""%>"> <a href="<%=basePath%>oskaSystems/products/products.jsp?active=2&c_active=1" class="<%="1".equals(c_active)?"active":""%>"> <i class="fa fa-angle-right"></i> <span>产品列表 </span> </a> </li>
                                             <li class="<%="2".equals(c_active)?"active":""%>"> <a href="<%=basePath%>oskaSystems/products/productsType.jsp?active=2&c_active=2" class="<%="2".equals(c_active)?"active":""%>"> <i class="fa fa-angle-right"></i> <span>产品类型 </span> </a> </li>
