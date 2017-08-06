@@ -12,7 +12,7 @@
 <!--页面标题-->
 <div class="navBig">
     <div class="w">
-        关于欧饰家
+        关于阑风
         <em class="en"><img src="<%=basePath%>static/images/yx-nav-bg.png"/></em>
     </div>
 
@@ -21,12 +21,12 @@
 <!--内容-->
 <div class="content">
     <div class="w">
-        <div class="mbx">您当前位置：<a href="javascript:;">首页</a> - 欧饰家印象 - 关于欧饰家</div>
+        <div class="mbx">您当前位置：<a href="javascript:;">首页</a> - 阑风印象 - 关于阑风</div>
         <div class="about-warp">
             <div class="title"></div>
             <div class="box">
                 <em class="font14" id="div1">
-                    欧饰家品牌地板自投放市场以来，<br />
+                    阑风品牌地板自投放市场以来，<br />
                     <span class="font18 bold">始终秉承“行家、专家、管家”的品牌经营理念和服务宗旨，<br />
 						不断开发和推行“欧洲品质、皇家时尚、健康华贵”的地板精品，<br />
 						全方位推出了欧饰家实木、强化、多层实木、纯手工实木拼花地板等系列地板产品，</span><br />

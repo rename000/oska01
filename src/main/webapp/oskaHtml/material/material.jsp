@@ -25,7 +25,7 @@
         <div class="material">
             <div class="ms">
                 <em>
-                    <p class="font18"><span>欧饰家地板拥有自己的</span><span class="font24">橡木原材料生产基地</span>。</p>
+                    <p class="font18"><span>阑风地板拥有自己的</span><span class="font24">橡木原材料生产基地</span>。</p>
                     <p class="font18">以<span class="font24">原材料源头</span>至成品终端真正实现零环节。</p>
                     <p class="font18">保证成品品质的同时也实现了<span class="font24">经销商利润最大化</span>。</p>
                 </em>

@@ -7,7 +7,7 @@
     <div class="w">
         <div class="box">
             <div class="info u-left">
-                <div class="title"><img src="<%=basePath%>static/images/case-nav.png"/><p class="mbx">您当前位置：首页 - 欧饰家印象 - 工程案例</p></div>
+                <div class="title"><img src="<%=basePath%>static/images/case-nav.png"/><p class="mbx">您当前位置：首页 - 阑风印象 - 工程案例</p></div>
                 <div class="name font18">
                     <em id="caseCount">1/30</em>
                     <p id="caseName">工程名称</p>
@@ -42,7 +42,8 @@
 <!--底部版权-->
 <div class="case-foot">
     <div class="w">
-        CopyRight © 2017 www.oskafloor.com All Rights Reserved. 欧饰家实木仿古地板 版权所有
+        CopyRight © 2017 www.lanfengfloor.com All Rights Reserved. 阑风实木仿古地板 版权所有
+        <%--CopyRight © 2017 www.oskafloor.com All Rights Reserved. 欧饰家实木仿古地板 版权所有--%>
     </div>
 </div>
 </body>

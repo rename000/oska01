@@ -21,40 +21,41 @@
 </div>
 <!--底部版权-->
 <div class="foot">
-    <div class="w">
-        <div class="navBox">
-            <dl class="navlist font14">
-                <dt>产品世界</dt>
-                <dd><a href="<%=basePath%>oskaHtml/products/products.jsp?productType=1">橡木仿古</a></dd>
-                <dd><a href="<%=basePath%>oskaHtml/products/products.jsp?productType=2">橡木人字拼</a></dd>
-                <dd><a href="<%=basePath%>oskaHtml/products/products.jsp?productType=3">橡木纯实木拼花</a></dd>
-                <dd><a href="<%=basePath%>oskaHtml/products/products.jsp?productType=4">强化地板</a></dd>
-            </dl>
-            <dl class="navlist font14">
-                <dt>原材料生材基地</dt>
-            </dl>
-            <dl class="navlist font14">
-                <dt>新闻资讯</dt>
-                <dd><a href="<%=basePath%>oskaHtml/news/news.jsp?newsType=1">企业新闻</a></dd>
-                <dd><a href="<%=basePath%>oskaHtml/news/news.jsp?newsType=2">行业新闻</a></dd>
-            </dl>
-            <dl class="navlist font14">
-                <dt>欧饰家印象</dt>
-                <dd><a href="<%=basePath%>oskaHtml/impression/about.jsp">关于欧饰家</a></dd>
-                <dd><a href="<%=basePath%>oskaHtml/impression/story.jsp">品牌故事</a></dd>
-                <dd><a href="<%=basePath%>oskaHtml/impression/case.jsp">工程案列</a></dd>
-            </dl>
-            <dl class="navlist font14">
-                <dt>联系我们</dt>
-            </dl>
-            <div class="logo"><img src="<%=basePath%>static/images/foot-logo2.png"/></div>
-            <div class="clearfloat"></div>
+    <div class="mod">
+        <div class="w">
+            <div class="navBox">
+                <dl class="navlist font14" id="productTypeListS">
+                    <dt>产品世界</dt>
+                    <dd><a href="<%=basePath%>oskaHtml/products/products.jsp?productType=1">实木系列</a></dd>
+                    <dd><a href="<%=basePath%>oskaHtml/products/products.jsp?productType=2">实木多层系列</a></dd>
+                    <dd><a href="<%=basePath%>oskaHtml/products/products.jsp?productType=3">木门系列</a></dd>
+                </dl>
+                <dl class="navlist font14">
+                    <dt>原材料生材基地</dt>
+                </dl>
+                <dl class="navlist font14">
+                    <dt>新闻资讯</dt>
+                    <dd><a href="<%=basePath%>oskaHtml/products/products.jsp?productType=1">企业新闻</a></dd>
+                    <dd><a href="<%=basePath%>oskaHtml/products/products.jsp?productType=2">行业新闻</a></dd>
+                </dl>
+                <dl class="navlist font14">
+                    <dt>阑风印象</dt>
+                    <dd><a href="<%=basePath%>oskaHtml/impression/about.jsp">关于阑风</a></dd>
+                    <dd><a href="<%=basePath%>oskaHtml/impression/story.jsp">品牌故事</a></dd>
+                    <dd><a href="<%=basePath%>oskaHtml/impression/case.jsp">工程案列</a></dd>
+                </dl>
+                <dl class="navlist font14">
+                    <dt>联系我们</dt>
+                </dl>
+                <div class="return-top u-right"><a href="#"><img src="<%=basePath%>static/images/fh-top.png"/></a></div>
+                <div class="clearfloat"></div>
+            </div>
         </div>
     </div>
     <div class="copyRight">
         <div class="w">
             <em>
-                <p>CopyRight © 2017 www.oskafloor.com All Rights Reserved. 欧饰家实木仿古地板 版权所有</p>
+                <p>CopyRight © 2017 www.lanfengfloor.com All Rights Reserved. 阑风实木仿古地板 版权所有</p>
                 <p>KEYWORDS: 实木仿古地板 | 实木仿古地板厂家 | 实木仿古地板生产厂家 | 实木仿古地板供应商 | 实木拼花地板 | 实木拼花地板招商加盟</p>
                 <p>友情链接：白乳胶 | ppr管材 | 皮带输送机 即热式电热水器价格 | 即热式电热水器哪个牌子好 | 超细重质碳酸钙</p>
             </em>
@@ -70,6 +71,62 @@
         loop : true,
         slidesPerView : 'auto',
     });
+</script>
+<script>
+    //getData base function
+    function getData(jsonObj,urlVal,callBack) {
+        var getData_jsonObject = jsonObj;
+        var option = {
+            url:urlVal,
+            type:'post',
+            data:{jsonObject:JSON.stringify(getData_jsonObject)},
+            success:function(data){
+//            console.log(data);
+                data = JSON.parse(data);
+                if(data.code=='1'){
+                    callBack(data);
+                }else{
+                    console.log("code为0； 查询失败")
+                }
+            },
+            error:function(msg){
+                console.log(msg);
+            }
+        };
+        $.ajax(option);
+    }
+
+    //获得产品列表
+    function getList(jsonObj){
+        var urlVal = '<%=basePath%>' + 'productType/getProductType';
+
+        getData(jsonObj,urlVal,function (data) {
+            var dataList = data.data.dataList;
+            productListData = dataList;
+            console.log('dataList===='+JSON.stringify(dataList));
+            var htmlStr = "";
+            for(var i=0;i<dataList.length;i++){
+                htmlStr +=  '<a href="<%=basePath%>oskaHtml/products/products.jsp?productType='+ dataList[i]['proTypeId'] +'">'+ dataList[i]['proTypeName'] +'</a>';
+            }
+
+            $("#productTypeList").html(htmlStr);
+
+            var htmlStrS = "<dt>产品世界</dt>";
+            for(var i=0;i<dataList.length;i++){
+                htmlStrS +=  '<dd><a href="<%=basePath%>oskaHtml/products/products.jsp?productType='+ dataList[i]['proTypeId'] +'">'+ dataList[i]['proTypeName'] +'</a></dd>';
+            }
+
+            $("#productTypeListS").html(htmlStrS);
+
+        })
+    }
+
+    function inits() {
+        var jsonObj = {nub:0,size:2,productType:"1"};
+        getList(jsonObj);
+    }
+    inits();
+
 </script>
 </body>
 </html>

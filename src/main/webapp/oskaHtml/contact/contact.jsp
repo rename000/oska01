@@ -30,7 +30,8 @@
 <!--底部版权-->
 <div class="case-foot">
     <div class="w">
-        CopyRight © 2017 www.oskafloor.com All Rights Reserved. 欧饰家实木仿古地板 版权所有
+        CopyRight © 2017 www.lanfengfloor.com All Rights Reserved. 阑风实木仿古地板 版权所有
+        <%--CopyRight © 2017 www.oskafloor.com All Rights Reserved. 欧饰家实木仿古地板 版权所有--%>
     </div>
 </div>
 </body>
